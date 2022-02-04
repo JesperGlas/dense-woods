@@ -1,9 +1,7 @@
 #ifndef _GAME_HPP_
 #define _GAME_HPP_
 
-#include <SFML/Graphics.hpp>
-#include <string>
-#include <iostream>
+#include "GameState.hpp"
 
 class Game
 {
@@ -12,14 +10,20 @@ private:
     const std::string m_Title;
     const std::string m_Version;
 
-    sf::RenderWindow *m_window;
+    sf::RenderWindow *mptr_window;
     sf::Event m_sfEvent;
+
+    sf::Clock m_dtClock; // Delta clock
+    float m_dt; // Delta time
+
+    std::stack<State *> mptr_states;
 public:
 
 // Functions
 private:
     // Static init functions
     void initWindow();
+    void initStates();
 
 public:
     // Constructors
@@ -28,11 +32,19 @@ public:
     // Deconstructors
     virtual ~Game();
 
-    // Functions
+    /* Functions */
+
+    // Updates
+    void updateDeltaTime();
     void updateSFMLEvents();
     void update();
+
+    // Render
     void render();
+
+    // Core
     void run();
+    void endApplication();
 };
 
 #endif
