@@ -1,7 +1,7 @@
 #ifndef _GAME_HPP_
 #define _GAME_HPP_
 
-#include "GameState.hpp"
+#include "MainMenuState.hpp"
 
 class Game
 {
@@ -16,7 +16,9 @@ private:
     sf::Clock m_dtClock; // Delta clock
     float m_dt; // Delta time
 
-    std::stack<State *> mptr_states;
+    std::stack<State *> m_states;
+
+    std::map<std::string, sf::Keyboard::Key> supportedKeys;
 public:
 
 // Functions
@@ -24,6 +26,7 @@ private:
     // Static init functions
     void initWindow();
     void initStates();
+    void initKeys();
 
 public:
     // Constructors

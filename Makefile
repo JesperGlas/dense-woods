@@ -18,7 +18,7 @@ default: all
 
 all: $(TARGET)
 
-$(TARGET):$(TARGET).o Game.o State.o GameState.o
+$(TARGET):$(TARGET).o Game.o State.o GameState.o Entity.o MainMenuState.o Button.o
 	$(CC) $(CFLAGS) -o $(BIN)/$(TARGET) $(BUILD)/*.o $(SFML_LINKS)
 
 $(TARGET).o: $(SRC)/$(TARGET).cpp
@@ -32,6 +32,15 @@ State.o: $(SRC)/State.cpp $(SRC)/State.hpp
 
 GameState.o: $(SRC)/GameState.cpp $(SRC)/GameState.hpp
 	$(CC) $(CFLAGS) -c $(SRC)/GameState.cpp -o $(BUILD)/GameState.o
+
+Entity.o: $(SRC)/Entity.cpp $(SRC)/Entity.hpp
+	$(CC) $(CFLAGS) -c $(SRC)/Entity.cpp -o $(BUILD)/Entity.o
+
+MainMenuState.o: $(SRC)/MainMenuState.cpp $(SRC)/MainMenuState.hpp
+	$(CC) $(CFLAGS) -c $(SRC)/MainMenuState.cpp -o $(BUILD)/MainMenuState.o
+
+Button.o: $(SRC)/Button.cpp $(SRC)/Button.hpp
+	$(CC) $(CFLAGS) -c $(SRC)/Button.cpp -o $(BUILD)/Button.o
 
 clean:
 	rm $(BUILD)/*

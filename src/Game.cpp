@@ -13,19 +13,42 @@ void Game::initWindow()
     this->mptr_window->setVerticalSyncEnabled(false);
 }
 
+void Game::initKeys()
+{
+    this->supportedKeys["Escape"] = sf::Keyboard::Key::Escape;
+    this->supportedKeys["Q"] = sf::Keyboard::Key::Q;
+    this->supportedKeys["W"] = sf::Keyboard::Key::W;
+    this->supportedKeys["A"] = sf::Keyboard::Key::A;
+    this->supportedKeys["S"] = sf::Keyboard::Key::S;
+    this->supportedKeys["D"] = sf::Keyboard::Key::D;
+
+    // Debug
+    std::clog << "Supported keys:" << std::endl;
+    for (auto i : this->supportedKeys)
+    {
+        std::clog << i.first << " : " << i.second << std::endl;
+    }
+}
+
 void Game::initStates()
 {
-    this->mptr_states.push(new GameState(this->mptr_window));
+    // Push MainMenuState
+    this->m_states.push(
+        new MainMenuState(this->mptr_window, &this->supportedKeys, &this->m_states)
+    );
 }
 
 // Constructors
 Game::Game()
     : m_Title {"Dense Woods"}, m_Version {"v1.0"}
 {
+    std::clog << "Constructing Game object.." << std::endl;
+    
     this->initWindow();
+    this->initKeys();
     this->initStates();
 
-    std::clog << "Game object constructed.." << std::endl;
+    std::clog << "Game object constructed!" << std::endl;
 }
 
 // Deconstructors
@@ -34,10 +57,10 @@ Game::~Game()
     delete this->mptr_window; // Delete window created in initWindow
 
     // Delete all states
-    while (!this->mptr_states.empty())
+    while (!this->m_states.empty())
     {
-        delete this->mptr_states.top(); // Delete top state
-        this->mptr_states.pop(); // Pop top state
+        delete this->m_states.top(); // Delete top state
+        this->m_states.pop(); // Pop top state
     }
 
     std::clog << "Game object deconstructed.." << std::endl;
@@ -64,17 +87,17 @@ void Game::update()
     this->updateSFMLEvents();
 
     // Update top state if state stack is not empty
-    if (!this->mptr_states.empty())
+    if (!this->m_states.empty())
     {
         // Update the top state on the stack
-        this->mptr_states.top()->update(this->m_dt);
+        this->m_states.top()->update(this->m_dt);
 
         // Delete the top state if it requests to quit
-        if (this->mptr_states.top()->getQuit())
+        if (this->m_states.top()->getQuit())
         {
-            this->mptr_states.top()->endStateActions(); // Handle any information about state before it is deleted
-            delete this->mptr_states.top(); // Delete top state
-            this->mptr_states.pop(); // Remove top state from stack
+            this->m_states.top()->endStateActions(); // Handle any information about state before it is deleted
+            delete this->m_states.top(); // Delete top state
+            this->m_states.pop(); // Remove top state from stack
         }
     }
     // Application end
@@ -90,10 +113,10 @@ void Game::render()
     this->mptr_window->clear(sf::Color::White);
 
     // Render items
-    if (!this->mptr_states.empty())
+    if (!this->m_states.empty())
     {
         // Render the top states if the states stack is not empty
-        this->mptr_states.top()->render(this->mptr_window);
+        this->m_states.top()->render(this->mptr_window);
     }
 
     this->mptr_window->display();

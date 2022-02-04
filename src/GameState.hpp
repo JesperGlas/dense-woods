@@ -8,22 +8,25 @@ class GameState
 {
 // Variables
 private:
+    Entity m_player;
 public:
 
 // Functions
 private:
+    void initFonts();
+    void initKeybinds();
 public:
     // Constructor
-    GameState(sf::RenderWindow *widow);
+    GameState(sf::RenderWindow *widow, std::map<std::string, sf::Keyboard::Key> *supportedKeys, std::stack<State *> *states);
 
     // Deconstructor
     virtual ~GameState();
 
     // Functions
     void endStateActions();
-    void updateKeyBinds(const float &dt);
+    void updateInput(const float &dt);
     void update(const float &dt);
-    void render(sf::RenderTarget *mptr_target = nullptr);
+    void render(sf::RenderTarget *target = nullptr);
 };
 
 #endif
