@@ -11,19 +11,22 @@ private:
     const std::string m_Version;
 
     sf::RenderWindow *mptr_window;
+    std::map<std::string, sf::Keyboard::Key> supportedKeys;
+    std::stack<State *> m_states;
+    
     sf::Event m_sfEvent;
+    std::vector<sf::VideoMode> m_videoModes;
+    sf::ContextSettings m_windowSettings;
 
     sf::Clock m_dtClock; // Delta clock
     float m_dt; // Delta time
 
-    std::stack<State *> m_states;
-
-    std::map<std::string, sf::Keyboard::Key> supportedKeys;
 public:
 
 // Functions
 private:
     // Static init functions
+    void initVariables();
     void initWindow();
     void initStates();
     void initKeys();

@@ -1,0 +1,644 @@
+make all --print-data-base --no-builtin-variables --no-builtin-rules --question
+# GNU Make 4.2.1
+# Built for x86_64-pc-linux-gnu
+# Copyright (C) 1988-2016 Free Software Foundation, Inc.
+# License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+# This is free software: you are free to change and redistribute it.
+# There is NO WARRANTY, to the extent permitted by law.
+ 
+
+# Make data base, printed on Sat Feb  5 01:13:43 2022
+
+# Variables
+
+# automatic
+<D = $(patsubst %/,%,$(dir $<))
+# automatic
+?F = $(notdir $?)
+# environment
+DESKTOP_SESSION = plasma
+# default
+.SHELLFLAGS := -c
+# makefile (from 'Makefile', line 18)
+OBJ = $(SRC:$(SRCDIR)/%$(EXT)=$(OBJDIR)/%.o)
+# environment
+XDG_SESSION_CLASS = user
+# makefile (from 'Makefile', line 17)
+SRC = $(wildcard $(SRCDIR)/*$(EXT))
+# environment
+XDG_SESSION_TYPE = x11
+# environment
+VSCODE_LOG_NATIVE = false
+# automatic
+?D = $(patsubst %/,%,$(dir $?))
+# automatic
+@D = $(patsubst %/,%,$(dir $@))
+# environment
+XAUTHORITY = /home/jesper/.Xauthority
+# automatic
+@F = $(notdir $@)
+# default
+MAKE_VERSION := 4.2.1
+# makefile
+CURDIR := /home/jesper/dev/cpp/dense-woods
+# makefile
+SHELL = /bin/sh
+# makefile (from 'Makefile', line 21)
+RM = rm
+# environment
+VTE_VERSION = 6003
+# environment
+VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
+# environment
+_ = /usr/bin/code
+# environment
+QT_AUTO_SCREEN_SCALE_FACTOR = 0
+# environment
+XDG_CONFIG_DIRS = /etc/xdg/xdg-plasma:/etc/xdg:/usr/share/kubuntu-default-settings/kf5-settings
+# makefile (from 'Button.d', line 1)
+MAKEFILE_LIST :=  Makefile MainMenuState.d Game.d State.d Player.d GameState.d Entity.d main.d Button.d
+# 'override' directive
+GNUMAKEFLAGS := 
+# makefile (from 'Makefile', line 7)
+CXXFLAGS = -std=c++11 -Wall
+# environment
+MAKELEVEL := 0
+# environment
+MANDATORY_PATH = /usr/share/gconf/plasma.mandatory.path
+# environment
+XDG_DATA_DIRS = /usr/share/plasma:/usr/local/share/:/usr/share/
+# environment
+DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus
+# environment
+VSCODE_VERBOSE_LOGGING = true
+# makefile (from 'Makefile', line 24)
+DEL = del
+# environment
+TERMINATOR_UUID = urn:uuid:b5fec4f8-7809-4884-af06-8c81f4f387dc
+# environment
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-8e03fcb5-a5d2-4a37-8a4d-2a898869a3ad.sock
+# environment
+LC_NAME = sv_SE.UTF-8
+# environment
+VSCODE_CWD = /home/jesper/dev/cpp/dense-woods
+# environment
+PAM_KWALLET5_LOGIN = /run/user/1000/kwallet5.socket
+# environment
+XDG_SESSION_PATH = /org/freedesktop/DisplayManager/Session1
+# default
+MAKE_HOST := x86_64-pc-linux-gnu
+# environment
+PATH = /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+# environment
+GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
+# environment
+XCURSOR_THEME = Sweet-cursors
+# environment
+LSCOLORS = Gxfxcxdxbxegedabagacad
+# environment
+SESSION_MANAGER = local/jesper-T460:@/tmp/.ICE-unix/3197,unix/jesper-T460:/tmp/.ICE-unix/3197
+# environment
+XDG_RUNTIME_DIR = /run/user/1000
+# environment
+VSCODE_LOG_STACK = false
+# environment
+VSCODE_CRASH_REPORTER_START_OPTIONS = {"companyName":"Microsoft","productName":"VSCode","submitURL":"appcenter://code?aid=fba07a4d-84bd-4fc8-a125-9640fc8ce171&uid=f65ef856-3625-4071-913c-85a82916325c&iid=f65ef856-3625-4071-913c-85a82916325c&sid=f65ef856-3625-4071-913c-85a82916325c","uploadToServer":true}
+# makefile (from 'Makefile', line 8)
+LDFLAGS = -lsfml-graphics -lsfml-window -lsfml-system
+# default
+.FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
+# environment
+ELECTRON_NO_ATTACH_CONSOLE = 1
+# environment
+LS_COLORS = rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:
+# environment
+XDG_SESSION_DESKTOP = KDE
+# environment
+SSH_AUTH_SOCK = /tmp/ssh-dwIPGlYvFPmW/agent.2992
+# makefile (from 'Makefile', line 13)
+SRCDIR = src
+# automatic
+%F = $(notdir $%)
+# environment
+DISPLAY = :0
+# environment
+VSCODE_PIPE_LOGGING = true
+# environment
+PWD = /home/jesper/dev/cpp/dense-woods
+# environment
+KDE_SESSION_VERSION = 5
+# default
+.LOADED := 
+# environment
+XDG_SEAT = seat0
+# environment
+SSH_AGENT_PID = 3070
+# environment
+ORIGINAL_XDG_CURRENT_DESKTOP = KDE
+# environment
+VSCODE_AMD_ENTRYPOINT = vs/workbench/services/extensions/node/extensionHostProcess
+# environment
+HOME = /home/jesper
+# environment
+VSCODE_CLI = 1
+# environment
+VSCODE_CODE_CACHE_PATH = /home/jesper/.config/Code/CachedData/899d46d82c4c95423fb7e10e68eba52050e30ba3
+# environment
+LOGNAME = jesper
+# environment
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
+# makefile (from 'Makefile', line 22)
+DELOBJ = $(OBJ)
+# automatic
++F = $(notdir $+)
+# environment
+KDE_FULL_SESSION = true
+# environment
+ZSH = /home/jesper/.oh-my-zsh
+# environment
+VSCODE_HANDLES_UNCAUGHT_ERRORS = true
+# automatic
+^D = $(patsubst %/,%,$(dir $^))
+# environment
+XDG_VTNR = 1
+# environment
+LC_TIME = sv_SE.UTF-8
+# environment
+COLORTERM = truecolor
+# default
+MAKE = $(MAKE_COMMAND)
+# default
+MAKECMDGOALS := all
+# environment
+SHLVL = 1
+# makefile (from 'Makefile', line 6)
+CC = g++
+# environment
+XDG_SESSION_ID = 3
+# environment
+USER = jesper
+# environment
+LC_MONETARY = sv_SE.UTF-8
+# makefile
+.DEFAULT_GOAL := all
+# environment
+XDG_CURRENT_DESKTOP = KDE
+# environment
+LESS = -R
+# automatic
+%D = $(patsubst %/,%,$(dir $%))
+# environment
+LC_TELEPHONE = sv_SE.UTF-8
+# default
+MAKE_COMMAND := make
+# environment
+OLDPWD = /home/jesper/dev/cpp/dense-woods/src
+# environment
+TERMINATOR_DBUS_PATH = /net/tenshu/Terminator2
+# default
+.VARIABLES := 
+# automatic
+*F = $(notdir $*)
+# environment
+XDG_SEAT_PATH = /org/freedesktop/DisplayManager/Seat0
+# environment
+VSCODE_IPC_HOOK = /run/user/1000/vscode-e2df31a7-1.63.2-main.sock
+# makefile (from 'Makefile', line 12)
+EXT = .cpp
+# makefile
+MAKEFLAGS = pqrR
+# environment
+MFLAGS = -pqrR
+# automatic
+*D = $(patsubst %/,%,$(dir $*))
+# environment
+BREAKPAD_DUMP_LOCATION = /home/jesper/.config/Code/exthost Crash Reports
+# automatic
++D = $(patsubst %/,%,$(dir $+))
+# environment
+GDK_BACKEND = x11
+# environment
+LC_PAPER = sv_SE.UTF-8
+# environment
+NO_AT_BRIDGE = 1
+# makefile (from 'Makefile', line 11)
+APPNAME = main
+# environment
+QT_ACCESSIBILITY = 1
+# environment
+DEFAULTS_PATH = /usr/share/gconf/plasma.default.path
+# default
+MAKEFILES := 
+# makefile (from 'Makefile', line 19)
+DEP = $(OBJ:$(OBJDIR)/%.o=%.d)
+# environment
+LC_NUMERIC = sv_SE.UTF-8
+# automatic
+<F = $(notdir $<)
+# environment
+ELECTRON_RUN_AS_NODE = 1
+# makefile (from 'Makefile', line 14)
+OBJDIR = obj
+# environment
+LC_MEASUREMENT = sv_SE.UTF-8
+# environment
+PAGER = less
+# environment
+LC_ALL = C
+# makefile (from 'Makefile', line 26)
+WDELOBJ = $(SRC:$(SRCDIR)/%$(EXT)=$(OBJDIR)\\%.o)
+# automatic
+^F = $(notdir $^)
+# default
+SUFFIXES := 
+# environment
+CHROME_DESKTOP = code-url-handler.desktop
+# default
+.INCLUDE_DIRS = /usr/include /usr/local/include /usr/include
+# environment
+LC_IDENTIFICATION = sv_SE.UTF-8
+# default
+.RECIPEPREFIX := 
+# makefile (from 'Makefile', line 25)
+EXE = .exe
+# environment
+LC_ADDRESS = sv_SE.UTF-8
+# environment
+LANG = C
+# environment
+TERM = xterm-256color
+# environment
+TERMINATOR_DBUS_NAME = net.tenshu.Terminator21a9d5db22c73a993ff0b42f64b396873
+# environment
+VSCODE_PID = 436225
+# environment
+KDE_SESSION_UID = 1000
+# variable set hash-table stats:
+ 
+# Load=131/1024=13%, Rehash=0, Collisions=22/195=11%
+
+# Pattern-specific Variable Values
+
+# No pattern-specific variable values.
+
+# Directories
+
+# . (device 2052, inode 7864684): 23 files, no impossibilities.
+# src (device 2052, inode 3714318): 17 files, no impossibilities.
+
+# 40 files, no impossibilities in 2 directories.
+
+# Implicit Rules
+
+%.d: src/%.cpp
+#  recipe to execute (from 'Makefile', line 40):
+	@$(CPP) $(CFLAGS) $< -MM -MT $(@:%.d=$(OBJDIR)/%.o) >$@
+
+obj/%.o: src/%.cpp
+#  recipe to execute (from 'Makefile', line 47):
+	$(CC) $(CXXFLAGS) -o $@ -c $<
+
+# 2 implicit rules, 0 (0.0%) terminal.
+
+# Files
+
+# Not a target:
+src/GameState.hpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-02-05 00:42:10.453871975
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+src/State.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-02-05 01:01:50.683159587
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+src/Button.hpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-02-04 17:40:45.42757718
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+src/MainMenuState.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-02-04 23:19:36.103811656
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+src/Player.hpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-02-05 00:50:50.793155912
+#  File has been updated.
+#  Successfully updated.
+
+all: main
+#  Command line target.
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has been updated.
+#  Successfully updated.
+
+.PHONY: clean cleandep cleanw cleandepw
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+Entity.d: src/Entity.cpp
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'Entity'
+#  Last modified 2022-02-05 01:13:24.909447705
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 40):
+	@$(CPP) $(CFLAGS) $< -MM -MT $(@:%.d=$(OBJDIR)/%.o) >$@
+
+# Not a target:
+src/State.hpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-02-05 00:51:10.365449783
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+src/MainMenuState.hpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-02-04 23:23:45.727176661
+#  File has been updated.
+#  Successfully updated.
+
+obj/main.o: src/main.cpp src/main.cpp src/Game.hpp src/MainMenuState.hpp src/State.hpp src/Entity.hpp src/GameState.hpp src/Player.hpp src/Button.hpp
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'main'
+#  Last modified 2022-02-05 01:13:29.237457081
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 47):
+	$(CC) $(CXXFLAGS) -o $@ -c $<
+
+# Not a target:
+Makefile:
+#  Implicit rule search has been done.
+#  Last modified 2022-02-05 01:10:45.577074282
+#  File has been updated.
+#  Successfully updated.
+
+Game.d: src/Game.cpp
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'Game'
+#  Last modified 2022-02-05 01:13:25.105448131
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 40):
+	@$(CPP) $(CFLAGS) $< -MM -MT $(@:%.d=$(OBJDIR)/%.o) >$@
+
+obj/Entity.o: src/Entity.cpp src/Entity.cpp src/Entity.hpp
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'Entity'
+#  Last modified 2022-02-05 01:13:28.76545606
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 47):
+	$(CC) $(CXXFLAGS) -o $@ -c $<
+
+obj/GameState.o: src/GameState.cpp src/GameState.cpp src/GameState.hpp src/State.hpp src/Entity.hpp src/Player.hpp
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'GameState'
+#  Last modified 2022-02-05 01:13:28.34945516
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 47):
+	$(CC) $(CXXFLAGS) -o $@ -c $<
+
+obj/Button.o: src/Button.cpp src/Button.cpp src/Button.hpp
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'Button'
+#  Last modified 2022-02-05 01:13:29.697458076
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 47):
+	$(CC) $(CXXFLAGS) -o $@ -c $<
+
+# Not a target:
+src/Game.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-02-04 23:22:51.79531327
+#  File has been updated.
+#  Successfully updated.
+
+cleanw:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+ 
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 64):
+	$(DEL) $(WDELOBJ) $(DEP) $(APPNAME)$(EXE)
+
+obj/Player.o: src/Player.cpp src/Player.cpp src/Player.hpp src/Entity.hpp
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'Player'
+#  Last modified 2022-02-05 01:13:27.841454061
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 47):
+	$(CC) $(CXXFLAGS) -o $@ -c $<
+
+State.d: src/State.cpp
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'State'
+#  Last modified 2022-02-05 01:13:25.057448026
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 40):
+	@$(CPP) $(CFLAGS) $< -MM -MT $(@:%.d=$(OBJDIR)/%.o) >$@
+
+Button.d: src/Button.cpp
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'Button'
+#  Last modified 2022-02-05 01:13:24.809447488
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 40):
+	@$(CPP) $(CFLAGS) $< -MM -MT $(@:%.d=$(OBJDIR)/%.o) >$@
+
+main.d: src/main.cpp
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'main'
+#  Last modified 2022-02-05 01:13:24.8614476
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 40):
+	@$(CPP) $(CFLAGS) $< -MM -MT $(@:%.d=$(OBJDIR)/%.o) >$@
+
+obj/State.o: src/State.cpp src/State.cpp src/State.hpp src/Entity.hpp
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'State'
+#  Last modified 2022-02-05 01:13:27.413453134
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 47):
+	$(CC) $(CXXFLAGS) -o $@ -c $<
+
+# Not a target:
+src/Game.hpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-02-04 22:29:23.358947574
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+.DEFAULT:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+obj/MainMenuState.o: src/MainMenuState.cpp src/MainMenuState.cpp src/MainMenuState.hpp src/State.hpp src/Entity.hpp src/GameState.hpp src/Player.hpp src/Button.hpp
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'MainMenuState'
+#  Last modified 2022-02-05 01:13:25.809449658
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 47):
+	$(CC) $(CXXFLAGS) -o $@ -c $<
+
+cleandep:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 58):
+	$(RM) $(DEP)
+
+cleandepw:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 69):
+	$(DEL) $(DEP)
+
+run:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 72):
+	./main
+
+clean:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 53):
+	$(RM) $(DELOBJ) $(DEP) $(APPNAME)
+
+Player.d: src/Player.cpp
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'Player'
+#  Last modified 2022-02-05 01:13:25.005447914
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 40):
+	@$(CPP) $(CFLAGS) $< -MM -MT $(@:%.d=$(OBJDIR)/%.o) >$@
+
+# Not a target:
+src/main.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-02-03 21:46:59.584529318
+#  File has been updated.
+#  Successfully updated.
+
+GameState.d: src/GameState.cpp
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'GameState'
+#  Last modified 2022-02-05 01:13:24.953447801
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 40):
+	@$(CPP) $(CFLAGS) $< -MM -MT $(@:%.d=$(OBJDIR)/%.o) >$@
+
+main: obj/MainMenuState.o obj/Game.o obj/State.o obj/Player.o obj/GameState.o obj/Entity.o obj/main.o obj/Button.o
+ 
+#  Implicit rule search has not been done.
+#  Last modified 2022-02-05 01:13:29.845458395
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 36):
+	$(CC) $(CXXFLAGS) -o $@ $^ $(LDFLAGS)
+
+# Not a target:
+src/Entity.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-02-05 00:58:54.270134872
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+src/GameState.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-02-05 01:07:48.204577239
+#  File has been updated.
+#  Successfully updated.
+
+MainMenuState.d: src/MainMenuState.cpp
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'MainMenuState'
+#  Last modified 2022-02-05 01:13:25.153448235
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 40):
+	@$(CPP) $(CFLAGS) $< -MM -MT $(@:%.d=$(OBJDIR)/%.o) >$@
+
+# Not a target:
+src/Button.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-02-04 17:40:45.42757718
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+src/Player.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-02-05 00:46:11.897684835
+#  File has been updated.
+#  Successfully updated.
+
+obj/Game.o: src/Game.cpp src/Game.cpp src/Game.hpp src/MainMenuState.hpp src/State.hpp src/Entity.hpp src/GameState.hpp src/Player.hpp src/Button.hpp
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'Game'
+#  Last modified 2022-02-05 01:13:26.769451739
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 47):
+	$(CC) $(CXXFLAGS) -o $@ -c $<
+
+# Not a target:
+src/Entity.hpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-02-05 00:20:22.022909269
+#  File has been updated.
+#  Successfully updated.
+
+# files hash-table stats:
+# Load=42/1024=4%, Rehash=0, Collisions=0/168=0%
+# VPATH Search Paths
+
+# No 'vpath' search paths.
+
+# No general ('VPATH' variable) search path.
+
+# strcache buffers: 1 (0) / strings = 82 / storage = 882 B / avg = 10 B
+# current buf: size = 8162 B / used = 882 B / count = 82 / avg = 10 B
+
+# strcache performance: lookups = 207 / hit rate = 60%
+# hash-table stats:
+# Load=82/8192=1%, Rehash=0, Collisions=2/207=1%
+# Finished Make data base on Sat Feb  5 01:13:43 2022
+
+ 

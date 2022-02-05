@@ -1,16 +1,23 @@
 #include "Game.hpp"
 
-// Static init functions
 void Game::initWindow()
 {
+    bool fullscreen{true}; // Unused for now
+    unsigned framerate_limit{120};
+    bool vertical_sync{false};
+    unsigned antialiasing_level{4}; // Lower in case of high load lol
+
+    this->m_windowSettings.antialiasingLevel = antialiasing_level;
+
     sf::VideoMode desktopMode = sf::VideoMode::getDesktopMode();
-    this->mptr_window = new sf::RenderWindow(sf::VideoMode(
-        desktopMode.width,
-        desktopMode.height,
-        desktopMode.bitsPerPixel
-    ), m_Title + " " + m_Version, sf::Style::Fullscreen);
-    this->mptr_window->setFramerateLimit(120);
-    this->mptr_window->setVerticalSyncEnabled(false);
+    this->m_videoModes = sf::VideoMode::getFullscreenModes();
+    this->mptr_window = new sf::RenderWindow(
+        sf::VideoMode(desktopMode),
+        m_Title + " " + m_Version,
+        sf::Style::Fullscreen,
+        this->m_windowSettings);
+    this->mptr_window->setFramerateLimit(framerate_limit);
+    this->mptr_window->setVerticalSyncEnabled(vertical_sync);
 }
 
 void Game::initKeys()
@@ -18,32 +25,25 @@ void Game::initKeys()
     this->supportedKeys["Escape"] = sf::Keyboard::Key::Escape;
     this->supportedKeys["Q"] = sf::Keyboard::Key::Q;
     this->supportedKeys["W"] = sf::Keyboard::Key::W;
+    this->supportedKeys["E"] = sf::Keyboard::Key::E;
     this->supportedKeys["A"] = sf::Keyboard::Key::A;
     this->supportedKeys["S"] = sf::Keyboard::Key::S;
     this->supportedKeys["D"] = sf::Keyboard::Key::D;
-
-    // Debug
-    std::clog << "Supported keys:" << std::endl;
-    for (auto i : this->supportedKeys)
-    {
-        std::clog << i.first << " : " << i.second << std::endl;
-    }
 }
 
 void Game::initStates()
 {
     // Push MainMenuState
     this->m_states.push(
-        new MainMenuState(this->mptr_window, &this->supportedKeys, &this->m_states)
-    );
+        new MainMenuState(this->mptr_window, &this->supportedKeys, &this->m_states));
 }
 
 // Constructors
 Game::Game()
-    : m_Title {"Dense Woods"}, m_Version {"v1.0"}
+    : m_Title{"Dense Woods"}, m_Version{"v1.0"}, mptr_window{nullptr}, m_dt{0}
 {
     std::clog << "Constructing Game object.." << std::endl;
-    
+
     this->initWindow();
     this->initKeys();
     this->initStates();
@@ -54,16 +54,18 @@ Game::Game()
 // Deconstructors
 Game::~Game()
 {
+    std::clog << "Deconstructing Game object.." << std::endl;
+
     delete this->mptr_window; // Delete window created in initWindow
 
     // Delete all states
     while (!this->m_states.empty())
     {
         delete this->m_states.top(); // Delete top state
-        this->m_states.pop(); // Pop top state
+        this->m_states.pop();        // Pop top state
     }
 
-    std::clog << "Game object deconstructed.." << std::endl;
+    std::clog << "Game object deconstructed!" << std::endl;
 }
 
 // Functions
@@ -73,12 +75,11 @@ void Game::updateDeltaTime()
     this->m_dt = this->m_dtClock.restart().asSeconds();
 }
 
-
 void Game::updateSFMLEvents()
 {
     while (this->mptr_window->pollEvent(this->m_sfEvent))
     {
-
+        
     }
 }
 
@@ -93,11 +94,11 @@ void Game::update()
         this->m_states.top()->update(this->m_dt);
 
         // Delete the top state if it requests to quit
-        if (this->m_states.top()->getQuit())
+        if (this->m_states.top()->checkIfStateEnd())
         {
             this->m_states.top()->endStateActions(); // Handle any information about state before it is deleted
-            delete this->m_states.top(); // Delete top state
-            this->m_states.pop(); // Remove top state from stack
+            delete this->m_states.top();             // Delete top state
+            this->m_states.pop();                    // Remove top state from stack
         }
     }
     // Application end

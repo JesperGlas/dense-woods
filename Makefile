@@ -1,50 +1,72 @@
+########################################################################
+####################### Makefile Template ##############################
+########################################################################
 
+# Compiler settings - Can be customized.
 CC = g++
-CFLAGS = -g -Wall
-SFML_LINKS = -lsfml-graphics -lsfml-window -lsfml-system
+CXXFLAGS = -std=c++11 -Wall
+LDFLAGS = -lsfml-graphics -lsfml-window -lsfml-system
 
-# TODO: Link to these in external folder
-INC = -I./external/SFML-2.5.1/include
-LIB = -L<sfml-install-path>/lib -lsfml-graphics -lsfml-window -lsfml-system
+# Makefile settings - Can be customized.
+APPNAME = main
+EXT = .cpp
+SRCDIR = src
+OBJDIR = obj
 
-SRC = ./src
-#INCLUDE = ./include
-BUILD = ./build
-BIN = ./bin
+############## Do not change anything from here downwards! #############
+SRC = $(wildcard $(SRCDIR)/*$(EXT))
+OBJ = $(SRC:$(SRCDIR)/%$(EXT)=$(OBJDIR)/%.o)
+DEP = $(OBJ:$(OBJDIR)/%.o=%.d)
+# UNIX-based OS variables & settings
+RM = rm
+DELOBJ = $(OBJ)
+# Windows OS variables & settings
+DEL = del
+EXE = .exe
+WDELOBJ = $(SRC:$(SRCDIR)/%$(EXT)=$(OBJDIR)\\%.o)
 
-TARGET = main
+########################################################################
+####################### Targets beginning here #########################
+########################################################################
 
-default: all
+all: $(APPNAME)
 
-all: $(TARGET)
+# Builds the app
+$(APPNAME): $(OBJ)
+	$(CC) $(CXXFLAGS) -o $@ $^ $(LDFLAGS)
 
-$(TARGET):$(TARGET).o Game.o State.o GameState.o Entity.o MainMenuState.o Button.o
-	$(CC) $(CFLAGS) -o $(BIN)/$(TARGET) $(BUILD)/*.o $(SFML_LINKS)
+# Creates the dependecy rules
+%.d: $(SRCDIR)/%$(EXT)
+	@$(CPP) $(CFLAGS) $< -MM -MT $(@:%.d=$(OBJDIR)/%.o) >$@
 
-$(TARGET).o: $(SRC)/$(TARGET).cpp
-	$(CC) $(CFLAGS) -c $(SRC)/$(TARGET).cpp -o $(BUILD)/$(TARGET).o
+# Includes all .h files
+-include $(DEP)
 
-Game.o: $(SRC)/Game.cpp $(SRC)/Game.hpp
-	$(CC) $(CFLAGS) -c $(SRC)/Game.cpp -o $(BUILD)/Game.o
+# Building rule for .o files and its .c/.cpp in combination with all .h
+$(OBJDIR)/%.o: $(SRCDIR)/%$(EXT)
+	$(CC) $(CXXFLAGS) -o $@ -c $<
 
-State.o: $(SRC)/State.cpp $(SRC)/State.hpp
-	$(CC) $(CFLAGS) -c $(SRC)/State.cpp -o $(BUILD)/State.o
-
-GameState.o: $(SRC)/GameState.cpp $(SRC)/GameState.hpp
-	$(CC) $(CFLAGS) -c $(SRC)/GameState.cpp -o $(BUILD)/GameState.o
-
-Entity.o: $(SRC)/Entity.cpp $(SRC)/Entity.hpp
-	$(CC) $(CFLAGS) -c $(SRC)/Entity.cpp -o $(BUILD)/Entity.o
-
-MainMenuState.o: $(SRC)/MainMenuState.cpp $(SRC)/MainMenuState.hpp
-	$(CC) $(CFLAGS) -c $(SRC)/MainMenuState.cpp -o $(BUILD)/MainMenuState.o
-
-Button.o: $(SRC)/Button.cpp $(SRC)/Button.hpp
-	$(CC) $(CFLAGS) -c $(SRC)/Button.cpp -o $(BUILD)/Button.o
-
+################### Cleaning rules for Unix-based OS ###################
+# Cleans complete project
+.PHONY: clean
 clean:
-	rm $(BUILD)/*
-	rm $(BIN)/*
+	$(RM) $(DELOBJ) $(DEP) $(APPNAME)
 
-run: $(BIN)/$(TARGET)
-	$(BIN)/$(TARGET)
+# Cleans only all files with the extension .d
+.PHONY: cleandep
+cleandep:
+	$(RM) $(DEP)
+
+#################### Cleaning rules for Windows OS #####################
+# Cleans complete project
+.PHONY: cleanw
+cleanw:
+	$(DEL) $(WDELOBJ) $(DEP) $(APPNAME)$(EXE)
+
+# Cleans only all files with the extension .d
+.PHONY: cleandepw
+cleandepw:
+	$(DEL) $(DEP)
+
+run:
+	./main

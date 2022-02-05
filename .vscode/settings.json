@@ -50,5 +50,12 @@
         "streambuf": "cpp",
         "cinttypes": "cpp",
         "typeinfo": "cpp"
-    }
+    },
+    "makefile.launchConfigurations": [
+        {
+            "cwd": "/home/jesper/dev/cpp/dense-woods/bin",
+            "binaryPath": "/home/jesper/dev/cpp/dense-woods/bin/main",
+            "binaryArgs": []
+        }
+    ]
 }

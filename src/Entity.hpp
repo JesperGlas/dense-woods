@@ -12,12 +12,15 @@ class Entity
 {
 // Variables
 private:
-    sf::RectangleShape m_shape;
+protected:
     float m_moveSpeed;
+    sf::Sprite *mptr_sprite;
+    sf::Texture *mptr_texture;
 public:
 
 // Functions
 private:
+    void initVariables();
 public:
     // Constructor
     Entity();
@@ -25,7 +28,11 @@ public:
     // Deconstructor
     virtual ~Entity();
 
+    // Component Functions
+    void createSprite(sf::Texture *texture);
+
     // Functions
+    virtual void setPosition(const float x, const float y);
     virtual void move(const float &dt, const float x, const float y);
     virtual void move(const float &dt, const sf::Vector2f position);
     virtual void update(const float &dt);

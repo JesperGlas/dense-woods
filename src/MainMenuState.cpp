@@ -5,24 +5,25 @@ MainMenuState::MainMenuState(sf::RenderWindow *window, std::map<std::string, sf:
     : State(window, supportedKeys, states)
 {
     std::clog << "Constructing MainMenuState object.." << std::endl;
+
+    this->initVariables();
+    this->initBackground();
     this->initFonts();
     this->initKeybinds();
     this->initButtons();
 
     sf::Vector2u window_size = this->getWindow()->getSize();
-    m_titleBackground.setFillColor(sf::Color::Cyan);
+    m_titleBackground.setFillColor(sf::Color(255, 255, 255, 100));
     m_titleBackground.setSize(sf::Vector2f(
-        window_size.x/4,
+        window_size.x/6,
         window_size.y-200));
     m_titleBackground.setPosition(100.f, 100.f);
 
     m_title.setFillColor(sf::Color::White);
     m_title.setFont(this->m_font);
-    m_title.setString("Sub Surface");
+    m_title.setString("Sub\nSurface");
     m_title.setCharacterSize(40);
-    m_title.setPosition(sf::Vector2f(
-        140.f, 140.f
-    ));
+    m_title.setPosition(sf::Vector2f(140.f, 140.f));
 
     std::clog << "MainMenuState object constructed!" << std::endl;
 }
@@ -30,15 +31,35 @@ MainMenuState::MainMenuState(sf::RenderWindow *window, std::map<std::string, sf:
 // Deconstructors
 MainMenuState::~MainMenuState()
 {
+    std::clog << "Deconstructing MainMenuState object.." << std::endl;
+
     // Deconstruct buttons using an iterator
     for (auto &iter : this->m_buttons)
     {
         delete iter.second;
     }
-    std::clog << "MainMenuState object deconstructed.." << std::endl;
+
+    std::clog << "MainMenuState object deconstructed!" << std::endl;
 }
 
 // Private Functions
+void MainMenuState::initVariables()
+{
+
+}
+
+void MainMenuState::initBackground()
+{
+    // Load background texture
+    if (!this->m_backgroundTexture.loadFromFile("assets/img/menu_3.jpg"))
+    {
+        throw("ERROR: Can't load background texture!");
+    }
+
+    this->m_background.setSize(sf::Vector2f(this->getWindow()->getSize()));
+    this->m_background.setTexture(&this->m_backgroundTexture);
+}
+
 void MainMenuState::initFonts()
 {
     this->setFont("assets/fonts/Roboto/roboto/Roboto-Regular.ttf");
@@ -57,8 +78,14 @@ void MainMenuState::initButtons()
         &this->m_font, "Quit"
     );
 
-    this->m_buttons["GAME_STATE"] = new Button(
+    this->m_buttons["SETTINGS_STATE"] = new Button(
         140.f, this->getWindow()->getSize().y - 260.f,
+        100.f, 40.f,
+        &this->m_font, "Settings"
+    );
+
+    this->m_buttons["GAME_STATE"] = new Button(
+        140.f, this->getWindow()->getSize().y - 320.f,
         100.f, 40.f,
         &this->m_font, "Continue"
     );
@@ -73,7 +100,7 @@ void MainMenuState::endStateActions()
 
 void MainMenuState::updateInput(const float &dt)
 {
-    this->checkForQuit();
+    
 }
 
 void MainMenuState::updateButtons()
@@ -97,7 +124,7 @@ void MainMenuState::updateButtons()
     if (this->m_buttons["EXIT_STATE"]->isActive())
     {
         std::clog << "### Quit toggle btn ###" << std::endl;
-        this->setQuit(true);
+        this->signalStateEnd();
     }
 }
 
@@ -123,6 +150,7 @@ void MainMenuState::render(sf::RenderTarget *target)
         target = this->getWindow();
     }
 
+    target->draw(this->m_background);
     target->draw(this->m_titleBackground);
     target->draw(this->m_title);
     this->renderButtons(target);

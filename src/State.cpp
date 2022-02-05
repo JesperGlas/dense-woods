@@ -2,7 +2,7 @@
 
 // Constructors
 State::State(sf::RenderWindow *window, std::map<std::string, sf::Keyboard::Key> *supportedKeys, std::stack<State *> *states)
-    : mptr_window {window}, mptr_supportedKeys {supportedKeys}, mptr_states {states}, m_requestQuit {false}
+    : mptr_window {window}, mptr_supportedKeys {supportedKeys}, mptr_states {states}, m_stateEndSignal {false}
 {
     std::clog << "Constructing State object.." << std::endl;
 
@@ -14,7 +14,9 @@ State::State(sf::RenderWindow *window, std::map<std::string, sf::Keyboard::Key> 
 // Deconstructors
 State::~State()
 {
-    std::clog << "State object deconstructed.." << std::endl;
+    std::clog << "Deconstructing State object.." << std::endl;
+    
+    std::clog << "State object deconstructed!" << std::endl;
 }
 
 // Getters
@@ -72,9 +74,9 @@ void State::setFont(std::string path)
     }
 }
 
-void State::setQuit(bool state)
+void State::signalStateEnd()
 {
-    this->m_requestQuit = state;
+    this->m_stateEndSignal = true;
 }
 
 void State::addState(State *state)
@@ -82,18 +84,29 @@ void State::addState(State *state)
     this->mptr_states->push(state);
 }
 
-// Functions
-const bool & State::getQuit() const
+void State::addTexture(std::string name, std::string path)
 {
-    return this->m_requestQuit;
+    sf::Texture texture;
+    if(!texture.loadFromFile(path))
+    {
+        throw("ERROR: Could not load texture!");
+    }
+    texture.setSmooth(true); // Smooth
+    this->m_textures[name] = texture;
+
+    std::clog << "Loaded texture at " << path << " to name " << name << std::endl;
 }
 
-void State::checkForQuit()
+const sf::Texture & State::getTexture(std::string name) const
 {
-    if (sf::Keyboard::isKeyPressed(this->getKeyBind("CLOSE")))
-    {
-        this->m_requestQuit = true;
-    }
+    // TODO: Check if texture exists
+    return this->m_textures.at(name);
+}
+
+// Functions
+const bool & State::checkIfStateEnd() const
+{
+    return this->m_stateEndSignal;
 }
 
 void State::updateMousePositions()

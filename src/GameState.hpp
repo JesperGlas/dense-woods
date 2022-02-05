@@ -2,19 +2,23 @@
 #define _GAMESTATE_HPP_
 
 #include "State.hpp"
+#include "Player.hpp" // Might be bad include
 
 class GameState
     : public State
 {
 // Variables
 private:
-    Entity m_player;
+    Player *mptr_player;
+    sf::RectangleShape m_background;
 public:
 
 // Functions
 private:
     void initFonts();
     void initKeybinds();
+    void initTextures();
+    void initPlayer();
 public:
     // Constructor
     GameState(sf::RenderWindow *widow, std::map<std::string, sf::Keyboard::Key> *supportedKeys, std::stack<State *> *states);
