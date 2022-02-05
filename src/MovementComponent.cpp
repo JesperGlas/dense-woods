@@ -1,8 +1,9 @@
 #include "MovementComponent.hpp"
 
+/* === Private Functions === */
 void MovementComponent::initVariables()
 {
-
+    
 }
 
 /* ### Constructors ### */
@@ -79,7 +80,8 @@ void MovementComponent::move(const float &dt, const float x_dir, const float y_d
     // Acceleration
     /* TODO: Could this be done more efficiently? */
     this->m_velocity.x += this->m_acceleration.x * x_dir;
-    if (abs(this->m_velocity.x) > this->m_maxVelocity.x) {
+    if (abs(this->m_velocity.x) > this->m_maxVelocity.x)
+    {
         int direction = (this->m_velocity.x >= 0) ? 1 : -1;
         this->m_velocity.x = this->m_maxVelocity.x * direction;
     }

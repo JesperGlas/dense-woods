@@ -68,19 +68,23 @@ void MainMenuState::initButtons()
 {
     this->m_buttons["GAME_STATE"] = new Button(
         40.f, 580.f,
-        100.f, 40.f,
         &this->m_font, "Continue"
     );
 
+    // TODO: Implement function for button
     this->m_buttons["SETTINGS_STATE"] = new Button(
         40.f, 640.f,
-        100.f, 40.f,
         &this->m_font, "Settings"
     );
 
-    this->m_buttons["EXIT_STATE"] = new Button(
+    // TODO: Implement function for button
+    this->m_buttons["EDITOR_STATE"] = new Button(
         40.f, 700.f,
-        100.f, 40.f,
+        &this->m_font, "Editor"
+    );
+
+    this->m_buttons["EXIT_STATE"] = new Button(
+        40.f, 760.f,
         &this->m_font, "Quit"
     );
 }
@@ -146,5 +150,13 @@ void MainMenuState::render(sf::RenderTarget *target)
     target->draw(this->m_background);
     target->draw(this->m_title);
     this->renderButtons(target);
+
+    /* === DEBUG FOR DESIGN ===*/
+    //sf::Text mouseText;
+    //mouseText.setPosition(this->getMousePosView().x, this->getMousePosView().y - 50);
+    //mouseText.setFont(this->m_font);
+    //mouseText.setCharacterSize(12);
+    //
+    //target->draw(mouseText);
 }
 

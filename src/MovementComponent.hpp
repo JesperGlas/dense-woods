@@ -7,16 +7,16 @@
 #include <vector>
 #include <stack>
 #include <map>
-#include <cmath> // Used for math
+#include <cmath> // Used for math in Movement
 
 class MovementComponent
 {
 private:
     sf::Sprite &mref_sprite;
     sf::Vector2f m_velocity;
-    sf::Vector2f m_maxVelocity;
     sf::Vector2f m_acceleration;
     sf::Vector2f m_deceleration;
+    sf::Vector2f m_maxVelocity;
 
 private:
     void initVariables();
