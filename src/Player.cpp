@@ -8,7 +8,7 @@ void Player::initVariables()
 
 void Player::initComponents()
 {
-    
+    this->createMovementComponent(100.f);
 }
 
 // Constructor
@@ -17,8 +17,11 @@ Player::Player(float x, float y, sf::Texture *texture)
 {
     std::clog << "Constructing Player object.." << std::endl;
 
+    this->initComponents();
+
     this->createSprite(texture);
     this->setPosition(x, y);
+    this->mptr_sprite->setScale(0.2, 0.2);
 
     // Center origin
     this->mptr_sprite->setOrigin(
@@ -45,7 +48,3 @@ Player::~Player()
 }
 
 // Functions
-void Player::rotate(const float &dt, float offset)
-{
-    this->mptr_sprite->rotate(dt * offset * this->m_moveSpeed);
-}

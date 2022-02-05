@@ -1,7 +1,14 @@
-make main --dry-run --keep-going --print-directory
+make main --dry-run --always-make --keep-going --print-directory
 make: Entering directory '/home/jesper/dev/cpp/dense-woods'
  
-make: 'main' is up to date.
- 
+g++ -std=c++11 -Wall -o obj/MainMenuState.o -c src/MainMenuState.cpp
+g++ -std=c++11 -Wall -o obj/Game.o -c src/Game.cpp
+g++ -std=c++11 -Wall -o obj/State.o -c src/State.cpp
+g++ -std=c++11 -Wall -o obj/Player.o -c src/Player.cpp
+g++ -std=c++11 -Wall -o obj/GameState.o -c src/GameState.cpp
+g++ -std=c++11 -Wall -o obj/Entity.o -c src/Entity.cpp
+g++ -std=c++11 -Wall -o obj/main.o -c src/main.cpp
+g++ -std=c++11 -Wall -o obj/Button.o -c src/Button.cpp
+g++ -std=c++11 -Wall -o main obj/MainMenuState.o obj/Game.o obj/State.o obj/Player.o obj/GameState.o obj/Entity.o obj/main.o obj/Button.o -lsfml-graphics -lsfml-window -lsfml-system
 make: Leaving directory '/home/jesper/dev/cpp/dense-woods'
  

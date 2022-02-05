@@ -12,18 +12,11 @@ MainMenuState::MainMenuState(sf::RenderWindow *window, std::map<std::string, sf:
     this->initKeybinds();
     this->initButtons();
 
-    sf::Vector2u window_size = this->getWindow()->getSize();
-    m_titleBackground.setFillColor(sf::Color(255, 255, 255, 100));
-    m_titleBackground.setSize(sf::Vector2f(
-        window_size.x/6,
-        window_size.y-200));
-    m_titleBackground.setPosition(100.f, 100.f);
-
     m_title.setFillColor(sf::Color::White);
     m_title.setFont(this->m_font);
-    m_title.setString("Sub\nSurface");
+    m_title.setString("Sub Surface");
     m_title.setCharacterSize(40);
-    m_title.setPosition(sf::Vector2f(140.f, 140.f));
+    m_title.setPosition(sf::Vector2f(40.f, 500.f));
 
     std::clog << "MainMenuState object constructed!" << std::endl;
 }
@@ -51,11 +44,12 @@ void MainMenuState::initVariables()
 void MainMenuState::initBackground()
 {
     // Load background texture
-    if (!this->m_backgroundTexture.loadFromFile("assets/img/menu_3.jpg"))
+    if (!this->m_backgroundTexture.loadFromFile("assets/img/menu_2.jpg"))
     {
         throw("ERROR: Can't load background texture!");
     }
 
+    this->m_backgroundTexture.setSmooth(true);
     this->m_background.setSize(sf::Vector2f(this->getWindow()->getSize()));
     this->m_background.setTexture(&this->m_backgroundTexture);
 }
@@ -72,24 +66,23 @@ void MainMenuState::initKeybinds()
 
 void MainMenuState::initButtons()
 {
-    this->m_buttons["EXIT_STATE"] = new Button(
-        140.f, this->getWindow()->getSize().y - 200.f,
-        100.f, 40.f,
-        &this->m_font, "Quit"
-    );
-
-    this->m_buttons["SETTINGS_STATE"] = new Button(
-        140.f, this->getWindow()->getSize().y - 260.f,
-        100.f, 40.f,
-        &this->m_font, "Settings"
-    );
-
     this->m_buttons["GAME_STATE"] = new Button(
-        140.f, this->getWindow()->getSize().y - 320.f,
+        40.f, 580.f,
         100.f, 40.f,
         &this->m_font, "Continue"
     );
 
+    this->m_buttons["SETTINGS_STATE"] = new Button(
+        40.f, 640.f,
+        100.f, 40.f,
+        &this->m_font, "Settings"
+    );
+
+    this->m_buttons["EXIT_STATE"] = new Button(
+        40.f, 700.f,
+        100.f, 40.f,
+        &this->m_font, "Quit"
+    );
 }
 
 // Public Functions
@@ -151,7 +144,6 @@ void MainMenuState::render(sf::RenderTarget *target)
     }
 
     target->draw(this->m_background);
-    target->draw(this->m_titleBackground);
     target->draw(this->m_title);
     this->renderButtons(target);
 }

@@ -8,7 +8,7 @@ void Entity::initVariables()
 
 // Constructors
 Entity::Entity()
-    : m_moveSpeed {100.f}
+    : mptr_sprite {nullptr}, mptr_texture {nullptr}, mptr_movementComponent {nullptr}
 {
     std::clog << "Constructing Entity object.." << std::endl;
     
@@ -22,12 +22,26 @@ Entity::~Entity()
 {
     std::clog << "Deconstructing Entity object.." << std::endl;
 
-    delete this->mptr_sprite;
+    if (this->mptr_sprite)
+    {
+        delete this->mptr_sprite;
+    }
+    if (this->mptr_movementComponent)
+    {
+        delete this->mptr_movementComponent;
+    }
 
     std::clog << "Entity object deconstructed!" << std::endl;
 }
 
 /* ### Component Functions */
+void Entity::createMovementComponent(const float maxVelocity)
+{
+    this->mptr_movementComponent = new MovementComponent(
+        sf::Vector2f(100.f, 100.f)
+    );
+}
+
 void Entity::createSprite(sf::Texture *texture)
 {
     this->mptr_texture = texture;
@@ -43,17 +57,19 @@ void Entity::setPosition(const float x, const float y)
         this->mptr_sprite->setPosition(x, y);
     }
 }
-void Entity::move(const float &dt, const float x_offset, const float y_offset)
+void Entity::move(const float &dt, const float x_dir, const float y_dir)
 {
-    this->move(dt, sf::Vector2f(x_offset, y_offset));
+    if (this->mptr_sprite && this->mptr_movementComponent)
+    {
+        // TODO: Max velocity check here or in MovementComponent
+        this->mptr_movementComponent->move(x_dir, y_dir); // Sets velocity
+        this->mptr_sprite->move(this->mptr_movementComponent->getVelocity() * dt); // Uses velocity
+    }
 }
 
-void Entity::move(const float &dt, const sf::Vector2f offset)
+void Entity::move(const float &dt, const sf::Vector2f direction)
 {
-    if (this->mptr_sprite)
-    {
-        this->mptr_sprite->move(offset * this->m_moveSpeed * dt);
-    }
+    this->move(dt, direction.x, direction.y);
 }
 
 void Entity::update(const float &dt)

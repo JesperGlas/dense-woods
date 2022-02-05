@@ -24,7 +24,6 @@ public:
     virtual ~Player();
 
     // Functions
-    void rotate(const float &dt, float offset);
 };
 
 #endif

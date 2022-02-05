@@ -12,7 +12,6 @@ class MainMenuState
 private:
     sf::Texture m_backgroundTexture;
     sf::RectangleShape m_background;
-    sf::RectangleShape m_titleBackground;
     sf::Text m_title;
 
     std::map<std::string, Button *> m_buttons;

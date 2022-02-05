@@ -87,14 +87,6 @@ void GameState::updateInput(const float &dt)
     {
         this->mptr_player->move(dt, 1.f, 0.f);
     }
-    if (sf::Keyboard::isKeyPressed(this->getKeyBind("ROTATE_LEFT")))
-    {
-        this->mptr_player->rotate(dt, -1.f);
-    }
-    if (sf::Keyboard::isKeyPressed(this->getKeyBind("ROTATE_RIGHT")))
-    {
-        this->mptr_player->rotate(dt, 1.f);
-    }
 }
 
 void GameState::update(const float &dt)
