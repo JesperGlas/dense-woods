@@ -54,7 +54,7 @@ void GameState::initTextures()
 
 void GameState::initPlayer()
 {
-    this->mptr_player = new Player(0.f, 0.f, &this->m_textures.at("PLAYER"));
+    this->mptr_player = new Player(0.f, 0.f, this->m_textures.at("PLAYER"));
 }
 
 
@@ -73,19 +73,19 @@ void GameState::updateInput(const float &dt)
     }
     if (sf::Keyboard::isKeyPressed(this->getKeyBind("MOVE_UP")))
     {
-        this->mptr_player->move(dt, 0.f, -1.f);
+        this->mptr_player->move(0.f, -1.f, dt);
     }
     if (sf::Keyboard::isKeyPressed(this->getKeyBind("MOVE_LEFT")))
     {
-        this->mptr_player->move(dt, -1.f, 0.f);
+        this->mptr_player->move(-1.f, 0.f, dt);
     }
     if (sf::Keyboard::isKeyPressed(this->getKeyBind("MOVE_DOWN")))
     {
-        this->mptr_player->move(dt, 0.f, 1.f);
+        this->mptr_player->move(0.f, 1.f, dt);
     }
     if (sf::Keyboard::isKeyPressed(this->getKeyBind("MOVE_RIGHT")))
     {
-        this->mptr_player->move(dt, 1.f, 0.f);
+        this->mptr_player->move(1.f, 0.f, dt);
     }
 }
 

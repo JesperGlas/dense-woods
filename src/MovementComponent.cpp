@@ -1,11 +1,25 @@
 #include "MovementComponent.hpp"
 
+void MovementComponent::initVariables()
+{
+
+}
 
 /* ### Constructors ### */
-MovementComponent::MovementComponent(sf::Vector2f max_velocity)
-    : m_maxVelocity {max_velocity}
+MovementComponent::MovementComponent(
+    sf::Sprite &sprite,
+    const float acceleration,
+    const float deceleration,
+    const float max_velocity
+    ) : mref_sprite {sprite},
+        m_velocity {sf::Vector2f(0.f, 0.f)},
+        m_acceleration {sf::Vector2f(acceleration, acceleration)},
+        m_deceleration {sf::Vector2f(deceleration, deceleration)},
+        m_maxVelocity {sf::Vector2f(max_velocity, max_velocity)}
 {
     std::clog << "Constructing MovementComponent.." << std::endl;
+
+    this->initVariables();
 
     std:: clog << "Movementcomponent constructed!" << std:: endl;
 }
@@ -36,19 +50,63 @@ void MovementComponent::setMaxVelocity(sf::Vector2f velocity)
     this->m_maxVelocity = velocity;
 }
 
-/* === Public Functions === */
-void MovementComponent::move(const sf::Vector2f direction)
+void MovementComponent::setVelocity(sf::Vector2f velocity)
 {
-    this->move(direction.x, direction.y);
+    this->m_velocity = velocity;
 }
 
-void MovementComponent::move(const float x_dir, const float y_dir)
+void MovementComponent::setUniformAcceleration(const float acceleration)
 {
-    this->m_velocity.x = this->m_maxVelocity.x * x_dir;
-    this->m_velocity.y = this->m_maxVelocity.y * y_dir;
+    this->m_acceleration.x = acceleration;
+    this->m_acceleration.y = acceleration;
+}
+
+void MovementComponent::setUniformDeceleration(const float deceleration)
+{
+    this->m_deceleration.x = deceleration;
+    this->m_deceleration.y = deceleration;
+}
+
+
+/* === Public Functions === */
+void MovementComponent::move(const float &dt, const sf::Vector2f direction)
+{
+    this->move(dt, direction.x, direction.y);
+}
+
+void MovementComponent::move(const float &dt, const float x_dir, const float y_dir)
+{
+    // Acceleration
+    /* TODO: Could this be done more efficiently? */
+    this->m_velocity.x += this->m_acceleration.x * x_dir;
+    if (abs(this->m_velocity.x) > this->m_maxVelocity.x) {
+        int direction = (this->m_velocity.x >= 0) ? 1 : -1;
+        this->m_velocity.x = this->m_maxVelocity.x * direction;
+    }
+
+    this->m_velocity.y += this->m_acceleration.y * y_dir;
+    if (abs(this->m_velocity.y) > this->m_maxVelocity.y)
+    {
+        int direction = (this->m_velocity.y >= 0) ? 1 : -1;
+        this->m_velocity.y = this->m_maxVelocity.y * direction;
+    }
 }
 
 void MovementComponent::update(const float &dt)
 {
+    // Decelaration
+    if (abs(this->m_velocity.x) > 0)
+    {
+        int direction = (this->m_velocity.x >= 0) ? 1 : -1;
+        this->m_velocity.x -= this->m_deceleration.x * direction;
+    }
 
+    if (abs(this->m_velocity.y) > 0)
+    {
+        int direction = (this->m_velocity.y >= 0) ? 1 : -1;
+        this->m_velocity.y -= this->m_deceleration.y * direction;
+    }
+
+    // Move sprite
+    this->mref_sprite.move(this->m_velocity * dt);
 }

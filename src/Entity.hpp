@@ -8,8 +8,7 @@ class Entity
 // Variables
 private:
 protected:
-    sf::Sprite *mptr_sprite;
-    sf::Texture *mptr_texture;
+    sf::Sprite m_sprite;
     MovementComponent *mptr_movementComponent;
 public:
 
@@ -24,13 +23,18 @@ public:
     virtual ~Entity();
 
     // Component Functions
-    void createSprite(sf::Texture *texture);
-    void createMovementComponent(const float maxVelocity);
+    void setSpriteTexture(sf::Texture &texture);
+    void createMovementComponent(
+        const float acceleration,
+        const float deceleration,
+        const float maxVelocity);
 
     // Functions
     virtual void setPosition(const float x, const float y);
-    virtual void move(const float &dt, const float x_dir, const float y_dir);
-    virtual void move(const float &dt, const sf::Vector2f direction);
+    virtual void centerOrigin();
+    virtual void setUniformScale(const float scale);
+    virtual void move(const float x_dir, const float y_dir, const float &dt);
+    virtual void move(const sf::Vector2f direction, const float &dt);
     virtual void update(const float &dt);
     virtual void render(sf::RenderTarget *target);
 };

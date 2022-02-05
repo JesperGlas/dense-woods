@@ -8,7 +8,7 @@ void Entity::initVariables()
 
 // Constructors
 Entity::Entity()
-    : mptr_sprite {nullptr}, mptr_texture {nullptr}, mptr_movementComponent {nullptr}
+    : mptr_movementComponent {nullptr}
 {
     std::clog << "Constructing Entity object.." << std::endl;
     
@@ -22,10 +22,6 @@ Entity::~Entity()
 {
     std::clog << "Deconstructing Entity object.." << std::endl;
 
-    if (this->mptr_sprite)
-    {
-        delete this->mptr_sprite;
-    }
     if (this->mptr_movementComponent)
     {
         delete this->mptr_movementComponent;
@@ -35,52 +31,66 @@ Entity::~Entity()
 }
 
 /* ### Component Functions */
-void Entity::createMovementComponent(const float maxVelocity)
+void Entity::createMovementComponent(
+    const float acceleration,
+    const float deceleration,
+    const float max_velocity
+)
 {
     this->mptr_movementComponent = new MovementComponent(
-        sf::Vector2f(100.f, 100.f)
-    );
+        this->m_sprite,
+        acceleration,
+        deceleration,
+        max_velocity);
 }
 
-void Entity::createSprite(sf::Texture *texture)
+void Entity::setSpriteTexture(sf::Texture &texture)
 {
-    this->mptr_texture = texture;
-    this->mptr_sprite = new sf::Sprite(*this->mptr_texture);
+    this->m_sprite.setTexture(texture);
 }
 
 
 // Functions
 void Entity::setPosition(const float x, const float y)
 {
-    if (this->mptr_sprite)
-    {
-        this->mptr_sprite->setPosition(x, y);
-    }
+    this->m_sprite.setPosition(x, y);
 }
-void Entity::move(const float &dt, const float x_dir, const float y_dir)
+
+void Entity::centerOrigin()
 {
-    if (this->mptr_sprite && this->mptr_movementComponent)
+    this->m_sprite.setOrigin(sf::Vector2f(
+        this->m_sprite.getLocalBounds().width/2,
+        this->m_sprite.getLocalBounds().height/2
+    ));
+}
+
+void Entity::setUniformScale(const float scale)
+{
+    this->m_sprite.setScale(sf::Vector2f(scale, scale));
+}
+
+void Entity::move(const float x_dir, const float y_dir, const float &dt)
+{
+    if (this->mptr_movementComponent)
     {
-        // TODO: Max velocity check here or in MovementComponent
-        this->mptr_movementComponent->move(x_dir, y_dir); // Sets velocity
-        this->mptr_sprite->move(this->mptr_movementComponent->getVelocity() * dt); // Uses velocity
+        this->mptr_movementComponent->move(dt, x_dir, y_dir);
     }
 }
 
-void Entity::move(const float &dt, const sf::Vector2f direction)
+void Entity::move(const sf::Vector2f direction, const float &dt)
 {
-    this->move(dt, direction.x, direction.y);
+    this->move(direction.x, direction.y, dt);
 }
 
 void Entity::update(const float &dt)
 {
-
+    if (this->mptr_movementComponent)
+    {
+        this->mptr_movementComponent->update(dt);
+    }
 }
 
 void Entity::render(sf::RenderTarget *target)
 {
-    if (this->mptr_sprite)
-    {
-        target->draw(*this->mptr_sprite);
-    }
+    target->draw(this->m_sprite);
 }

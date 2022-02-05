@@ -1,5 +1,5 @@
-#ifndef _PLAYER_
-#define _PLAYER_
+#ifndef _PLAYER_HPP_
+#define _PLAYER_HPP_
 
 #include "Entity.hpp"
 
@@ -17,8 +17,8 @@ private:
 
 public:
     // Constructor
-    Player(float x, float y, sf::Texture *texture);
-    Player(sf::Vector2f position, sf::Texture *texture);
+    Player(float x, float y, sf::Texture &texture);
+    Player(sf::Vector2f position, sf::Texture &texture);
 
     // Deconstructor
     virtual ~Player();
