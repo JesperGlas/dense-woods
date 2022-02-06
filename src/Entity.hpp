@@ -27,10 +27,16 @@ public:
 
     // Component Functions
     void setSpriteTexture(sf::Texture &texture);
+    void createHitboxComponent(
+        sf::Sprite &sprite,
+        const float x_offset,
+        const float y_offset
+    );
     void createMovementComponent(
         const float acceleration,
         const float deceleration,
-        const float maxVelocity);
+        const float maxVelocity
+    );
 
     // Functions
     virtual void setPosition(const float x, const float y);

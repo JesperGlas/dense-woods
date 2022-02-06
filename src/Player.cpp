@@ -8,11 +8,9 @@ void Player::initVariables()
 
 void Player::initComponents()
 {
-    this->createMovementComponent(
-        5.f,
-        1.f,
-        200.f
-    );
+    this->createMovementComponent(5.f, 1.f, 200.f);
+
+    this->createHitboxComponent(this->m_sprite, 0.f, 0.f);
 }
 
 // Constructor
@@ -21,12 +19,11 @@ Player::Player(float x, float y, sf::Texture &texture)
 {
     std::clog << "Constructing Player object.." << std::endl;
 
-    this->initComponents();
-
     this->setSpriteTexture(texture);
     this->setPosition(x, y);
     this->setUniformScale(0.2);
-    this->centerOrigin();
+
+    this->initComponents();
 
     std::clog << "Player object constructed!" << std::endl;
 }
@@ -41,7 +38,7 @@ Player::Player(sf::Vector2f position, sf::Texture &texture)
 // Deconstructor
 Player::~Player()
 {
-    std:: clog << "Constructing Player object.." << std::endl;
+    std::clog << "Constructing Player object.." << std::endl;
 
     std::clog << "Player object deconstructed!" << std::endl;
 }

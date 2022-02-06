@@ -8,8 +8,7 @@ void Entity::initVariables()
 
 // Constructors
 Entity::Entity()
-    :   mptr_movementComponent {nullptr},
-        mptr_hitboxComponent {nullptr}
+    : mptr_hitboxComponent {nullptr}, mptr_movementComponent {nullptr}
 {
     std::clog << "Constructing Entity object.." << std::endl;
     
@@ -29,7 +28,23 @@ Entity::~Entity()
     std::clog << "Entity object deconstructed!" << std::endl;
 }
 
-/* ### Component Functions */
+/* === Component Functions === */
+
+void Entity::createHitboxComponent(
+    sf::Sprite &sprite,
+    const float x_offset,
+    const float y_offset
+)
+{
+    this->mptr_hitboxComponent = new HitboxComponent(
+        sprite,
+        x_offset,
+        y_offset,
+        this->m_sprite.getGlobalBounds().width,
+        this->m_sprite.getGlobalBounds().height
+    );
+}
+
 void Entity::createMovementComponent(
     const float acceleration,
     const float deceleration,
@@ -87,9 +102,16 @@ void Entity::update(const float &dt)
     {
         this->mptr_movementComponent->update(dt);
     }
+
+    if (this->mptr_hitboxComponent)
+    {
+        this->mptr_hitboxComponent->update();
+    }
 }
 
 void Entity::render(sf::RenderTarget *target)
 {
     target->draw(this->m_sprite);
+
+    this->mptr_hitboxComponent->render(target);
 }

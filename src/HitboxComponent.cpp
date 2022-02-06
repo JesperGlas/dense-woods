@@ -45,7 +45,7 @@ void HitboxComponent::update()
     this->m_hitbox.setPosition(this->mref_sprite.getPosition() + this->m_offset);
 }
 
-void HitboxComponent::render(sf::RenderTarget &target)
+void HitboxComponent::render(sf::RenderTarget *target)
 {
-    target.draw(this->m_hitbox);
+    target->draw(this->m_hitbox);
 } 
