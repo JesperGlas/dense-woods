@@ -99,7 +99,7 @@ void EditorState::update(const float &dt)
     this->updateInput(dt);
 }
 
-void EditorState::renderButtons(sf::RenderTarget *target)
+void EditorState::renderButtons(sf::RenderTarget &target)
 {
     for (auto &iter : this->m_buttons)
     {
@@ -116,7 +116,7 @@ void EditorState::render(sf::RenderTarget *target)
 
     target->draw(this->m_background);
     target->draw(this->m_title);
-    this->renderButtons(target);
+    this->renderButtons(*target);
 
     /* === DEBUG FOR DESIGN ===*/
     //sf::Text mouseText;

@@ -105,8 +105,8 @@ void Button::update(const sf::Vector2f mousePos)
     }
 }
 
-void Button::render(sf::RenderTarget *target)
+void Button::render(sf::RenderTarget &target)
 {
-    target->draw(this->m_shape);
-    target->draw(this->m_text);
+    target.draw(this->m_shape);
+    target.draw(this->m_text);
 }

@@ -110,6 +110,6 @@ void GameState::render(sf::RenderTarget *target)
     // Render background
     target->draw(this->m_background);
 
-    this->mptr_player->render(target);
+    this->mptr_player->render(*target);
 }
 

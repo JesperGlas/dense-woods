@@ -109,9 +109,9 @@ void Entity::update(const float &dt)
     }
 }
 
-void Entity::render(sf::RenderTarget *target)
+void Entity::render(sf::RenderTarget &target)
 {
-    target->draw(this->m_sprite);
+    target.draw(this->m_sprite);
 
-    this->mptr_hitboxComponent->render(target);
+    this->mptr_hitboxComponent->render(&target);
 }

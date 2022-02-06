@@ -45,7 +45,7 @@ public:
     virtual void move(const float x_dir, const float y_dir, const float &dt);
     virtual void move(const sf::Vector2f direction, const float &dt);
     virtual void update(const float &dt);
-    virtual void render(sf::RenderTarget *target);
+    virtual void render(sf::RenderTarget &target);
 };
 
 #endif
