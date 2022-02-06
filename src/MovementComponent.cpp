@@ -16,8 +16,7 @@ MovementComponent::MovementComponent(
         m_velocity {sf::Vector2f(0.f, 0.f)},
         m_acceleration {sf::Vector2f(acceleration, acceleration)},
         m_deceleration {sf::Vector2f(deceleration, deceleration)},
-        m_maxVelocity {sf::Vector2f(max_velocity, max_velocity)},
-        m_movementDirection {sf::Vector2f(0.f, 0.f)}
+        m_maxVelocity {sf::Vector2f(max_velocity, max_velocity)}
 {
     std::clog << "Constructing MovementComponent.." << std::endl;
 
@@ -44,33 +43,6 @@ const sf::Vector2f & MovementComponent::getVelocity() const
 const sf::Vector2f & MovementComponent::getMaxVelocity() const
 {
     return this->m_maxVelocity;
-}
-
-bool MovementComponent::getState(MovementDirection direction)
-{
-    bool state {false};
-
-    switch (direction)
-    {
-    case IDLE:
-        state = this->m_movementDirection == sf::Vector2f(0.f, 0.f);
-        break;
-    case MOVE_UP:
-        state = this->m_movementDirection.y == -1.f;
-        break;
-    case MOVE_RIGHT:
-        state = this->m_movementDirection.x == 1.f;
-        break;
-    case MOVE_DOWN:
-        state = this->m_movementDirection.y == 1.f;
-    case MOVE_LEFT:
-        state = this->m_movementDirection.x == -1.f;
-        break;
-    default:
-        break;
-    }
-
-    return state;
 }
 
 /* === Setters === */
@@ -124,27 +96,20 @@ void MovementComponent::move(const float &dt, const float x_dir, const float y_d
 
 void MovementComponent::update(const float &dt)
 {
-    // Update direction
-    if (this->m_velocity.x > 0)
-        this->m_movementDirection.x = 1.f;
-    else if (this-> m_velocity.x < 0)
-        this->m_movementDirection.x = -1.f;
-    else
-        this->m_movementDirection.x = 0.f;
-
-    if (this->m_velocity.y > 0)
-        this->m_movementDirection.y = 1.f;
-    else if (this->m_velocity.y < 0)
-        this->m_movementDirection.y = -1.f;
-    else
-        this->m_movementDirection.y = 0.f;
-
     // Decelaration
-    if (abs(this->m_velocity.x) > 0)
-        this->m_velocity.x -= this->m_deceleration.x * (float) m_movementDirection.x;
+    if (this->m_velocity.x > 0.f)
+        this->m_velocity.x -= this->m_deceleration.x;
+    else if (this->m_velocity.x < 0.f)
+        this->m_velocity.x += this->m_deceleration.x;
+    else
+        this->m_velocity.x = 0.f;
 
-    if (abs(this->m_velocity.y) > 0)
-        this->m_velocity.y -= this->m_deceleration.y * (float) m_movementDirection.y;
+    if (this->m_velocity.y > 0.f)
+        this->m_velocity.y -= this->m_deceleration.y;
+    else if (this->m_velocity.y < 0.f)
+        this->m_velocity.y += this->m_deceleration.y;
+    else
+        this->m_velocity.y = 0.f;
 
     // Move sprite
     this->mref_sprite.move(this->m_velocity * dt);

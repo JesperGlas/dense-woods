@@ -9,14 +9,6 @@
 #include <map>
 #include <cmath> // Used for math in Movement
 
-enum MovementDirection {
-    IDLE = 0,
-    MOVE_UP = 1,
-    MOVE_RIGHT = 2,
-    MOVE_DOWN = 3,
-    MOVE_LEFT = 4
-};
-
 class MovementComponent
 {
 private:
@@ -25,7 +17,6 @@ private:
     sf::Vector2f m_acceleration;
     sf::Vector2f m_deceleration;
     sf::Vector2f m_maxVelocity;
-    sf::Vector2f m_movementDirection;
 
 private:
     void initVariables();
@@ -41,7 +32,6 @@ public:
     // Getters
     const sf::Vector2f & getVelocity() const;
     const sf::Vector2f & getMaxVelocity() const;
-    bool getState(MovementDirection direction);
 
     // Setters
     void setMaxVelocity(sf::Vector2f velocity);

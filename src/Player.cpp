@@ -12,8 +12,9 @@ void Player::initComponents()
 
     this->createHitboxComponent(
         this->m_sprite,
-        3.f, 6.f,
-        -6.f, -15.f
+        4.f, 6.f,
+        this->m_sprite.getGlobalBounds().width - 9.f,
+        this->m_sprite.getGlobalBounds().height - 18.f
     );
 }
 
@@ -47,4 +48,9 @@ Player::~Player()
     std::clog << "Player object deconstructed!" << std::endl;
 }
 
-// Functions
+/* === Functions === */
+
+void Player::update(const float &dt)
+{
+    Entity::update(dt);
+}
