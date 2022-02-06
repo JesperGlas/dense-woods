@@ -2,6 +2,7 @@
 #define _ENTITY_HPP_
 
 #include "MovementComponent.hpp"
+#include "HitboxComponent.hpp"
 
 class Entity
 {
@@ -9,6 +10,8 @@ class Entity
 private:
 protected:
     sf::Sprite m_sprite;
+
+    HitboxComponent *mptr_hitboxComponent;
     MovementComponent *mptr_movementComponent;
 public:
 

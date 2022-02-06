@@ -8,7 +8,8 @@ void Entity::initVariables()
 
 // Constructors
 Entity::Entity()
-    : mptr_movementComponent {nullptr}
+    :   mptr_movementComponent {nullptr},
+        mptr_hitboxComponent {nullptr}
 {
     std::clog << "Constructing Entity object.." << std::endl;
     
@@ -22,11 +23,9 @@ Entity::~Entity()
 {
     std::clog << "Deconstructing Entity object.." << std::endl;
 
-    if (this->mptr_movementComponent)
-    {
-        delete this->mptr_movementComponent;
-    }
-
+    delete this->mptr_movementComponent;
+    delete this->mptr_hitboxComponent;
+    
     std::clog << "Entity object deconstructed!" << std::endl;
 }
 
