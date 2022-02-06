@@ -5,17 +5,17 @@
 #include <string>
 #include <iostream>
 
-enum button_states{
+enum ButtonStates {
     BTN_IDLE = 0,
     BTN_HOVER = 1,
     BTN_ACTIVE = 2
-    };
+};
 
 class Button
 {
 // Variables
 private:
-    short unsigned m_buttonState;
+    ButtonStates m_buttonState;
     sf::RectangleShape m_shape;
 
     sf::Font *mptr_font;

@@ -60,7 +60,6 @@ void GameState::initPlayer()
         this->m_textures.at("PLAYER"));
 }
 
-
 // Public Functions
 void GameState::endStateActions()
 {

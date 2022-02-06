@@ -22,7 +22,7 @@ HitboxComponent::HitboxComponent(
 
     this->m_hitbox.setFillColor(sf::Color::Transparent);
     this->m_hitbox.setOutlineThickness(1.f);
-    this->m_hitbox.setOutlineColor(sf::Color::Red);
+    this->m_hitbox.setOutlineColor(sf::Color::Green);
 
     std::clog << "HitboxComponent object constructed!" << std::endl;
 }

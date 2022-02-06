@@ -19,6 +19,7 @@ private:
     void initKeybinds();
     void initTextures();
     void initPlayer();
+    void initObjects();
 public:
     // Constructor
     GameState(sf::RenderWindow *widow, std::map<std::string, sf::Keyboard::Key> *supportedKeys, std::stack<State *> *states);
