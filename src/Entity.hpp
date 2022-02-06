@@ -29,8 +29,10 @@ public:
     void setSpriteTexture(sf::Texture &texture);
     void createHitboxComponent(
         sf::Sprite &sprite,
-        const float x_offset,
-        const float y_offset
+        const float x_start_offset,
+        const float y_start_offset,
+        const float x_end_offset,
+        const float y_end_offset
     );
     void createMovementComponent(
         const float acceleration,

@@ -16,17 +16,18 @@ private:
     // TODO: Better shape
     sf::Sprite &mref_sprite;
     sf::RectangleShape m_hitbox;
-    sf::Vector2f m_offset;
+    sf::Vector2f m_posOffset;
 public:
 
 // Functions
 public:
     HitboxComponent(
         sf::Sprite &sprite,
-        const float x_offset,
-        const float y_offset,
-        const float width,
-        const float height);
+        const float x_start_offset,
+        const float y_start_offset,
+        const float x_end_offset,
+        const float y_end_offset
+    );
 
     virtual ~HitboxComponent();
 

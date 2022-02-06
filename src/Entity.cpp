@@ -32,16 +32,18 @@ Entity::~Entity()
 
 void Entity::createHitboxComponent(
     sf::Sprite &sprite,
-    const float x_offset,
-    const float y_offset
+    const float x_start_offset,
+    const float y_start_offset,
+    const float x_end_offset,
+    const float y_end_offset
 )
 {
     this->mptr_hitboxComponent = new HitboxComponent(
         sprite,
-        x_offset,
-        y_offset,
-        this->m_sprite.getGlobalBounds().width,
-        this->m_sprite.getGlobalBounds().height
+        x_start_offset,
+        y_start_offset,
+        x_end_offset,
+        y_end_offset
     );
 }
 
