@@ -1,5 +1,12 @@
 #include "State.hpp"
 
+/* === Private Functions === */
+
+void State::initFonts()
+{
+    this->setFont("assets/fonts/Roboto/roboto/Roboto-Regular.ttf");
+}
+
 // Constructors
 State::State(sf::RenderWindow *window, std::map<std::string, sf::Keyboard::Key> *supportedKeys, std::stack<State *> *states)
     : mptr_window {window}, mptr_supportedKeys {supportedKeys}, mptr_states {states}, m_stateEndSignal {false}

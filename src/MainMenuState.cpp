@@ -54,11 +54,6 @@ void MainMenuState::initBackground()
     this->m_background.setTexture(&this->m_backgroundTexture);
 }
 
-void MainMenuState::initFonts()
-{
-    this->setFont("assets/fonts/Roboto/roboto/Roboto-Regular.ttf");
-}
-
 void MainMenuState::initKeybinds()
 {
     this->setKeybind("CLOSE", this->getSupportedKey("A"));
@@ -110,11 +105,25 @@ void MainMenuState::updateButtons()
     // Start Game
     if (this->m_buttons["GAME_STATE"]->isActive())
     {
-        this->addState(new GameState(
-            this->getWindow(),
-            this->getSupportedKeys(),
-            this->getStateStack()
-        ));
+        this->addState(
+            new GameState(
+                this->getWindow(),
+                this->getSupportedKeys(),
+                this->getStateStack()
+            )
+        );
+    }
+
+    // Editor
+    if (this->m_buttons["EDITOR_STATE"]->isActive())
+    {
+        this->addState(
+            new EditorState(
+                this->getWindow(),
+                this->getSupportedKeys(),
+                this->getStateStack()
+            )
+        );
     }
 
     // Quit Game

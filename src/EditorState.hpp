@@ -1,10 +1,9 @@
-#ifndef _MAINMENUSTATE_
-#define _MAINMENUSTATE_
+#ifndef _EDITORSTATE_HPP_
+#define _EDITORSTATE_HPP_
 
-#include "GameState.hpp"
-#include "EditorState.hpp"
+#include "State.hpp"
 
-class MainMenuState
+class EditorState
     : public State
 {
 // Variables
@@ -24,10 +23,10 @@ private:
     void initButtons();
 public:
     // Constructor
-    MainMenuState(sf::RenderWindow *widow, std::map<std::string, sf::Keyboard::Key> *supportedKeys, std::stack<State *> *states);
+    EditorState(sf::RenderWindow *widow, std::map<std::string, sf::Keyboard::Key> *supportedKeys, std::stack<State *> *states);
 
     // Deconstructor
-    virtual ~MainMenuState();
+    virtual ~EditorState();
 
     // Functions
     void endStateActions();

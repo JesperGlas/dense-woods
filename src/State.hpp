@@ -2,6 +2,7 @@
 #define _STATE_HPP_
 
 #include "Entity.hpp"
+#include "Button.hpp"
 
 class State
 {
@@ -25,7 +26,8 @@ public:
 // Functions
 private:
 protected:
-    virtual void initFonts() = 0;
+    virtual void initFonts();
+    
     virtual void initKeybinds() = 0;
 public:
     // Constructors
