@@ -9,8 +9,18 @@ void State::initFonts()
 }
 
 // Constructors
-State::State(sf::RenderWindow *window, std::map<std::string, sf::Keyboard::Key> *supportedKeys, std::stack<State *> *states)
-    : mptr_window {window}, mptr_supportedKeys {supportedKeys}, mptr_states {states}, m_stateEndSignal {false}
+State::State(
+    sf::RenderWindow *window,
+    std::map<std::string,
+    sf::Keyboard::Key> *supportedKeys,
+    std::stack<State *> *states
+    ) : mptr_window {window},
+        mptr_supportedKeys {supportedKeys},
+        mptr_states {states},
+        m_stateEndSignal {false},
+        m_statePauseSignal {false},
+        m_keytime {0.f},
+        m_keytimeMax {10.f}
 {
     std::clog << "Constructing State object.." << std::endl;
 
@@ -69,7 +79,8 @@ const sf::Vector2f & State::getMousePosView()
     return this->m_mousePosView;
 }
 
-// Setters
+/* === Setters === */
+
 void State::setKeybind(std::string action, sf::Keyboard::Key key)
 {
     this->m_keyBinds[action] = key;
@@ -117,7 +128,8 @@ const sf::Texture & State::getTexture(std::string name) const
     return this->m_textures.at(name);
 }
 
-// Functions
+/* === Getters === */
+
 const bool & State::checkIfStateEnd() const
 {
     return this->m_stateEndSignal;
@@ -128,9 +140,30 @@ const bool & State::checkIfStatePaused() const
     return this->m_statePauseSignal;
 }
 
+const bool State::getKeytime()
+{
+    if (this->m_keytime >= this->m_keytimeMax)
+    {
+        this->m_keytime = 0.f;
+        return true;
+    }
+
+    return false;
+}
+
+/* === Public Functions === */
+
 void State::updateMousePositions()
 {
     this->m_mousePosScreen = sf::Mouse::getPosition();
     this->m_mousePosWindow = sf::Mouse::getPosition(*this->getWindow());
     this->m_mousePosView = this->getWindow()->mapPixelToCoords(this->m_mousePosWindow);
+}
+
+void State::updateKeyTime(const float &dt)
+{
+    if (this->m_keytime < this->m_keytimeMax)
+    {
+        this->m_keytime += 10.f * dt;
+    }
 }

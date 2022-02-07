@@ -51,6 +51,12 @@ public:
     
     Button(
         const float x, const float y,
+        const float width, const float height,
+        sf::Font *font, std::string text
+    );
+
+    Button(
+        const float x, const float y,
         sf::Font *font, std::string text
     );
 

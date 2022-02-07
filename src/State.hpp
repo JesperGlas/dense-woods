@@ -14,6 +14,8 @@ private:
     
     bool m_stateEndSignal;
     bool m_statePauseSignal;
+    float m_keytime;
+    float m_keytimeMax;
 
     std::map<std::string, sf::Keyboard::Key> m_keyBinds;
     sf::Vector2i m_mousePosScreen; // Mouse position on screen
@@ -56,13 +58,18 @@ public:
     void addState(State *state);
 
     void addTexture(std::string name, std::string path);
-    const sf::Texture & getTexture(std::string name) const;
 
-    // Functions
+    // Getters
+    const sf::Texture & getTexture(std::string name) const;
     const bool & checkIfStateEnd() const;
     const bool & checkIfStatePaused() const;
-    virtual void endStateActions() = 0;
+    const bool getKeytime();
+
+    // Functions
     virtual void updateMousePositions();
+    virtual void updateKeyTime(const float &dt);
+
+    virtual void endStateActions() = 0;
     virtual void updateInput(const float &dt) = 0;
     virtual void update(const float &dt) = 0;
     virtual void render(sf::RenderTarget *mptr_target = nullptr) = 0;

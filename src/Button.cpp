@@ -43,9 +43,10 @@ Button::Button(
 
 Button::Button(
     const float x, const float y,
+    const float width, const float height,
     sf::Font *font, std::string text
 ) : Button(
-    x, y, 100.f, 50.f,
+    x, y, width, height,
     sf::Color::Transparent,
     sf::Color(50, 50, 50),
     sf::Color(50, 50, 50),
@@ -58,6 +59,17 @@ Button::Button(
     std::clog << "Constructing standard button.." << std::endl;
 
     std::clog << "Standard button constructed!" << std::endl;
+}
+
+Button::Button(
+    const float x, const float y,
+    sf::Font *font, std::string text
+) : Button(
+    x, y, 100.f, 50.f,
+    font, text
+    )
+{
+
 }
 
 // Deconstructor

@@ -1,43 +1,6 @@
 #include "GameState.hpp"
 
-// Constructors
-GameState::GameState(
-    sf::RenderWindow *window,
-    std::map<std::string, sf::Keyboard::Key> *supportedKeys,
-    std::stack<State *> *states
-    ) : State(window, supportedKeys, states),
-        m_pauseMenu {*window, this->m_font}
-{
-    std::clog << "==> Constructing GameState object.." << std::endl;
-
-    std::clog << "GameState init functions.." << std::endl;
-    this->initKeybinds();
-    this->initTextures();
-    this->initPlayer();
-
-    // Init background
-    this->m_background.setSize(sf::Vector2f(this->getWindow()->getSize()));
-    this->m_background.setPosition(sf::Vector2f(0.f, 0.f));
-    this->m_background.setFillColor(sf::Color::Blue);
-
-    std::clog << "<== GameState object constructed!" << std::endl;
-}
-
-// Deconstructors
-GameState::~GameState()
-{
-    std::clog << "Deconstructing GameState object.." << std::endl;
-
-    delete this->mptr_player;
-
-    std::clog << "GameState object deconstructed!" << std::endl;
-}
-
-// Private Functions
-void GameState::initFonts()
-{
-    
-}
+/* === Private Functions === */
 
 void GameState::initKeybinds()
 {
@@ -64,6 +27,46 @@ void GameState::initPlayer()
         this->m_textures.at("PLAYER"));
 }
 
+void GameState::initPauseMenu()
+{
+    this->m_pauseMenu.addButton("CONTINUE_GAME", "Continue");
+    this->m_pauseMenu.addButton("EXIT_STATE", "Quit Game");
+}
+
+// Constructors
+GameState::GameState(
+    sf::RenderWindow *window,
+    std::map<std::string, sf::Keyboard::Key> *supportedKeys,
+    std::stack<State *> *states
+    ) : State(window, supportedKeys, states),
+        m_pauseMenu {*window, this->m_font}
+{
+    std::clog << "==> Constructing GameState object.." << std::endl;
+
+    std::clog << "GameState init functions.." << std::endl;
+    this->initKeybinds();
+    this->initTextures();
+    this->initPlayer();
+    this->initPauseMenu();
+
+    // Init background
+    this->m_background.setSize(sf::Vector2f(this->getWindow()->getSize()));
+    this->m_background.setPosition(sf::Vector2f(0.f, 0.f));
+    this->m_background.setFillColor(sf::Color::Blue);
+
+    std::clog << "<== GameState object constructed!" << std::endl;
+}
+
+// Deconstructors
+GameState::~GameState()
+{
+    std::clog << "Deconstructing GameState object.." << std::endl;
+
+    delete this->mptr_player;
+
+    std::clog << "GameState object deconstructed!" << std::endl;
+}
+
 // Public Functions
 void GameState::endStateActions()
 {
@@ -72,22 +75,26 @@ void GameState::endStateActions()
 
 void GameState::updateInput(const float &dt)
 {
-    if (sf::Keyboard::isKeyPressed(this->getKeyBind("PAUSE_MENU")))
+    if (this->m_pauseMenu.isButtonPressed("CONTINUE_GAME"))
     {
-        this->setStatePause(true);
+        this->setStatePause(false);
+    }
+    if (this->m_pauseMenu.isButtonPressed("EXIT_STATE"))
+    {
+        this->setStateEnd();
+    }
+    if (sf::Keyboard::isKeyPressed(this->getKeyBind("FORCE_EXIT")))
+    {
+        this->setStateEnd();
     }
 }
 
 void GameState::updatePlayerInput(const float &dt)
 {
     // Update player input
-    if (sf::Keyboard::isKeyPressed(this->getKeyBind("FORCE_EXIT")))
+    if (sf::Keyboard::isKeyPressed(this->getKeyBind("PAUSE_MENU")))
     {
-        this->setStateEnd();
-    }
-    if (sf::Keyboard::isKeyPressed(this->getKeyBind("PAUSE_TIME")))
-    {
-        this->setStatePause(false);
+        this->setStatePause(true);
     }
     if (sf::Keyboard::isKeyPressed(this->getKeyBind("MOVE_UP")))
     {
@@ -110,6 +117,7 @@ void GameState::updatePlayerInput(const float &dt)
 void GameState::update(const float &dt)
 {
     this->updateMousePositions();
+    this->updateKeyTime(dt);
     this->updateInput(dt);
 
     if (this->checkIfStatePaused())

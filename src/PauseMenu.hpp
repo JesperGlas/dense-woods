@@ -24,7 +24,6 @@ public:
 
 // Functions
 private:
-    void initButtons();
 public:
     // Constructors
     PauseMenu(sf::RenderWindow &window, sf::Font &font);
@@ -32,7 +31,11 @@ public:
     // Deconstructods
     virtual ~PauseMenu();
 
+    // Getters
+    const bool isButtonPressed(const std::string key);
+
     // Functions
+    void addButton(const std::string key, std::string text);
     void update(const sf::Vector2f &mousePosition);
     void render(sf::RenderTarget &target);
 };

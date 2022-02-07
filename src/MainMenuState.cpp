@@ -26,26 +26,47 @@ void MainMenuState::initKeybinds()
 
 void MainMenuState::initButtons()
 {
+    const float y_start {580.f};
+    const float button_width {100.f};
+    const float button_height {40.f};
+    const float button_spacing {20.f};
+
     this->m_buttons["GAME_STATE"] = new Button(
-        40.f, 580.f,
-        &this->m_font, "Continue"
+        40.f,
+        y_start + this->m_buttons.size() * (button_height + button_spacing),
+        button_width,
+        button_height,
+        &this->m_font,
+        "Continue"
     );
 
     // TODO: Implement function for button
     this->m_buttons["SETTINGS_STATE"] = new Button(
-        40.f, 640.f,
-        &this->m_font, "Settings"
+        40.f,
+        y_start + this->m_buttons.size() * (button_height + button_spacing),
+        button_width,
+        button_height,
+        &this->m_font,
+        "Settings"
     );
 
     // TODO: Implement function for button
     this->m_buttons["EDITOR_STATE"] = new Button(
-        40.f, 700.f,
-        &this->m_font, "Editor"
+        40.f,
+        y_start + this->m_buttons.size() * (button_height + button_spacing),
+        button_width,
+        button_height,
+        &this->m_font,
+        "Editor"
     );
 
     this->m_buttons["EXIT_STATE"] = new Button(
-        40.f, 760.f,
-        &this->m_font, "Quit"
+        40.f,
+        y_start + this->m_buttons.size() * (button_height + button_spacing),
+        button_width,
+        button_height,
+        &this->m_font,
+        "Quit"
     );
 }
 
