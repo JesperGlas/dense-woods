@@ -112,16 +112,6 @@ void MainMenuState::endStateActions()
 
 void MainMenuState::updateInput(const float &dt)
 {
-    
-}
-
-void MainMenuState::updateButtons()
-{
-    for (auto &iter : this->m_buttons)
-    {
-        iter.second->update(this->getMousePosView());
-    }
-
     // Start Game
     if (this->m_buttons["GAME_STATE"]->isActive())
     {
@@ -151,6 +141,14 @@ void MainMenuState::updateButtons()
     {
         std::clog << "### Quit toggle btn ###" << std::endl;
         this->setStateEnd();
+    }
+}
+
+void MainMenuState::updateButtons()
+{
+    for (auto &iter : this->m_buttons)
+    {
+        iter.second->update(this->getMousePosView());
     }
 }
 

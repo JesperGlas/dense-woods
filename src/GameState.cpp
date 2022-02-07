@@ -75,6 +75,23 @@ void GameState::endStateActions()
 
 void GameState::updateInput(const float &dt)
 {
+    if (sf::Keyboard::isKeyPressed(this->getKeyBind("PAUSE_MENU")) && this->getKeytime())
+    {
+        if (this->checkIfStatePaused())
+            this->setStatePause(false);
+        else
+            this->setStatePause(true);
+    }
+
+    // Temporary to force an exit
+    if (sf::Keyboard::isKeyPressed(this->getKeyBind("FORCE_EXIT")))
+    {
+        this->setStateEnd();
+    }
+}
+
+void GameState::updatePauseMenu(const float &dt)
+{
     if (this->m_pauseMenu.isButtonPressed("CONTINUE_GAME"))
     {
         this->setStatePause(false);
@@ -83,19 +100,11 @@ void GameState::updateInput(const float &dt)
     {
         this->setStateEnd();
     }
-    if (sf::Keyboard::isKeyPressed(this->getKeyBind("FORCE_EXIT")))
-    {
-        this->setStateEnd();
-    }
 }
 
 void GameState::updatePlayerInput(const float &dt)
 {
     // Update player input
-    if (sf::Keyboard::isKeyPressed(this->getKeyBind("PAUSE_MENU")))
-    {
-        this->setStatePause(true);
-    }
     if (sf::Keyboard::isKeyPressed(this->getKeyBind("MOVE_UP")))
     {
         this->mptr_player->move(0.f, -1.f, dt);
@@ -119,10 +128,11 @@ void GameState::update(const float &dt)
     this->updateMousePositions();
     this->updateKeyTime(dt);
 
+    this->updateInput(dt);
+
     if (this->checkIfStatePaused())
     {
-        this->updateInput(dt);
-        
+        this->updatePauseMenu(dt);
         this->m_pauseMenu.update(dt);
     }
     else

@@ -33,6 +33,7 @@ public:
     void endStateActions();
 
     void updateInput(const float &dt);
+    void updatePauseMenu(const float &dt);
     void updatePlayerInput(const float &dt);
     void update(const float &dt);
     void render(sf::RenderTarget *target = nullptr);
