@@ -75,7 +75,10 @@ void EditorState::endStateActions()
 
 void EditorState::updateInput(const float &dt)
 {
-    
+    if (this->m_buttons["EXIT_STATE"]->isActive())
+    {
+        this->setStateEnd();
+    }
 }
 
 void EditorState::updateButtons()
@@ -84,18 +87,15 @@ void EditorState::updateButtons()
     {
         iter.second->update(this->getMousePosView());
     }
-
-    // Quit Game
-    if (this->m_buttons["EXIT_STATE"]->isActive())
-    {
-        this->setStateEnd();
-    }
 }
 
 void EditorState::update(const float &dt)
 {
     this->updateMousePositions();
+    this->updateKeyTime(dt);
+
     this->updateButtons();
+
     this->updateInput(dt);
 }
 

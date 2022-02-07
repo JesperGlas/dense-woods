@@ -167,8 +167,5 @@ void State::updateMousePositions()
 
 void State::updateKeyTime(const float &dt)
 {
-    if (this->m_keytime < this->m_keytimeMax)
-    {
-        this->m_keytime += 10.f * dt;
-    }
+    this->m_keytime += 100.f * dt;
 }

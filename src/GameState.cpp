@@ -118,11 +118,12 @@ void GameState::update(const float &dt)
 {
     this->updateMousePositions();
     this->updateKeyTime(dt);
-    this->updateInput(dt);
 
     if (this->checkIfStatePaused())
     {
-        this->m_pauseMenu.update(this->getMousePosView());
+        this->updateInput(dt);
+        
+        this->m_pauseMenu.update(dt);
     }
     else
     {

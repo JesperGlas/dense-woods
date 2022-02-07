@@ -79,13 +79,17 @@ void PauseMenu::addButton(std::string key, std::string text)
     );
 }
 
-void PauseMenu::update(const sf::Vector2f &mousePosition)
+void PauseMenu::updateButtons()
 {
     for (auto &iter : this->m_buttons)
-    {
-        iter.second->update(mousePosition);
-    }
+        {
+            iter.second->update(this->m_state.getMousePosView());
+        }
+}
 
+void PauseMenu::update(const float &dt)
+{
+    this->updateButtons();
 }
 
 void PauseMenu::render(sf::RenderTarget &target)
