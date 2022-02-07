@@ -32,7 +32,9 @@ public:
 
     // Functions
     void endStateActions();
+
     void updateInput(const float &dt);
+    void updatePlayerInput(const float &dt);
     void update(const float &dt);
     void render(sf::RenderTarget *target = nullptr);
 };

@@ -23,6 +23,7 @@ void Game::initWindow()
 void Game::initKeys()
 {
     this->supportedKeys["Escape"] = sf::Keyboard::Key::Escape;
+    this->supportedKeys["Space"] = sf::Keyboard::Key::Space;
     this->supportedKeys["Q"] = sf::Keyboard::Key::Q;
     this->supportedKeys["W"] = sf::Keyboard::Key::W;
     this->supportedKeys["E"] = sf::Keyboard::Key::E;
