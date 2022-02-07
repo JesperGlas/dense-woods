@@ -57,7 +57,6 @@ MainMenuState::MainMenuState(sf::RenderWindow *window, std::map<std::string, sf:
 
     this->initVariables();
     this->initBackground();
-    this->initFonts();
     this->initKeybinds();
     this->initButtons();
 

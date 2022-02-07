@@ -4,6 +4,7 @@
 
 void State::initFonts()
 {
+    // Inits a default font
     this->setFont("assets/fonts/Roboto/roboto/Roboto-Regular.ttf");
 }
 
@@ -14,6 +15,7 @@ State::State(sf::RenderWindow *window, std::map<std::string, sf::Keyboard::Key> 
     std::clog << "Constructing State object.." << std::endl;
 
     this->setKeybind("CLOSE", this->getSupportedKey("Escape")); // Set default close key to Escape
+    this->initFonts(); // Init default font
     
     std::clog << "State object constructed!" << std::endl;
 }

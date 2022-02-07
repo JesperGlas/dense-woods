@@ -1,8 +1,12 @@
 #include "GameState.hpp"
 
 // Constructors
-GameState::GameState(sf::RenderWindow *window, std::map<std::string, sf::Keyboard::Key> *supportedKeys, std::stack<State *> *states)
-    : State(window, supportedKeys, states), m_pauseMenu {*window}
+GameState::GameState(
+    sf::RenderWindow *window,
+    std::map<std::string, sf::Keyboard::Key> *supportedKeys,
+    std::stack<State *> *states
+    ) : State(window, supportedKeys, states),
+        m_pauseMenu {*window, this->m_font}
 {
     std::clog << "==> Constructing GameState object.." << std::endl;
 
@@ -110,7 +114,7 @@ void GameState::update(const float &dt)
 
     if (this->checkIfStatePaused())
     {
-        this->m_pauseMenu.update();
+        this->m_pauseMenu.update(this->getMousePosView());
     }
     else
     {

@@ -14,6 +14,8 @@ class PauseMenu
 {
 // Variables
 private:
+    sf::Font &mref_font;
+    sf::Text m_menuTitle;
     sf::RectangleShape m_background;
     sf::RectangleShape m_container;
 
@@ -25,13 +27,13 @@ private:
     void initButtons();
 public:
     // Constructors
-    PauseMenu(sf::RenderWindow &window);
+    PauseMenu(sf::RenderWindow &window, sf::Font &font);
 
     // Deconstructods
     virtual ~PauseMenu();
 
     // Functions
-    void update();
+    void update(const sf::Vector2f &mousePosition);
     void render(sf::RenderTarget &target);
 };
 
