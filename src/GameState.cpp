@@ -2,7 +2,7 @@
 
 // Constructors
 GameState::GameState(sf::RenderWindow *window, std::map<std::string, sf::Keyboard::Key> *supportedKeys, std::stack<State *> *states)
-    : State(window, supportedKeys, states)
+    : State(window, supportedKeys, states), m_pauseMenu {*window}
 {
     std::clog << "==> Constructing GameState object.." << std::endl;
 
@@ -37,13 +37,12 @@ void GameState::initFonts()
 
 void GameState::initKeybinds()
 {
-    this->setKeybind("CLOSE", this->getSupportedKey("Escape"));
+    this->setKeybind("PAUSE_MENU", this->getSupportedKey("Escape"));
     this->setKeybind("MOVE_UP", this->getSupportedKey("W"));
     this->setKeybind("MOVE_LEFT", this->getSupportedKey("A"));
     this->setKeybind("MOVE_DOWN", this->getSupportedKey("S"));
     this->setKeybind("MOVE_RIGHT", this->getSupportedKey("D"));
-    this->setKeybind("ROTATE_LEFT", this->getSupportedKey("Q"));
-    this->setKeybind("ROTATE_RIGHT", this->getSupportedKey("E"));
+    this->setKeybind("FORCE_EXIT", this->getSupportedKey("E"));
 }
 
 void GameState::initTextures()
@@ -69,9 +68,16 @@ void GameState::endStateActions()
 void GameState::updateInput(const float &dt)
 {
     // Update player input
-    if (sf::Keyboard::isKeyPressed(this->getKeyBind("CLOSE")))
+    if (sf::Keyboard::isKeyPressed(this->getKeyBind("FORCE_EXIT")))
     {
-        this->signalStateEnd();
+        this->setStateEnd();
+    }
+    if (sf::Keyboard::isKeyPressed(this->getKeyBind("PAUSE_MENU")))
+    {
+        if (this->checkIfStatePaused())
+            this->setStatePause(false);
+        else
+            this->setStatePause(true);
     }
     if (sf::Keyboard::isKeyPressed(this->getKeyBind("MOVE_UP")))
     {
@@ -93,10 +99,17 @@ void GameState::updateInput(const float &dt)
 
 void GameState::update(const float &dt)
 {
-    this->updateMousePositions();
-    this->updateInput(dt);
+    if (this->checkIfStatePaused())
+    {
+        this->m_pauseMenu.update();
+    }
+    else
+    {
+        this->updateMousePositions();
+        this->updateInput(dt);
 
-    this->mptr_player->update(dt);
+        this->mptr_player->update(dt);
+    }
 }
 
 void GameState::render(sf::RenderTarget *target)
@@ -110,5 +123,10 @@ void GameState::render(sf::RenderTarget *target)
     target->draw(this->m_background);
 
     this->mptr_player->render(*target);
+
+    if (this->checkIfStatePaused())
+    {
+        this->m_pauseMenu.render(*target);
+    }
 }
 

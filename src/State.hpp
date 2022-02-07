@@ -13,6 +13,8 @@ private:
     std::stack<State *> *mptr_states;
     
     bool m_stateEndSignal;
+    bool m_statePauseSignal;
+
     std::map<std::string, sf::Keyboard::Key> m_keyBinds;
     sf::Vector2i m_mousePosScreen; // Mouse position on screen
     sf::Vector2i m_mousePosWindow; // Mouse position on window
@@ -49,7 +51,8 @@ public:
     // Setters
     void setKeybind(std::string action, sf::Keyboard::Key key);
     void setFont(std::string path);
-    void signalStateEnd();
+    void setStateEnd();
+    void setStatePause(bool state);
     void addState(State *state);
 
     void addTexture(std::string name, std::string path);
@@ -57,6 +60,7 @@ public:
 
     // Functions
     const bool & checkIfStateEnd() const;
+    const bool & checkIfStatePaused() const;
     virtual void endStateActions() = 0;
     virtual void updateMousePositions();
     virtual void updateInput(const float &dt) = 0;

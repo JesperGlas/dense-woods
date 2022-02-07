@@ -88,7 +88,7 @@ void EditorState::updateButtons()
     // Quit Game
     if (this->m_buttons["EXIT_STATE"]->isActive())
     {
-        this->signalStateEnd();
+        this->setStateEnd();
     }
 }
 

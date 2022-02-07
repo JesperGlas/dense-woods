@@ -1,41 +1,6 @@
 #include "MainMenuState.hpp"
 
-// Constructors
-MainMenuState::MainMenuState(sf::RenderWindow *window, std::map<std::string, sf::Keyboard::Key> *supportedKeys, std::stack<State *> *states)
-    : State(window, supportedKeys, states)
-{
-    std::clog << "Constructing MainMenuState object.." << std::endl;
-
-    this->initVariables();
-    this->initBackground();
-    this->initFonts();
-    this->initKeybinds();
-    this->initButtons();
-
-    m_title.setFillColor(sf::Color::White);
-    m_title.setFont(this->m_font);
-    m_title.setString("Sub Surface");
-    m_title.setCharacterSize(40);
-    m_title.setPosition(sf::Vector2f(40.f, 500.f));
-
-    std::clog << "MainMenuState object constructed!" << std::endl;
-}
-
-// Deconstructors
-MainMenuState::~MainMenuState()
-{
-    std::clog << "Deconstructing MainMenuState object.." << std::endl;
-
-    // Deconstruct buttons using an iterator
-    for (auto &iter : this->m_buttons)
-    {
-        delete iter.second;
-    }
-
-    std::clog << "MainMenuState object deconstructed!" << std::endl;
-}
-
-// Private Functions
+/* === Private Functions === */
 void MainMenuState::initVariables()
 {
 
@@ -84,6 +49,41 @@ void MainMenuState::initButtons()
     );
 }
 
+// Constructors
+MainMenuState::MainMenuState(sf::RenderWindow *window, std::map<std::string, sf::Keyboard::Key> *supportedKeys, std::stack<State *> *states)
+    : State(window, supportedKeys, states)
+{
+    std::clog << "Constructing MainMenuState object.." << std::endl;
+
+    this->initVariables();
+    this->initBackground();
+    this->initFonts();
+    this->initKeybinds();
+    this->initButtons();
+
+    m_title.setFillColor(sf::Color::White);
+    m_title.setFont(this->m_font);
+    m_title.setString("Sub Surface");
+    m_title.setCharacterSize(40);
+    m_title.setPosition(sf::Vector2f(40.f, 500.f));
+
+    std::clog << "MainMenuState object constructed!" << std::endl;
+}
+
+// Deconstructors
+MainMenuState::~MainMenuState()
+{
+    std::clog << "Deconstructing MainMenuState object.." << std::endl;
+
+    // Deconstruct buttons using an iterator
+    for (auto &iter : this->m_buttons)
+    {
+        delete iter.second;
+    }
+
+    std::clog << "MainMenuState object deconstructed!" << std::endl;
+}
+
 // Public Functions
 void MainMenuState::endStateActions()
 {
@@ -130,7 +130,7 @@ void MainMenuState::updateButtons()
     if (this->m_buttons["EXIT_STATE"]->isActive())
     {
         std::clog << "### Quit toggle btn ###" << std::endl;
-        this->signalStateEnd();
+        this->setStateEnd();
     }
 }
 

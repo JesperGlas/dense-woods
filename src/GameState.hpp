@@ -3,12 +3,15 @@
 
 #include "State.hpp"
 #include "Player.hpp" // Might be bad include
+#include "PauseMenu.hpp"
 
 class GameState
     : public State
 {
 // Variables
 private:
+    PauseMenu m_pauseMenu;
+
     Player *mptr_player;
     sf::RectangleShape m_background;
 public:

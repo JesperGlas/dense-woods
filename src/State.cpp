@@ -81,9 +81,14 @@ void State::setFont(std::string path)
     }
 }
 
-void State::signalStateEnd()
+void State::setStateEnd()
 {
     this->m_stateEndSignal = true;
+}
+
+void State::setStatePause(bool state)
+{
+    this->m_statePauseSignal = state;
 }
 
 void State::addState(State *state)
@@ -114,6 +119,11 @@ const sf::Texture & State::getTexture(std::string name) const
 const bool & State::checkIfStateEnd() const
 {
     return this->m_stateEndSignal;
+}
+
+const bool & State::checkIfStatePaused() const
+{
+    return this->m_statePauseSignal;
 }
 
 void State::updateMousePositions()
