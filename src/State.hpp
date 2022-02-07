@@ -49,6 +49,7 @@ public:
     const sf::Vector2i & getMousePosScreen();
     const sf::Vector2i & getMousePosWindow();
     const sf::Vector2f & getMousePosView();
+    sf::Font & getFont();
 
     // Setters
     void setKeybind(std::string action, sf::Keyboard::Key key);

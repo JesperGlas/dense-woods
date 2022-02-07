@@ -7,13 +7,14 @@ Button::Button(
     sf::Color idle_color_fill,
     sf::Color hover_color_fill,
     sf::Color active_color_fill,
-    sf::Font *font, const unsigned char_size,
+    sf::Font &font, 
+    const unsigned char_size,
     std::string text,
     sf::Color idle_color_text,
     sf::Color hover_color_text,
     sf::Color active_color_text
     ) : m_buttonState {BTN_IDLE},
-        mptr_font {font},
+        mref_font {font},
         m_charSize {char_size},
         m_idleColorFill {idle_color_fill},
         m_hoverColorFill {hover_color_fill},
@@ -27,7 +28,7 @@ Button::Button(
     this->m_shape.setPosition(sf::Vector2f(x, y));
     this->m_shape.setSize(sf::Vector2f(width, heigth));
 
-    this->m_text.setFont(*this->mptr_font);
+    this->m_text.setFont(this->mref_font);
     this->m_text.setString(text);
     this->m_text.setFillColor(sf::Color::White);
     this->m_text.setCharacterSize(char_size);
@@ -44,7 +45,7 @@ Button::Button(
 Button::Button(
     const float x, const float y,
     const float width, const float height,
-    sf::Font *font, std::string text
+    sf::Font &font, std::string text
 ) : Button(
     x, y, width, height,
     sf::Color::Transparent,
@@ -63,7 +64,7 @@ Button::Button(
 
 Button::Button(
     const float x, const float y,
-    sf::Font *font, std::string text
+    sf::Font &font, std::string text
 ) : Button(
     x, y, 100.f, 50.f,
     font, text

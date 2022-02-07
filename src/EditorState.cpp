@@ -63,7 +63,7 @@ void EditorState::initButtons()
 {
     this->m_buttons["EXIT_STATE"] = new Button(
         40.f, 760.f,
-        &this->m_font, "Back"
+        this->m_font, "Back"
     );
 }
 

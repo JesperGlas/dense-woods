@@ -3,30 +3,30 @@
 /* === Private functions === */
 
 /* === Constructors === */
-PauseMenu::PauseMenu(sf::RenderWindow &window, sf::Font &font)
-    : mref_font {font}
+PauseMenu::PauseMenu(State &state)
+    : m_state {state}
 {
     std::clog << "Constructing PauseMenu object.." << std::endl;
 
     this->m_background.setPosition(0.f, 0.f);
     this->m_background.setSize(
         sf::Vector2f(
-            window.getSize().x,
-            window.getSize().y
+            this->m_state.getWindow()->getSize().x,
+            this->m_state.getWindow()->getSize().y
         )
     );
     this->m_background.setFillColor(sf::Color(69, 69, 69, 100));
 
     this->m_container.setSize(
         sf::Vector2f(
-            window.getSize().x/6.f,
-            window.getSize().y
+            this->m_state.getWindow()->getSize().x/6.f,
+            this->m_state.getWindow()->getSize().y
         )
     );
     this->m_container.setFillColor(sf::Color(36, 36, 36, 255));
     this->m_container.setPosition(0.f, 0.f);
 
-    this->m_menuTitle.setFont(this->mref_font);
+    this->m_menuTitle.setFont(this->m_state.getFont());
     this->m_menuTitle.setFillColor(sf::Color::White);
     this->m_menuTitle.setCharacterSize(40);
     this->m_menuTitle.setString("Pause Menu");
@@ -74,7 +74,7 @@ void PauseMenu::addButton(std::string key, std::string text)
         button_start_y + this->m_buttons.size() * (button_height + button_spacing),
         button_width,
         button_height,
-        &this->mref_font,
+        this->m_state.getFont(),
         text
     );
 }

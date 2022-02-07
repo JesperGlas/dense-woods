@@ -9,12 +9,13 @@
 #include <map>
 
 #include "Button.hpp"
+#include "State.hpp"
 
 class PauseMenu
 {
 // Variables
 private:
-    sf::Font &mref_font;
+    State &m_state;
     sf::Text m_menuTitle;
     sf::RectangleShape m_background;
     sf::RectangleShape m_container;
@@ -26,7 +27,7 @@ public:
 private:
 public:
     // Constructors
-    PauseMenu(sf::RenderWindow &window, sf::Font &font);
+    PauseMenu(State &state);
 
     // Deconstructods
     virtual ~PauseMenu();

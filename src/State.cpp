@@ -79,6 +79,11 @@ const sf::Vector2f & State::getMousePosView()
     return this->m_mousePosView;
 }
 
+sf::Font & State::getFont()
+{
+    return this->m_font;
+}
+
 /* === Setters === */
 
 void State::setKeybind(std::string action, sf::Keyboard::Key key)

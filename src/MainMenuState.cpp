@@ -36,7 +36,7 @@ void MainMenuState::initButtons()
         y_start + this->m_buttons.size() * (button_height + button_spacing),
         button_width,
         button_height,
-        &this->m_font,
+        this->m_font,
         "Continue"
     );
 
@@ -46,7 +46,7 @@ void MainMenuState::initButtons()
         y_start + this->m_buttons.size() * (button_height + button_spacing),
         button_width,
         button_height,
-        &this->m_font,
+        this->m_font,
         "Settings"
     );
 
@@ -56,7 +56,7 @@ void MainMenuState::initButtons()
         y_start + this->m_buttons.size() * (button_height + button_spacing),
         button_width,
         button_height,
-        &this->m_font,
+        this->m_font,
         "Editor"
     );
 
@@ -65,7 +65,7 @@ void MainMenuState::initButtons()
         y_start + this->m_buttons.size() * (button_height + button_spacing),
         button_width,
         button_height,
-        &this->m_font,
+        this->m_font,
         "Quit"
     );
 }

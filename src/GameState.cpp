@@ -39,7 +39,7 @@ GameState::GameState(
     std::map<std::string, sf::Keyboard::Key> *supportedKeys,
     std::stack<State *> *states
     ) : State(window, supportedKeys, states),
-        m_pauseMenu {*window, this->m_font}
+        m_pauseMenu {*this}
 {
     std::clog << "==> Constructing GameState object.." << std::endl;
 
