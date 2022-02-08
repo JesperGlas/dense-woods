@@ -13,7 +13,7 @@ void Game::initWindow()
     this->m_videoModes = sf::VideoMode::getFullscreenModes();
     this->m_window.create(
         sf::VideoMode(desktopMode),
-        m_Title + " " + m_Version,
+        this->m_title + " " + this->m_version,
         sf::Style::Fullscreen,
         this->m_windowSettings);
     this->m_window.setFramerateLimit(framerate_limit);
@@ -24,14 +24,14 @@ void Game::initWindow()
 
 void Game::initKeys()
 {
-    this->supportedKeys["Escape"] = sf::Keyboard::Key::Escape;
-    this->supportedKeys["Space"] = sf::Keyboard::Key::Space;
-    this->supportedKeys["Q"] = sf::Keyboard::Key::Q;
-    this->supportedKeys["W"] = sf::Keyboard::Key::W;
-    this->supportedKeys["E"] = sf::Keyboard::Key::E;
-    this->supportedKeys["A"] = sf::Keyboard::Key::A;
-    this->supportedKeys["S"] = sf::Keyboard::Key::S;
-    this->supportedKeys["D"] = sf::Keyboard::Key::D;
+    this->m_supportedKeys["Escape"] = sf::Keyboard::Key::Escape;
+    this->m_supportedKeys["Space"] = sf::Keyboard::Key::Space;
+    this->m_supportedKeys["Q"] = sf::Keyboard::Key::Q;
+    this->m_supportedKeys["W"] = sf::Keyboard::Key::W;
+    this->m_supportedKeys["E"] = sf::Keyboard::Key::E;
+    this->m_supportedKeys["A"] = sf::Keyboard::Key::A;
+    this->m_supportedKeys["S"] = sf::Keyboard::Key::S;
+    this->m_supportedKeys["D"] = sf::Keyboard::Key::D;
 }
 
 void Game::initStates()
@@ -40,7 +40,7 @@ void Game::initStates()
     this->m_states.push(
         new MainMenuState(
             this->m_window,
-            this->supportedKeys,
+            this->m_supportedKeys,
             this->m_states
         )
     );
@@ -48,8 +48,8 @@ void Game::initStates()
 
 // Constructors
 Game::Game()
-    :   m_Title{"Dense Woods"},
-        m_Version{"v1.0"},
+    :   m_title{"Dense Woods"},
+        m_version{"v1.0"},
         m_dt{0}
 {
     std::clog << "Constructing Game object.." << std::endl;

@@ -7,11 +7,11 @@ class Game
 {
 // Variables
 private:
-    const std::string m_Title;
-    const std::string m_Version;
+    const std::string m_title;
+    const std::string m_version;
 
     sf::RenderWindow m_window;
-    std::map<std::string, sf::Keyboard::Key> supportedKeys;
+    std::map<std::string, sf::Keyboard::Key> m_supportedKeys;
     std::stack<State *> m_states;
     
     sf::Event m_sfEvent;

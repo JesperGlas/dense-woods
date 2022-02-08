@@ -127,6 +127,18 @@ void MainMenuState::updateInput(const float &dt)
         );
     }
 
+    // Start Game
+    if (this->m_buttons["SETTINGS_STATE"]->isActive())
+    {
+        this->addState(
+            new SettingsState(
+                this->getWindow(),
+                this->getSupportedKeys(),
+                this->getStateStack()
+            )
+        );
+    }
+
     // Editor
     if (this->m_buttons["EDITOR_STATE"]->isActive())
     {
@@ -160,8 +172,8 @@ void MainMenuState::update(const float &dt)
     this->updateMousePositions();
     this->updateKeyTime(dt);
 
-    this->updateInput(dt);
     this->updateButtons();
+    this->updateInput(dt);
 }
 
 void MainMenuState::renderButtons(sf::RenderTarget &target)

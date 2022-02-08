@@ -3,6 +3,7 @@
 
 #include "GameState.hpp"
 #include "EditorState.hpp"
+#include "SettingsState.hpp"
 
 class MainMenuState
     : public State
