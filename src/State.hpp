@@ -2,7 +2,7 @@
 #define _STATE_HPP_
 
 #include "Entity.hpp"
-#include "Button.hpp"
+#include "Gui.hpp"
 
 class State
 {
@@ -23,7 +23,7 @@ private:
     sf::Vector2i m_mousePosScreen; // Mouse position on screen
     sf::Vector2i m_mousePosWindow; // Mouse position on window
     sf::Vector2f m_mousePosView; // Mouse position relative to view
-protected:
+
     sf::Font m_font; // TODO: Make getter work, move to private
     std::map<std::string, sf::Texture> m_textures;
     
@@ -62,8 +62,8 @@ public:
     const sf::Vector2i & getMousePosWindow();
     const sf::Vector2f & getMousePosView();
 
-    sf::Font & getFont();
-    const sf::Texture & getTexture(std::string name) const;
+    const sf::Font & getFont();
+    sf::Texture & getTexture(std::string name);
 
     // Setters
     void setStateEnd();

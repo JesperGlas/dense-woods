@@ -100,12 +100,12 @@ const sf::Vector2f & State::getMousePosView()
     return this->m_mousePosView;
 }
 
-sf::Font & State::getFont()
+const sf::Font & State::getFont()
 {
     return this->m_font;
 }
 
-const sf::Texture & State::getTexture(std::string name) const
+sf::Texture & State::getTexture(std::string name)
 {
     // TODO: Check if texture exists
     return this->m_textures.at(name);

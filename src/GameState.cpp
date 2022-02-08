@@ -24,7 +24,8 @@ void GameState::initPlayer()
     this->mptr_player = new Player(
         this->getWindow().getSize().x/2,
         this->getWindow().getSize().y/2,
-        this->m_textures.at("PLAYER"));
+        this->getTexture("PLAYER")
+    );
 }
 
 void GameState::initPauseMenu()

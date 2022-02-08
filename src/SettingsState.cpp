@@ -31,12 +31,12 @@ void SettingsState::initButtons()
     const float button_height {40.f};
     const float button_spacing {20.f};
 
-    this->m_buttons["EXIT_STATE"] = new Button(
+    this->m_buttons["EXIT_STATE"] = new gui::Button(
         40.f,
         y_start + this->m_buttons.size() * (button_height + button_spacing),
         button_width,
         button_height,
-        this->m_font,
+        this->getFont(),
         "Quit"
     );
 }
@@ -56,7 +56,7 @@ SettingsState::SettingsState(
     this->initButtons();
 
     m_title.setFillColor(sf::Color::White);
-    m_title.setFont(this->m_font);
+    m_title.setFont(this->getFont());
     m_title.setString("Settings");
     m_title.setCharacterSize(40);
     m_title.setPosition(sf::Vector2f(40.f, 500.f));

@@ -19,8 +19,11 @@ void Player::initComponents()
 }
 
 // Constructor
-Player::Player(float x, float y, sf::Texture &texture)
-    : Entity ()
+Player::Player(
+    float x,
+    float y,
+    sf::Texture &texture
+    ) : Entity ()
 {
     std::clog << "Constructing Player object.." << std::endl;
 

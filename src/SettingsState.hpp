@@ -12,7 +12,7 @@ private:
     sf::RectangleShape m_background;
     sf::Text m_title;
 
-    std::map<std::string, Button *> m_buttons;
+    std::map<std::string, gui::Button *> m_buttons;
 public:
 
 // Functions

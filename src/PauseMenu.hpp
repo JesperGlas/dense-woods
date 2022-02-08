@@ -8,7 +8,6 @@
 #include <stack>
 #include <map>
 
-#include "Button.hpp"
 #include "State.hpp"
 
 class PauseMenu
@@ -20,7 +19,7 @@ private:
     sf::RectangleShape m_background;
     sf::RectangleShape m_container;
 
-    std::map<std::string, Button *> m_buttons;
+    std::map<std::string, gui::Button *> m_buttons;
 public:
 
 // Functions

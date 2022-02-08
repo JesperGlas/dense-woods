@@ -69,7 +69,7 @@ void PauseMenu::addButton(std::string key, std::string text)
     const float button_height {40.f};
     const float button_spacing {20.f};
 
-    this->m_buttons[key] = new Button(
+    this->m_buttons[key] = new gui::Button(
         40.f,
         button_start_y + this->m_buttons.size() * (button_height + button_spacing),
         button_width,

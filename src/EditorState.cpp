@@ -16,7 +16,7 @@ EditorState::EditorState(
     this->initButtons();
 
     m_title.setFillColor(sf::Color::White);
-    m_title.setFont(this->m_font);
+    m_title.setFont(this->getFont());
     m_title.setString("Editor");
     m_title.setCharacterSize(40);
     m_title.setPosition(sf::Vector2f(40.f, 500.f));
@@ -64,9 +64,9 @@ void EditorState::initKeybinds()
 
 void EditorState::initButtons()
 {
-    this->m_buttons["EXIT_STATE"] = new Button(
+    this->m_buttons["EXIT_STATE"] = new gui::Button(
         40.f, 760.f,
-        this->m_font, "Back"
+        this->getFont(), "Back"
     );
 }
 

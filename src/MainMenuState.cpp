@@ -31,41 +31,41 @@ void MainMenuState::initButtons()
     const float button_height {40.f};
     const float button_spacing {20.f};
 
-    this->m_buttons["GAME_STATE"] = new Button(
+    this->m_buttons["GAME_STATE"] = new gui::Button(
         40.f,
         y_start + this->m_buttons.size() * (button_height + button_spacing),
         button_width,
         button_height,
-        this->m_font,
+        this->getFont(),
         "Continue"
     );
 
     // TODO: Implement function for button
-    this->m_buttons["SETTINGS_STATE"] = new Button(
+    this->m_buttons["SETTINGS_STATE"] = new gui::Button(
         40.f,
         y_start + this->m_buttons.size() * (button_height + button_spacing),
         button_width,
         button_height,
-        this->m_font,
+        this->getFont(),
         "Settings"
     );
 
     // TODO: Implement function for button
-    this->m_buttons["EDITOR_STATE"] = new Button(
+    this->m_buttons["EDITOR_STATE"] = new gui::Button(
         40.f,
         y_start + this->m_buttons.size() * (button_height + button_spacing),
         button_width,
         button_height,
-        this->m_font,
+        this->getFont(),
         "Editor"
     );
 
-    this->m_buttons["EXIT_STATE"] = new Button(
+    this->m_buttons["EXIT_STATE"] = new gui::Button(
         40.f,
         y_start + this->m_buttons.size() * (button_height + button_spacing),
         button_width,
         button_height,
-        this->m_font,
+        this->getFont(),
         "Quit"
     );
 }
@@ -85,7 +85,7 @@ MainMenuState::MainMenuState(
     this->initButtons();
 
     m_title.setFillColor(sf::Color::White);
-    m_title.setFont(this->m_font);
+    m_title.setFont(this->getFont());
     m_title.setString("Sub Surface");
     m_title.setCharacterSize(40);
     m_title.setPosition(sf::Vector2f(40.f, 500.f));

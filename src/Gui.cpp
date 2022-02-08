@@ -1,13 +1,13 @@
-#include "Button.hpp"
+#include "Gui.hpp"
 
 // Constructor
-Button::Button(
+gui::Button::Button(
     const float x, const float y,
     const float width, const float heigth,
     sf::Color idle_color_fill,
     sf::Color hover_color_fill,
     sf::Color active_color_fill,
-    sf::Font & font, 
+    const sf::Font & font, 
     const unsigned char_size,
     std::string text,
     sf::Color idle_color_text,
@@ -42,10 +42,10 @@ Button::Button(
     std::clog << "Button object constructed!" << std::endl;
 }
 
-Button::Button(
+gui::Button::Button(
     const float x, const float y,
     const float width, const float height,
-    sf::Font & font,
+    const sf::Font & font,
     std::string text
 ) : Button(
     x, y, width, height,
@@ -63,9 +63,9 @@ Button::Button(
     std::clog << "Standard button constructed!" << std::endl;
 }
 
-Button::Button(
+gui::Button::Button(
     const float x, const float y,
-    sf::Font & font,
+    const sf::Font & font,
     std::string text
 ) : Button(
     x, y, 100.f, 50.f,
@@ -76,19 +76,19 @@ Button::Button(
 }
 
 // Deconstructor
-Button::~Button()
+gui::Button::~Button()
 {
     std::clog << "Button object deconstructed.." << std::endl;
 }
 
 // Accessors
-const bool Button::isActive() const
+const bool gui::Button::isActive() const
 {
     return this->m_buttonState == BTN_ACTIVE;
 }
 
 // Functions
-void Button::update(const sf::Vector2f mousePos)
+void gui::Button::update(const sf::Vector2f mousePos)
 {
     this->m_buttonState = BTN_IDLE; // Idle
     if (this->m_shape.getGlobalBounds().contains(mousePos))
@@ -120,7 +120,7 @@ void Button::update(const sf::Vector2f mousePos)
     }
 }
 
-void Button::render(sf::RenderTarget &target)
+void gui::Button::render(sf::RenderTarget &target)
 {
     target.draw(this->m_shape);
     target.draw(this->m_text);
