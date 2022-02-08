@@ -18,7 +18,7 @@ private:
     ButtonStates m_buttonState;
     sf::RectangleShape m_shape;
 
-    sf::Font &mref_font;
+    sf::Font & mref_font;
     unsigned m_charSize;
     sf::Text m_text;
 
@@ -42,7 +42,8 @@ public:
         sf::Color idle_color_fill,
         sf::Color hover_color_fill,
         sf::Color active_color_fill,
-        sf::Font &font, const unsigned char_size,
+        sf::Font & font,
+        const unsigned char_size,
         std::string text,
         sf::Color idle_color_text,
         sf::Color hover_color_text,
@@ -52,12 +53,14 @@ public:
     Button(
         const float x, const float y,
         const float width, const float height,
-        sf::Font &font, std::string text
+        sf::Font & font,
+        std::string text
     );
 
     Button(
         const float x, const float y,
-        sf::Font &font, std::string text
+        sf::Font & font,
+        std::string text
     );
 
     // Deconstructor

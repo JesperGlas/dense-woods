@@ -15,7 +15,7 @@ void MainMenuState::initBackground()
     }
 
     this->m_backgroundTexture.setSmooth(true);
-    this->m_background.setSize(sf::Vector2f(this->getWindow()->getSize()));
+    this->m_background.setSize(sf::Vector2f(this->getWindow().getSize()));
     this->m_background.setTexture(&this->m_backgroundTexture);
 }
 
@@ -72,7 +72,7 @@ void MainMenuState::initButtons()
 
 // Constructors
 MainMenuState::MainMenuState(
-    sf::RenderWindow *window,
+    sf::RenderWindow &window,
     std::map<std::string, sf::Keyboard::Key> &supportedKeys,
     std::stack<State *> &states
     ) : State(window, supportedKeys, states)
@@ -172,16 +172,11 @@ void MainMenuState::renderButtons(sf::RenderTarget &target)
     }
 }
 
-void MainMenuState::render(sf::RenderTarget *target)
+void MainMenuState::render(sf::RenderTarget &target)
 {
-    if (!target)
-    {
-        target = this->getWindow();
-    }
-
-    target->draw(this->m_background);
-    target->draw(this->m_title);
-    this->renderButtons(*target);
+    target.draw(this->m_background);
+    target.draw(this->m_title);
+    this->renderButtons(target);
 
     /* === DEBUG FOR DESIGN ===*/
     //sf::Text mouseText;

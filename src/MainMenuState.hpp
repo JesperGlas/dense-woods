@@ -25,7 +25,7 @@ private:
 public:
     // Constructor
     MainMenuState(
-        sf::RenderWindow *widow,
+        sf::RenderWindow &widow,
         std::map<std::string, sf::Keyboard::Key> &supportedKeys,
         std::stack<State *> &states
     );
@@ -39,7 +39,7 @@ public:
     void updateButtons();
     void update(const float &dt);
     void renderButtons(sf::RenderTarget &target);
-    void render(sf::RenderTarget *target = nullptr);
+    void render(sf::RenderTarget &target);
 };
 
 #endif

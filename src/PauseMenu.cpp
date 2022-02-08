@@ -11,16 +11,16 @@ PauseMenu::PauseMenu(State &state)
     this->m_background.setPosition(0.f, 0.f);
     this->m_background.setSize(
         sf::Vector2f(
-            this->m_state.getWindow()->getSize().x,
-            this->m_state.getWindow()->getSize().y
+            this->m_state.getWindow().getSize().x,
+            this->m_state.getWindow().getSize().y
         )
     );
     this->m_background.setFillColor(sf::Color(69, 69, 69, 100));
 
     this->m_container.setSize(
         sf::Vector2f(
-            this->m_state.getWindow()->getSize().x/6.f,
-            this->m_state.getWindow()->getSize().y
+            this->m_state.getWindow().getSize().x/6.f,
+            this->m_state.getWindow().getSize().y
         )
     );
     this->m_container.setFillColor(sf::Color(36, 36, 36, 255));

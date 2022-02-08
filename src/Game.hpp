@@ -10,7 +10,7 @@ private:
     const std::string m_Title;
     const std::string m_Version;
 
-    sf::RenderWindow *mptr_window;
+    sf::RenderWindow m_window;
     std::map<std::string, sf::Keyboard::Key> supportedKeys;
     std::stack<State *> m_states;
     
@@ -26,10 +26,9 @@ public:
 // Functions
 private:
     // Static init functions
-    void initVariables();
     void initWindow();
-    void initStates();
     void initKeys();
+    void initStates();
 
 public:
     // Constructors
@@ -49,8 +48,8 @@ public:
     void render();
 
     // Core
-    void run();
     void endApplication();
+    void run();
 };
 
 #endif

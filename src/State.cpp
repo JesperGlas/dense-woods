@@ -10,10 +10,10 @@ void State::initFonts()
 
 // Constructors
 State::State(
-    sf::RenderWindow *window,
+    sf::RenderWindow &window,
     std::map<std::string, sf::Keyboard::Key> &supportedKeys,
     std::stack<State *> &states
-    ) : mptr_window {window},
+    ) : mref_window {window},
         mref_supportedKeys {supportedKeys},
         mref_states {states},
         m_stateEndSignal {false},
@@ -37,10 +37,11 @@ State::~State()
     std::clog << "State object deconstructed!" << std::endl;
 }
 
-// Getters
-sf::RenderWindow * State::getWindow()
+/* === Getters === */
+
+sf::RenderWindow & State::getWindow() const
 {
-    return this->mptr_window;
+    return this->mref_window;
 }
 
 std::map<std::string, sf::Keyboard::Key> & State::getSupportedKeys()
@@ -51,6 +52,27 @@ std::map<std::string, sf::Keyboard::Key> & State::getSupportedKeys()
 std::stack<State *> & State::getStateStack()
 {
     return this->mref_states;
+}
+
+const bool State::getKeytime()
+{
+    if (this->m_keytime >= this->m_keytimeMax)
+    {
+        this->m_keytime = 0.f;
+        return true;
+    }
+
+    return false;
+}
+
+const bool & State::checkIfStateEnd() const
+{
+    return this->m_stateEndSignal;
+}
+
+const bool & State::checkIfStatePaused() const
+{
+    return this->m_statePauseSignal;
 }
 
 const sf::Keyboard::Key & State::getSupportedKey(std::string key)
@@ -83,7 +105,23 @@ sf::Font & State::getFont()
     return this->m_font;
 }
 
+const sf::Texture & State::getTexture(std::string name) const
+{
+    // TODO: Check if texture exists
+    return this->m_textures.at(name);
+}
+
 /* === Setters === */
+
+void State::setStateEnd()
+{
+    this->m_stateEndSignal = true;
+}
+
+void State::setStatePause(bool state)
+{
+    this->m_statePauseSignal = state;
+}
 
 void State::setKeybind(std::string action, sf::Keyboard::Key key)
 {
@@ -98,16 +136,6 @@ void State::setFont(std::string path)
     }
 }
 
-void State::setStateEnd()
-{
-    this->m_stateEndSignal = true;
-}
-
-void State::setStatePause(bool state)
-{
-    this->m_statePauseSignal = state;
-}
-
 void State::addState(State *state)
 {
     this->mref_states.push(state);
@@ -118,41 +146,10 @@ void State::addTexture(std::string name, std::string path)
     sf::Texture texture;
     if(!texture.loadFromFile(path))
     {
-        throw("ERROR: Could not load texture!");
+        throw("ERROR [STATE]: Could not load and add texture!");
     }
     texture.setSmooth(true); // Smooth
     this->m_textures[name] = texture;
-
-    std::clog << "Loaded texture at " << path << " to name " << name << std::endl;
-}
-
-const sf::Texture & State::getTexture(std::string name) const
-{
-    // TODO: Check if texture exists
-    return this->m_textures.at(name);
-}
-
-/* === Getters === */
-
-const bool & State::checkIfStateEnd() const
-{
-    return this->m_stateEndSignal;
-}
-
-const bool & State::checkIfStatePaused() const
-{
-    return this->m_statePauseSignal;
-}
-
-const bool State::getKeytime()
-{
-    if (this->m_keytime >= this->m_keytimeMax)
-    {
-        this->m_keytime = 0.f;
-        return true;
-    }
-
-    return false;
 }
 
 /* === Public Functions === */
@@ -160,8 +157,8 @@ const bool State::getKeytime()
 void State::updateMousePositions()
 {
     this->m_mousePosScreen = sf::Mouse::getPosition();
-    this->m_mousePosWindow = sf::Mouse::getPosition(*this->getWindow());
-    this->m_mousePosView = this->getWindow()->mapPixelToCoords(this->m_mousePosWindow);
+    this->m_mousePosWindow = sf::Mouse::getPosition(this->getWindow());
+    this->m_mousePosView = this->getWindow().mapPixelToCoords(this->m_mousePosWindow);
 }
 
 void State::updateKeyTime(const float &dt)

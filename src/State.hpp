@@ -8,10 +8,12 @@ class State
 {
 // Variables
 private:
-    sf::RenderWindow *mptr_window;
+    // References
+    sf::RenderWindow &mref_window;
     std::map<std::string, sf::Keyboard::Key> &mref_supportedKeys;
     std::stack<State *> &mref_states;
     
+    // State variables
     bool m_stateEndSignal;
     bool m_statePauseSignal;
     float m_keytime;
@@ -36,7 +38,7 @@ protected:
 public:
     // Constructors
     State(
-        sf::RenderWindow *window,
+        sf::RenderWindow &window,
         std::map<std::string, sf::Keyboard::Key> &supportedKeys,
         std::stack<State *> &states
     );
@@ -45,30 +47,33 @@ public:
     virtual ~State();
 
     // Getters
-    sf::RenderWindow * getWindow(); // Original sf::RenderWindow * getWindow()
+    sf::RenderWindow & getWindow() const;
     std::map<std::string, sf::Keyboard::Key> & getSupportedKeys();
     std::stack<State *> & getStateStack();
+
+    const bool getKeytime();
+    const bool & checkIfStateEnd() const;
+    const bool & checkIfStatePaused() const;
+
     const sf::Keyboard::Key & getSupportedKey(std::string key);
     const sf::Keyboard::Key & getKeyBind(std::string key);
+
     const sf::Vector2i & getMousePosScreen();
     const sf::Vector2i & getMousePosWindow();
     const sf::Vector2f & getMousePosView();
+
     sf::Font & getFont();
+    const sf::Texture & getTexture(std::string name) const;
 
     // Setters
-    void setKeybind(std::string action, sf::Keyboard::Key key);
-    void setFont(std::string path);
     void setStateEnd();
     void setStatePause(bool state);
+
+    void setKeybind(std::string action, sf::Keyboard::Key key);
+    void setFont(std::string path);
+
     void addState(State *state);
-
     void addTexture(std::string name, std::string path);
-
-    // Getters
-    const sf::Texture & getTexture(std::string name) const;
-    const bool & checkIfStateEnd() const;
-    const bool & checkIfStatePaused() const;
-    const bool getKeytime();
 
     // Functions
     virtual void updateMousePositions();
@@ -77,7 +82,7 @@ public:
     virtual void endStateActions() = 0;
     virtual void updateInput(const float &dt) = 0;
     virtual void update(const float &dt) = 0;
-    virtual void render(sf::RenderTarget *mptr_target = nullptr) = 0;
+    virtual void render(sf::RenderTarget &target) = 0;
 };
 
 #endif

@@ -24,7 +24,7 @@ private:
 public:
     // Constructor
     SettingsState(
-        sf::RenderWindow *widow,
+        sf::RenderWindow &widow,
         std::map<std::string, sf::Keyboard::Key> &supportedKeys,
         std::stack<State *> &states
     );

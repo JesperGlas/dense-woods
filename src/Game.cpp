@@ -11,13 +11,15 @@ void Game::initWindow()
 
     sf::VideoMode desktopMode = sf::VideoMode::getDesktopMode();
     this->m_videoModes = sf::VideoMode::getFullscreenModes();
-    this->mptr_window = new sf::RenderWindow(
+    this->m_window.create(
         sf::VideoMode(desktopMode),
         m_Title + " " + m_Version,
         sf::Style::Fullscreen,
         this->m_windowSettings);
-    this->mptr_window->setFramerateLimit(framerate_limit);
-    this->mptr_window->setVerticalSyncEnabled(vertical_sync);
+    this->m_window.setFramerateLimit(framerate_limit);
+    this->m_window.setVerticalSyncEnabled(vertical_sync);
+
+    std::clog << "=#=> m_window is " << m_window.isOpen() << std::endl;
 }
 
 void Game::initKeys()
@@ -37,7 +39,7 @@ void Game::initStates()
     // Push MainMenuState
     this->m_states.push(
         new MainMenuState(
-            this->mptr_window,
+            this->m_window,
             this->supportedKeys,
             this->m_states
         )
@@ -46,7 +48,9 @@ void Game::initStates()
 
 // Constructors
 Game::Game()
-    : m_Title{"Dense Woods"}, m_Version{"v1.0"}, mptr_window{nullptr}, m_dt{0}
+    :   m_Title{"Dense Woods"},
+        m_Version{"v1.0"},
+        m_dt{0}
 {
     std::clog << "Constructing Game object.." << std::endl;
 
@@ -61,8 +65,6 @@ Game::Game()
 Game::~Game()
 {
     std::clog << "Deconstructing Game object.." << std::endl;
-
-    delete this->mptr_window; // Delete window created in initWindow
 
     // Delete all states
     while (!this->m_states.empty())
@@ -83,7 +85,7 @@ void Game::updateDeltaTime()
 
 void Game::updateSFMLEvents()
 {
-    while (this->mptr_window->pollEvent(this->m_sfEvent))
+    while (this->m_window.pollEvent(this->m_sfEvent))
     {
         
     }
@@ -111,35 +113,35 @@ void Game::update()
     else
     {
         this->endApplication();
-        this->mptr_window->close();
+        this->m_window.close();
     }
 }
 
 void Game::render()
 {
-    this->mptr_window->clear(sf::Color::White);
+    this->m_window.clear(sf::Color::White);
 
     // Render items
     if (!this->m_states.empty())
     {
         // Render the top states if the states stack is not empty
-        this->m_states.top()->render(this->mptr_window);
+        this->m_states.top()->render(this->m_window);
     }
 
-    this->mptr_window->display();
-}
-
-void Game::run()
-{
-    while (this->mptr_window->isOpen())
-    {
-        this->updateDeltaTime();
-        this->update();
-        this->render();
-    }
+    this->m_window.display();
 }
 
 void Game::endApplication()
 {
     std::clog << "Performing actions before closing the Game.." << std::endl;
+}
+
+void Game::run()
+{
+    while (this->m_window.isOpen())
+    {
+        this->updateDeltaTime();
+        this->update();
+        this->render();
+    }
 }

@@ -7,7 +7,7 @@ Button::Button(
     sf::Color idle_color_fill,
     sf::Color hover_color_fill,
     sf::Color active_color_fill,
-    sf::Font &font, 
+    sf::Font & font, 
     const unsigned char_size,
     std::string text,
     sf::Color idle_color_text,
@@ -45,7 +45,8 @@ Button::Button(
 Button::Button(
     const float x, const float y,
     const float width, const float height,
-    sf::Font &font, std::string text
+    sf::Font & font,
+    std::string text
 ) : Button(
     x, y, width, height,
     sf::Color::Transparent,
@@ -64,7 +65,8 @@ Button::Button(
 
 Button::Button(
     const float x, const float y,
-    sf::Font &font, std::string text
+    sf::Font & font,
+    std::string text
 ) : Button(
     x, y, 100.f, 50.f,
     font, text

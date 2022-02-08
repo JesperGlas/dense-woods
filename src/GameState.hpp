@@ -25,7 +25,7 @@ private:
 public:
     // Constructor
     GameState(
-        sf::RenderWindow *widow,
+        sf::RenderWindow &widow,
         std::map<std::string, sf::Keyboard::Key> &supportedKeys,
         std::stack<State *> &states
     );
@@ -40,7 +40,7 @@ public:
     void updatePauseMenu(const float &dt);
     void updatePlayerInput(const float &dt);
     void update(const float &dt);
-    void render(sf::RenderTarget *target = nullptr);
+    void render(sf::RenderTarget &target);
 };
 
 #endif

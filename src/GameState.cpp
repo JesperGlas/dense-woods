@@ -22,8 +22,8 @@ void GameState::initTextures()
 void GameState::initPlayer()
 {
     this->mptr_player = new Player(
-        this->getWindow()->getSize().x/2,
-        this->getWindow()->getSize().y/2,
+        this->getWindow().getSize().x/2,
+        this->getWindow().getSize().y/2,
         this->m_textures.at("PLAYER"));
 }
 
@@ -35,7 +35,7 @@ void GameState::initPauseMenu()
 
 // Constructors
 GameState::GameState(
-    sf::RenderWindow *window,
+    sf::RenderWindow &window,
     std::map<std::string, sf::Keyboard::Key> &supportedKeys,
     std::stack<State *> &states
     ) : State(window, supportedKeys, states),
@@ -50,7 +50,7 @@ GameState::GameState(
     this->initPauseMenu();
 
     // Init background
-    this->m_background.setSize(sf::Vector2f(this->getWindow()->getSize()));
+    this->m_background.setSize(sf::Vector2f(this->getWindow().getSize()));
     this->m_background.setPosition(sf::Vector2f(0.f, 0.f));
     this->m_background.setFillColor(sf::Color::Blue);
 
@@ -142,21 +142,16 @@ void GameState::update(const float &dt)
     }
 }
 
-void GameState::render(sf::RenderTarget *target)
+void GameState::render(sf::RenderTarget &target)
 {
-    if (!target)
-    {
-        target = this->getWindow();
-    }
-
     // Render background
-    target->draw(this->m_background);
+    target.draw(this->m_background);
 
-    this->mptr_player->render(*target);
+    this->mptr_player->render(target);
 
     if (this->checkIfStatePaused())
     {
-        this->m_pauseMenu.render(*target);
+        this->m_pauseMenu.render(target);
     }
 }
 
