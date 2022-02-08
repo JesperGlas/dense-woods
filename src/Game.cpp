@@ -39,7 +39,7 @@ void Game::initStates()
         new MainMenuState(
             this->mptr_window,
             this->supportedKeys,
-            &this->m_states
+            this->m_states
         )
     );
 }

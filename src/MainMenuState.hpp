@@ -27,7 +27,7 @@ public:
     MainMenuState(
         sf::RenderWindow *widow,
         std::map<std::string, sf::Keyboard::Key> &supportedKeys,
-        std::stack<State *> *states
+        std::stack<State *> &states
     );
 
     // Deconstructor

@@ -45,7 +45,7 @@ void SettingsState::initButtons()
 SettingsState::SettingsState(
     sf::RenderWindow *window,
     std::map<std::string, sf::Keyboard::Key> &supportedKeys,
-    std::stack<State *> *states
+    std::stack<State *> &states
     ) : State(window, supportedKeys, states)
 {
     std::clog << "Constructing SettingsState object.." << std::endl;

@@ -12,10 +12,10 @@ void State::initFonts()
 State::State(
     sf::RenderWindow *window,
     std::map<std::string, sf::Keyboard::Key> &supportedKeys,
-    std::stack<State *> *states
+    std::stack<State *> &states
     ) : mptr_window {window},
         mref_supportedKeys {supportedKeys},
-        mptr_states {states},
+        mref_states {states},
         m_stateEndSignal {false},
         m_statePauseSignal {false},
         m_keytime {0.f},
@@ -48,9 +48,9 @@ std::map<std::string, sf::Keyboard::Key> & State::getSupportedKeys()
     return this->mref_supportedKeys;
 }
 
-std::stack<State *> * State::getStateStack()
+std::stack<State *> & State::getStateStack()
 {
-    return this->mptr_states;
+    return this->mref_states;
 }
 
 const sf::Keyboard::Key & State::getSupportedKey(std::string key)
@@ -110,7 +110,7 @@ void State::setStatePause(bool state)
 
 void State::addState(State *state)
 {
-    this->mptr_states->push(state);
+    this->mref_states.push(state);
 }
 
 void State::addTexture(std::string name, std::string path)
