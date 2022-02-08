@@ -23,7 +23,11 @@ private:
     void initButtons();
 public:
     // Constructor
-    EditorState(sf::RenderWindow *widow, std::map<std::string, sf::Keyboard::Key> *supportedKeys, std::stack<State *> *states);
+    EditorState(
+        sf::RenderWindow *widow,
+        std::map<std::string, sf::Keyboard::Key> &supportedKeys,
+        std::stack<State *> *states
+    );
 
     // Deconstructor
     virtual ~EditorState();

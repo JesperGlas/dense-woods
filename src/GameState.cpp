@@ -36,7 +36,7 @@ void GameState::initPauseMenu()
 // Constructors
 GameState::GameState(
     sf::RenderWindow *window,
-    std::map<std::string, sf::Keyboard::Key> *supportedKeys,
+    std::map<std::string, sf::Keyboard::Key> &supportedKeys,
     std::stack<State *> *states
     ) : State(window, supportedKeys, states),
         m_pauseMenu {*this}

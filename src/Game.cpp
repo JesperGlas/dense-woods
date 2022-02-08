@@ -36,7 +36,12 @@ void Game::initStates()
 {
     // Push MainMenuState
     this->m_states.push(
-        new MainMenuState(this->mptr_window, &this->supportedKeys, &this->m_states));
+        new MainMenuState(
+            this->mptr_window,
+            this->supportedKeys,
+            &this->m_states
+        )
+    );
 }
 
 // Constructors

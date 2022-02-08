@@ -1,8 +1,11 @@
 #include "EditorState.hpp"
 
 // Constructors
-EditorState::EditorState(sf::RenderWindow *window, std::map<std::string, sf::Keyboard::Key> *supportedKeys, std::stack<State *> *states)
-    : State(window, supportedKeys, states)
+EditorState::EditorState(
+    sf::RenderWindow *window,
+    std::map<std::string, sf::Keyboard::Key> &supportedKeys,
+    std::stack<State *> *states
+    ) : State(window, supportedKeys, states)
 {
     std::clog << "Constructing EditorState object.." << std::endl;
 

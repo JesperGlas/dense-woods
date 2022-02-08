@@ -1,46 +1,44 @@
-#ifndef _GAMESTATE_HPP_
-#define _GAMESTATE_HPP_
+#ifndef _SETTINGSSTATE_HPP_
+#define _SETTINGSSTATE_HPP_
 
 #include "State.hpp"
-#include "Player.hpp" // Might be bad include
-#include "PauseMenu.hpp"
 
-class GameState
+class SettingsState
     : public State
 {
 // Variables
 private:
-    PauseMenu m_pauseMenu;
-
-    Player *mptr_player;
+    sf::Texture m_backgroundTexture;
     sf::RectangleShape m_background;
+    sf::Text m_title;
+
+    std::map<std::string, Button *> m_buttons;
 public:
 
 // Functions
 private:
+    void initVariables();
+    void initBackground();
     void initKeybinds();
-    void initTextures();
-    void initPlayer();
-    void initPauseMenu();
+    void initButtons();
 public:
     // Constructor
-    GameState(
+    SettingsState(
         sf::RenderWindow *widow,
         std::map<std::string, sf::Keyboard::Key> &supportedKeys,
         std::stack<State *> *states
     );
 
     // Deconstructor
-    virtual ~GameState();
+    virtual ~SettingsState();
 
     // Functions
     void endStateActions();
-
     void updateInput(const float &dt);
-    void updatePauseMenu(const float &dt);
-    void updatePlayerInput(const float &dt);
+    void updateButtons();
     void update(const float &dt);
-    void render(sf::RenderTarget *target = nullptr);
+    void renderButtons(sf::RenderTarget &target);
+    void render(sf::RenderTarget &target);
 };
 
 #endif

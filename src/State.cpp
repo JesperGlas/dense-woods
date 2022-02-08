@@ -11,11 +11,10 @@ void State::initFonts()
 // Constructors
 State::State(
     sf::RenderWindow *window,
-    std::map<std::string,
-    sf::Keyboard::Key> *supportedKeys,
+    std::map<std::string, sf::Keyboard::Key> &supportedKeys,
     std::stack<State *> *states
     ) : mptr_window {window},
-        mptr_supportedKeys {supportedKeys},
+        mref_supportedKeys {supportedKeys},
         mptr_states {states},
         m_stateEndSignal {false},
         m_statePauseSignal {false},
@@ -44,9 +43,9 @@ sf::RenderWindow * State::getWindow()
     return this->mptr_window;
 }
 
-std::map<std::string, sf::Keyboard::Key> * State::getSupportedKeys()
+std::map<std::string, sf::Keyboard::Key> & State::getSupportedKeys()
 {
-    return this->mptr_supportedKeys;
+    return this->mref_supportedKeys;
 }
 
 std::stack<State *> * State::getStateStack()
@@ -56,7 +55,7 @@ std::stack<State *> * State::getStateStack()
 
 const sf::Keyboard::Key & State::getSupportedKey(std::string key)
 {
-    return this->mptr_supportedKeys->at(key);
+    return this->mref_supportedKeys.at(key);
 }
 
 const sf::Keyboard::Key & State::getKeyBind(std::string key)

@@ -9,7 +9,7 @@ class State
 // Variables
 private:
     sf::RenderWindow *mptr_window;
-    std::map<std::string, sf::Keyboard::Key> *mptr_supportedKeys;
+    std::map<std::string, sf::Keyboard::Key> &mref_supportedKeys;
     std::stack<State *> *mptr_states;
     
     bool m_stateEndSignal;
@@ -35,14 +35,18 @@ protected:
     virtual void initKeybinds() = 0;
 public:
     // Constructors
-    State(sf::RenderWindow *window, std::map<std::string, sf::Keyboard::Key> *supportedKeys, std::stack<State *> *states);
+    State(
+        sf::RenderWindow *window,
+        std::map<std::string, sf::Keyboard::Key> &supportedKeys,
+        std::stack<State *> *states
+    );
 
     // Deconstructors
     virtual ~State();
 
     // Getters
     sf::RenderWindow * getWindow(); // Original sf::RenderWindow * getWindow()
-    std::map<std::string, sf::Keyboard::Key> * getSupportedKeys();
+    std::map<std::string, sf::Keyboard::Key> & getSupportedKeys();
     std::stack<State *> * getStateStack();
     const sf::Keyboard::Key & getSupportedKey(std::string key);
     const sf::Keyboard::Key & getKeyBind(std::string key);
