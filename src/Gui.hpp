@@ -90,11 +90,11 @@ namespace gui {
         const sf::Font &mref_font;
 
         gui::Button *mptr_active;
+        std::map<std::string, gui::Button *> m_buttons;
 
         const sf::Color m_backgroundColor;
         sf::RectangleShape m_background;
         std::map<std::string, std::string> m_items;
-        std::map<std::string, gui::Button *> m_buttons;
 
         float m_keytime;
         float m_keytimeMax;
