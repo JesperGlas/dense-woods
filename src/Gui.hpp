@@ -34,23 +34,20 @@ namespace gui {
         sf::Color m_hoverColorText;
         sf::Color m_activeColorText;
 
-    protected:
-        
-
     // Functions
     public:
         // Constructor
         Button(
             const float x, const float y,
             const float width, const float heigth,
-            sf::Color idle_color_fill,
-            sf::Color hover_color_fill,
-            sf::Color active_color_fill,
             const sf::Font & font,
             const unsigned char_size,
             std::string text,
+            sf::Color idle_color_fill,
             sf::Color idle_color_text,
+            sf::Color hover_color_fill,
             sf::Color hover_color_text,
+            sf::Color active_color_fill,
             sf::Color active_color_text
             );
         
@@ -79,6 +76,7 @@ namespace gui {
 
         // Setters
         void setText(std::string text);
+        void setIsToggle();
 
         // Functions
         void update(const sf::Vector2f mousePos);
@@ -93,6 +91,8 @@ namespace gui {
 
         gui::Button *mptr_active;
 
+        const sf::Color m_backgroundColor;
+        sf::RectangleShape m_background;
         std::map<std::string, std::string> m_items;
         std::map<std::string, gui::Button *> m_buttons;
 
@@ -102,11 +102,12 @@ namespace gui {
         std::string m_activeCode;
 
         const sf::Vector2f m_position;
-        const float m_width;
-        const float m_height; // TODO: Container instead of button, implement scroll support.
+        const sf::Vector2f m_closedSize;
+        sf::Vector2f m_openSize;
 
     // Functions
     private:
+        void initBackground();
     public:
         // Constructor
         DropDownSelect(
@@ -127,8 +128,11 @@ namespace gui {
         // Setters
         void addAlternative(std::string key, std::string text);
 
-        // Functions
+        // Render functions
         void render(sf::RenderTarget &target);
+
+        // Update function
+        void updateBackgroud();
         void updateKeytime(const float &dt);
         void update(const float &dt, const sf::Vector2f &mouse_position);
     };

@@ -6,14 +6,14 @@
 gui::Button::Button(
     const float x, const float y,
     const float width, const float heigth,
-    sf::Color idle_color_fill,
-    sf::Color hover_color_fill,
-    sf::Color active_color_fill,
     const sf::Font & font, 
     const unsigned char_size,
     std::string text,
+    sf::Color idle_color_fill,
     sf::Color idle_color_text,
+    sf::Color hover_color_fill,
     sf::Color hover_color_text,
+    sf::Color active_color_fill,
     sf::Color active_color_text
     ) : m_buttonState {BTN_IDLE},
         mref_font {font},
@@ -52,12 +52,12 @@ gui::Button::Button(
     std::string text
 ) : Button(
     x, y, width, height,
-    sf::Color::Transparent,
-    sf::Color(50, 50, 50),
-    sf::Color(50, 50, 50),
     font, char_size, text,
+    sf::Color::Transparent,
     sf::Color::White,
+    sf::Color(50, 50, 50),
     sf::Color::White,
+    sf::Color(50, 50, 50),
     sf::Color::Black
     )
 {
@@ -104,6 +104,8 @@ const float &gui::Button::getHeight() const
 {
     return this->getSize().y;
 }
+
+/* === Setters === */
 
 void gui::Button::setText(std::string text)
 {
@@ -154,6 +156,12 @@ void gui::Button::render(sf::RenderTarget &target)
 /* ### === DropDownSelect === ### */
 
 /* === Private Functions === */
+void gui::DropDownSelect::initBackground()
+{
+    this->m_background.setSize(this->m_closedSize);
+    this->m_background.setPosition(this->m_position);
+    this->m_background.setFillColor(this->m_backgroundColor);
+}
 
 /* === Constructor === */
 gui::DropDownSelect::DropDownSelect(
@@ -163,13 +171,14 @@ gui::DropDownSelect::DropDownSelect(
     const float height,
     const sf::Font &font
 ) : mref_font {font},
+    m_backgroundColor {sf::Color(50, 50, 50)},
     mptr_active {nullptr},
     m_keytime {0.f},
     m_keytimeMax {10.f},
     m_isOpen {false},
     m_position {sf::Vector2f(x, y)},
-    m_width {width},
-    m_height {height}
+    m_closedSize {sf::Vector2f(width, height)},
+    m_openSize {sf::Vector2f(width, height * 2)}
 {
     std::clog << "Constructing DropDownSelect object.." << std::endl;
 
@@ -213,40 +222,30 @@ void gui::DropDownSelect::addAlternative(std::string key, std::string text)
         this->mptr_active = new Button(
             this->m_position.x,
             this->m_position.y,
-            this->m_width,
-            this->m_height,
-            this->mref_font,
-            12,
-            text
-        );
-
-        this->m_buttons[key] = new Button(
-            this->m_position.x,
-            this->m_position.y + this->m_height,
-            this->m_width,
-            this->m_height,
+            this->m_closedSize.x,
+            this->m_closedSize.y,
             this->mref_font,
             12,
             text
         );
 
         this->m_activeCode = key;
+        this->initBackground();
     }
-    else
-    {
-        this->m_buttons[key] = new Button(
-            this->m_position.x,
-            this->m_position.y + this->m_height + this->m_height * this->m_buttons.size(),
-            this->m_width,
-            this->m_height,
-            this->mref_font,
-            12,
-            text
-        );
-    }
+
+    this->m_buttons[key] = new Button(
+        this->m_position.x,
+        this->m_position.y + this->m_closedSize.y + this->m_closedSize.y * this->m_buttons.size(),
+        this->m_closedSize.x,
+        this->m_closedSize.y,
+        this->mref_font,
+        12,
+        text
+    );
 
     // Add alternative in list
     this->m_items[key] = text;
+    this->m_openSize.y += this->m_closedSize.y;
 }
 
 /* === Functions === */
@@ -255,6 +254,8 @@ void gui::DropDownSelect::render(sf::RenderTarget &target)
 {
     if (this->mptr_active && !this->m_buttons.empty())
     {
+        target.draw(this->m_background);
+
         this->mptr_active->render(target);
 
         if (this->m_isOpen)
@@ -265,6 +266,14 @@ void gui::DropDownSelect::render(sf::RenderTarget &target)
             }
         }
     }
+}
+
+void gui::DropDownSelect::updateBackgroud()
+{
+    if (this->m_isOpen)
+        this->m_background.setSize(this->m_openSize);
+    else
+        this->m_background.setSize(this->m_closedSize);
 }
 
 void gui::DropDownSelect::updateKeytime(const float &dt)
@@ -282,6 +291,8 @@ void gui::DropDownSelect::update(const float &dt, const sf::Vector2f &mouse_posi
 
     if (this->mptr_active->isActive() && this->getKeytime())
         this->m_isOpen = !this->m_isOpen;
+
+    this->updateBackgroud();
     
     for (auto &iter : this->m_buttons)
     {
