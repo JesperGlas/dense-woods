@@ -16,6 +16,7 @@ private:
     sf::RectangleShape m_background;
 
     gui::DropDownSelect *test;
+    gui::ProgressBar *health_bar;
 public:
 
 // Functions

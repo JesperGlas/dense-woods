@@ -134,7 +134,60 @@ namespace gui {
         // Update function
         void updateBackgroud();
         void updateKeytime(const float &dt);
+        void updateButtons(const sf::Vector2f &mouse_position);
+        void updateInput(const float &dt);
         void update(const float &dt, const sf::Vector2f &mouse_position);
+    };
+
+    class ProgressBar
+    {
+    // Variables
+    private:
+        const sf::Font &mref_font;
+        const float &mref_maxValue;
+        const float &mref_value;
+        
+        sf::Vector2f m_position;
+        const sf::Vector2f m_size;
+        const float m_border;
+
+        sf::RectangleShape m_background;
+        sf::RectangleShape m_statusBar;
+
+        sf::Color m_backgroundColor;
+        sf::Color m_statusColor;
+
+    // Functions
+    private:
+        void initBackground();
+        void initStatusBar();
+    public:
+        // Constructors
+        ProgressBar(
+            const sf::Font &font,
+            const float &max_value,
+            const float &value,
+            sf::Vector2f position,
+            sf::Vector2f size,
+            sf::Color color_background,
+            sf::Color color_status
+        );
+
+        // Deconstructor
+        ~ProgressBar();
+
+        // Getters
+        const float & getValue() const;
+
+        // Setters
+
+        // Update
+        void update();
+
+        // Render
+        void render(sf::RenderTarget &target);
+
+        // Function
     };
 }
 

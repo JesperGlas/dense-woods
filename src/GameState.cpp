@@ -21,10 +21,22 @@ void GameState::initTextures()
 
 void GameState::initUI()
 {
-    test = new gui::DropDownSelect(0.f, 0.f, 100.f, 40.f, this->getFont());
-    test->addAlternative("LIGHT", "Light Hull");
-    test->addAlternative("MEDIUM", "Medium Hull");
-    test->addAlternative("HEAVY", "Heavy Hull");
+    // Loadout Dropdown
+    this->test = new gui::DropDownSelect(0.f, 0.f, 200.f, 40.f, this->getFont());
+    this->test->addAlternative("H_25", "25");
+    this->test->addAlternative("H_75", "75");
+    this->test->addAlternative("H_100", "100");
+
+    // Health
+    this->health_bar = new gui::ProgressBar(
+        this->getFont(),
+        this->mptr_player->getMaxHealth(),
+        this->mptr_player->getHealth(),
+        sf::Vector2f(200.f, 0.f),
+        sf::Vector2f(200.f, 40.f),
+        sf::Color(50, 50, 50),
+        sf::Color(0, 255, 0, 150)
+    );
 }
 
 void GameState::initPlayer()
@@ -49,16 +61,18 @@ GameState::GameState(
     std::stack<State *> &states
     ) : State(window, supportedKeys, states),
         m_pauseMenu {*this},
-        test {nullptr}
+        test {nullptr},
+        health_bar {nullptr}
 {
     std::clog << "==> Constructing GameState object.." << std::endl;
 
     std::clog << "GameState init functions.." << std::endl;
     this->initKeybinds();
     this->initTextures();
-    this->initUI(); // TEST
     this->initPlayer();
     this->initPauseMenu();
+
+    this->initUI(); // TEST
 
     // Init background
     this->m_background.setSize(sf::Vector2f(this->getWindow().getSize()));
@@ -74,6 +88,10 @@ GameState::~GameState()
     std::clog << "Deconstructing GameState object.." << std::endl;
 
     delete this->mptr_player;
+
+    // TODO: Make this better, maybe part of UI class
+    delete this->test;
+    delete this->health_bar;
 
     std::clog << "GameState object deconstructed!" << std::endl;
 }
@@ -104,6 +122,24 @@ void GameState::updateInput(const float &dt)
 void GameState::updateUI(const float &dt)
 {
     this->test->update(dt, this->getMousePosView());
+
+    this->health_bar->update();
+
+    if (this->mptr_player->getHealth() != 25.f && this->test->getSelected() == "H_25")
+    {
+        std::clog << "===> 25 IS ACTIVE!!!" << std::endl;
+        this->mptr_player->setHealth(25.f);
+    }
+    else if (this->mptr_player->getHealth() != 75.f && this->test->getSelected() == "H_75")
+    {
+        std::clog << "===> 75 IS ACTIVE!!!" << std::endl;
+        this->mptr_player->setHealth(75.f);
+    }
+    else if (this->mptr_player->getHealth() != 100.f && this->test->getSelected() == "H_100")
+    {
+        std::clog << "===> 100 IS ACTIVE!!!" << std::endl;
+        this->mptr_player->setHealth(100.f);
+    }
 }
 
 void GameState::updatePauseMenu(const float &dt)
@@ -167,6 +203,7 @@ void GameState::render(sf::RenderTarget &target)
 
     // UI
     this->test->render(target); // TEST
+    this->health_bar->render(target);
 
     if (this->checkIfStatePaused())
     {

@@ -1,11 +1,6 @@
 #include "Player.hpp"
 
 /* ### Private Functions ### */
-void Player::initVariables()
-{
-
-}
-
 void Player::initComponents()
 {
     this->createMovementComponent(5.f, 1.f, 200.f);
@@ -23,7 +18,9 @@ Player::Player(
     float x,
     float y,
     sf::Texture &texture
-    ) : Entity ()
+    ) : Entity (),
+        m_maxHealth {100.f},
+        m_health {100.f}
 {
     std::clog << "Constructing Player object.." << std::endl;
 
@@ -49,6 +46,28 @@ Player::~Player()
     std::clog << "Constructing Player object.." << std::endl;
 
     std::clog << "Player object deconstructed!" << std::endl;
+}
+
+/* === Getters === */
+const float & Player::getMaxHealth() const
+{
+    return this->m_maxHealth;
+}
+
+const float & Player::getHealth() const
+{
+    return this->m_health;
+}
+
+/* === Setters === */
+void Player::setMaxHealth(float value)
+{
+    this->m_maxHealth = value;
+}
+
+void Player::setHealth(float value)
+{
+    this->m_health = value;
 }
 
 /* === Functions === */

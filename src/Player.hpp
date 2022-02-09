@@ -8,11 +8,12 @@ class Player
 {
 // Variable
 private:
+    float m_maxHealth;
+    float m_health;
 public:
 
 // Functions
 private:
-    void initVariables();
     void initComponents();
 
 public:
@@ -22,6 +23,14 @@ public:
 
     // Deconstructor
     virtual ~Player();
+
+    // Getters
+    const float & getMaxHealth() const;
+    const float & getHealth() const;
+
+    // Setters
+    void setMaxHealth(float value);
+    void setHealth(float value);
 
     // Functions
     void update(const float &dt);

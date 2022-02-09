@@ -171,8 +171,8 @@ gui::DropDownSelect::DropDownSelect(
     const float height,
     const sf::Font &font
 ) : mref_font {font},
-    m_backgroundColor {sf::Color(50, 50, 50)},
     mptr_active {nullptr},
+    m_backgroundColor {sf::Color(50, 50, 50)},
     m_keytime {0.f},
     m_keytimeMax {10.f},
     m_isOpen {false},
@@ -284,27 +284,126 @@ void gui::DropDownSelect::updateKeytime(const float &dt)
     }
 }
 
-void gui::DropDownSelect::update(const float &dt, const sf::Vector2f &mouse_position)
+void gui::DropDownSelect::updateButtons(const sf::Vector2f &mouse_position)
 {
-    this->updateKeytime(dt);
     this->mptr_active->update(mouse_position);
 
-    if (this->mptr_active->isActive() && this->getKeytime())
-        this->m_isOpen = !this->m_isOpen;
-
-    this->updateBackgroud();
-    
-    for (auto &iter : this->m_buttons)
+    if (this->m_isOpen)
     {
-        iter.second->update(mouse_position);
-        if (iter.second->isActive())
-            {
-                this->m_activeCode = iter.first;
-                this->mptr_active->setText(
-                    this->m_items[iter.first]
-                );
-            }
+        for (auto &iter : this->m_buttons)
+        {
+            iter.second->update(mouse_position);
+        }
     }
 }
 
+void gui::DropDownSelect::updateInput(const float &dt)
+{
+    if (this->mptr_active->isActive() && this->getKeytime())
+    {
+        this->m_isOpen = !this->m_isOpen;
+    }
+
+    if (this->m_isOpen)
+    {
+        for (auto &iter : this->m_buttons)
+        {
+            if (iter.second->isActive())
+            {
+                this->m_activeCode = iter.first;
+                this->mptr_active->setText(this->m_items[iter.first]);
+            }
+        }
+    }
+}
+
+void gui::DropDownSelect::update(const float &dt, const sf::Vector2f &mouse_position)
+{
+    this->updateKeytime(dt);
+
+    this->updateBackgroud();
+
+    this->updateButtons(mouse_position);
+
+    this->updateInput(dt);
+}
+
 /* ### === End DropDownSelect === ### */
+
+/* ### === ProgressBar === ### */
+
+/* === Private functions === */
+void gui::ProgressBar::initBackground()
+{
+    this->m_background.setPosition(this->m_position);
+    this->m_background.setSize(this->m_size);
+    this->m_background.setFillColor(this->m_backgroundColor);
+}
+
+void gui::ProgressBar::initStatusBar()
+{
+    this->m_statusBar.setPosition(
+        this->m_position + sf::Vector2f(this->m_border, this->m_border)
+    );
+    this->m_statusBar.setSize(   
+        this->m_size - 2.f * sf::Vector2f(this->m_border, this->m_border)
+    );
+    this->m_statusBar.setFillColor(this->m_statusColor);
+}
+
+/* === Constructor === */
+gui::ProgressBar::ProgressBar(
+    const sf::Font &font,
+    const float &max_value,
+    const float &value,
+    sf::Vector2f position,
+    sf::Vector2f size,
+    sf::Color color_background,
+    sf::Color color_status
+) : mref_font {font},
+    mref_maxValue {max_value},
+    mref_value {value},
+    m_position {position},
+    m_size {size},
+    m_border {5.f},
+    m_backgroundColor {color_background},
+    m_statusColor {color_status}
+{
+    this->initBackground();
+    this->initStatusBar();
+}
+
+/* === Deconstructor === */
+gui::ProgressBar::~ProgressBar()
+{
+
+}
+
+/* === Getters === */
+const float & gui::ProgressBar::getValue() const
+{
+    return this->mref_value;
+}
+/* === Setters === */
+
+/* === Update functions === */
+void gui::ProgressBar::update()
+{
+    this->m_statusBar.setSize(
+        sf::Vector2f(
+            this->mref_value / this->mref_maxValue * (this->m_size.x - 2.f * this->m_border),
+            this->m_size.y - 2.f * this->m_border
+        )
+    );
+}
+
+/* === Render functions === */
+void gui::ProgressBar::render(sf::RenderTarget &target)
+{
+    target.draw(this->m_background);
+    target.draw(this->m_statusBar);
+}
+
+/* === Functions === */
+
+/* ### === End ProgressBar === ### */
