@@ -29,6 +29,7 @@ void MainMenuState::initButtons()
     const float y_start {580.f};
     const float button_width {100.f};
     const float button_height {40.f};
+    const unsigned button_text_size {20};
     const float button_spacing {20.f};
 
     this->m_buttons["GAME_STATE"] = new gui::Button(
@@ -37,6 +38,7 @@ void MainMenuState::initButtons()
         button_width,
         button_height,
         this->getFont(),
+        button_text_size,
         "Continue"
     );
 
@@ -47,6 +49,7 @@ void MainMenuState::initButtons()
         button_width,
         button_height,
         this->getFont(),
+        button_text_size,
         "Settings"
     );
 
@@ -57,6 +60,7 @@ void MainMenuState::initButtons()
         button_width,
         button_height,
         this->getFont(),
+        button_text_size,
         "Editor"
     );
 
@@ -66,6 +70,7 @@ void MainMenuState::initButtons()
         button_width,
         button_height,
         this->getFont(),
+        button_text_size,
         "Quit"
     );
 }

@@ -4,6 +4,9 @@
 #include <SFML/Graphics.hpp>
 #include <string>
 #include <iostream>
+#include <vector>
+#include <map>
+#include <any>
 
 enum ButtonStates {
     BTN_IDLE = 0,
@@ -55,6 +58,7 @@ namespace gui {
             const float x, const float y,
             const float width, const float height,
             const sf::Font & font,
+            const unsigned char_size,
             std::string text
         );
 
@@ -67,35 +71,66 @@ namespace gui {
         // Deconstructor
         ~Button();
 
-        // Accessors
+        // Getters
         const bool isActive() const;
+        const sf::Vector2f &getSize() const;
+        const float &getWidth() const;
+        const float &getHeight() const;
 
         // Setters
+        void setText(std::string text);
 
         // Functions
         void update(const sf::Vector2f mousePos);
         void render(sf::RenderTarget &target);
     };
 
-    class DropDownBox
+    class DropDownSelect
     {
     // Variables
     private:
+        const sf::Font &mref_font;
+
+        gui::Button *mptr_active;
+
+        std::map<std::string, std::string> m_items;
+        std::map<std::string, gui::Button *> m_buttons;
+
+        float m_keytime;
+        float m_keytimeMax;
+        bool m_isOpen;
+        std::string m_activeCode;
+
+        const sf::Vector2f m_position;
+        const float m_width;
+        const float m_height; // TODO: Container instead of button, implement scroll support.
 
     // Functions
     private:
     public:
         // Constructor
-        DropDownBox();
+        DropDownSelect(
+            const float x,
+            const float y,
+            const float width,
+            const float height,
+            const sf::Font &font
+        );
 
         // Deconstructor
-        ~DropDownBox();
+        virtual ~DropDownSelect();
 
         // Getters
+        const std::string &getSelected() const;
+        const bool getKeytime();
 
         // Setters
+        void addAlternative(std::string key, std::string text);
 
         // Functions
+        void render(sf::RenderTarget &target);
+        void updateKeytime(const float &dt);
+        void update(const float &dt, const sf::Vector2f &mouse_position);
     };
 }
 

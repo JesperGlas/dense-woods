@@ -19,6 +19,14 @@ void GameState::initTextures()
     this->addTexture("PLAYER", "assets/img/sub_1.png");
 }
 
+void GameState::initUI()
+{
+    test = new gui::DropDownSelect(0.f, 0.f, 100.f, 40.f, this->getFont());
+    test->addAlternative("LIGHT", "Light Hull");
+    test->addAlternative("MEDIUM", "Medium Hull");
+    test->addAlternative("HEAVY", "Heavy Hull");
+}
+
 void GameState::initPlayer()
 {
     this->mptr_player = new Player(
@@ -40,13 +48,15 @@ GameState::GameState(
     std::map<std::string, sf::Keyboard::Key> &supportedKeys,
     std::stack<State *> &states
     ) : State(window, supportedKeys, states),
-        m_pauseMenu {*this}
+        m_pauseMenu {*this},
+        test {nullptr}
 {
     std::clog << "==> Constructing GameState object.." << std::endl;
 
     std::clog << "GameState init functions.." << std::endl;
     this->initKeybinds();
     this->initTextures();
+    this->initUI(); // TEST
     this->initPlayer();
     this->initPauseMenu();
 
@@ -91,6 +101,11 @@ void GameState::updateInput(const float &dt)
     }
 }
 
+void GameState::updateUI(const float &dt)
+{
+    this->test->update(dt, this->getMousePosView());
+}
+
 void GameState::updatePauseMenu(const float &dt)
 {
     if (this->m_pauseMenu.isButtonPressed("CONTINUE_GAME"))
@@ -128,7 +143,6 @@ void GameState::update(const float &dt)
 {
     this->updateMousePositions();
     this->updateKeyTime(dt);
-
     this->updateInput(dt);
 
     if (this->checkIfStatePaused())
@@ -138,6 +152,7 @@ void GameState::update(const float &dt)
     }
     else
     {
+        this->updateUI(dt);
         this->updatePlayerInput(dt);
         this->mptr_player->update(dt);
     }
@@ -149,6 +164,9 @@ void GameState::render(sf::RenderTarget &target)
     target.draw(this->m_background);
 
     this->mptr_player->render(target);
+
+    // UI
+    this->test->render(target); // TEST
 
     if (this->checkIfStatePaused())
     {

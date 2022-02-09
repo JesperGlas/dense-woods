@@ -14,12 +14,15 @@ private:
 
     Player *mptr_player;
     sf::RectangleShape m_background;
+
+    gui::DropDownSelect *test;
 public:
 
 // Functions
 private:
     void initKeybinds();
     void initTextures();
+    void initUI();
     void initPlayer();
     void initPauseMenu();
 public:
@@ -37,6 +40,7 @@ public:
     void endStateActions();
 
     void updateInput(const float &dt);
+    void updateUI(const float &dt);
     void updatePauseMenu(const float &dt);
     void updatePlayerInput(const float &dt);
     void update(const float &dt);

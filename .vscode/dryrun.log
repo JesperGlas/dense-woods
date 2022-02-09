@@ -9,13 +9,13 @@ g++ -std=c++11 -Wall -o obj/State.o -c src/State.cpp
 g++ -std=c++11 -Wall -o obj/PauseMenu.o -c src/PauseMenu.cpp
 g++ -std=c++11 -Wall -o obj/Player.o -c src/Player.cpp
 g++ -std=c++11 -Wall -o obj/GameState.o -c src/GameState.cpp
-g++ -std=c++11 -Wall -o obj/PauseMenuState.o -c src/PauseMenuState.cpp
 g++ -std=c++11 -Wall -o obj/Entity.o -c src/Entity.cpp
+g++ -std=c++11 -Wall -o obj/SettingsState.o -c src/SettingsState.cpp
+g++ -std=c++11 -Wall -o obj/Gui.o -c src/Gui.cpp
  
 g++ -std=c++11 -Wall -o obj/main.o -c src/main.cpp
 g++ -std=c++11 -Wall -o obj/EditorState.o -c src/EditorState.cpp
-g++ -std=c++11 -Wall -o obj/Button.o -c src/Button.cpp
 g++ -std=c++11 -Wall -o obj/MovementComponent.o -c src/MovementComponent.cpp
-g++ -std=c++11 -Wall -o main obj/MainMenuState.o obj/Game.o obj/HitboxComponent.o obj/State.o obj/PauseMenu.o obj/Player.o obj/GameState.o obj/PauseMenuState.o obj/Entity.o obj/main.o obj/EditorState.o obj/Button.o obj/MovementComponent.o -lsfml-graphics -lsfml-window -lsfml-system
+g++ -std=c++11 -Wall -o main obj/MainMenuState.o obj/Game.o obj/HitboxComponent.o obj/State.o obj/PauseMenu.o obj/Player.o obj/GameState.o obj/Entity.o obj/SettingsState.o obj/Gui.o obj/main.o obj/EditorState.o obj/MovementComponent.o -lsfml-graphics -lsfml-window -lsfml-system
 make: Leaving directory '/home/jesper/dev/cpp/dense-woods'
  

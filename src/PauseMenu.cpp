@@ -67,6 +67,7 @@ void PauseMenu::addButton(std::string key, std::string text)
     const float button_start_y {100.f};
     const float button_width {120.f};
     const float button_height {40.f};
+    const unsigned button_text_size {20};
     const float button_spacing {20.f};
 
     this->m_buttons[key] = new gui::Button(
@@ -75,6 +76,7 @@ void PauseMenu::addButton(std::string key, std::string text)
         button_width,
         button_height,
         this->m_state.getFont(),
+        button_text_size,
         text
     );
 }

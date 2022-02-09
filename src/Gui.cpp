@@ -1,5 +1,7 @@
 #include "Gui.hpp"
 
+/* ### === Button === ### */
+
 // Constructor
 gui::Button::Button(
     const float x, const float y,
@@ -46,13 +48,14 @@ gui::Button::Button(
     const float x, const float y,
     const float width, const float height,
     const sf::Font & font,
+    const unsigned char_size,
     std::string text
 ) : Button(
     x, y, width, height,
     sf::Color::Transparent,
     sf::Color(50, 50, 50),
     sf::Color(50, 50, 50),
-    font, 20, text,
+    font, char_size, text,
     sf::Color::White,
     sf::Color::White,
     sf::Color::Black
@@ -65,11 +68,11 @@ gui::Button::Button(
 
 gui::Button::Button(
     const float x, const float y,
-    const sf::Font & font,
+    const sf::Font &font,
     std::string text
 ) : Button(
     x, y, 100.f, 50.f,
-    font, text
+    font, 20, text
     )
 {
 
@@ -81,10 +84,30 @@ gui::Button::~Button()
     std::clog << "Button object deconstructed.." << std::endl;
 }
 
-// Accessors
+/* === Getters === */
 const bool gui::Button::isActive() const
 {
     return this->m_buttonState == BTN_ACTIVE;
+}
+
+const sf::Vector2f &gui::Button::getSize() const
+{
+    return this->m_shape.getSize();
+}
+
+const float &gui::Button::getWidth() const
+{
+    return this->getSize().x;
+}
+
+const float &gui::Button::getHeight() const
+{
+    return this->getSize().y;
+}
+
+void gui::Button::setText(std::string text)
+{
+    this->m_text.setString(text);
 }
 
 // Functions
@@ -125,3 +148,152 @@ void gui::Button::render(sf::RenderTarget &target)
     target.draw(this->m_shape);
     target.draw(this->m_text);
 }
+
+/* ### === End Button === ### */
+
+/* ### === DropDownSelect === ### */
+
+/* === Private Functions === */
+
+/* === Constructor === */
+gui::DropDownSelect::DropDownSelect(
+    const float x,
+    const float y,
+    const float width,
+    const float height,
+    const sf::Font &font
+) : mref_font {font},
+    mptr_active {nullptr},
+    m_keytime {0.f},
+    m_keytimeMax {10.f},
+    m_isOpen {false},
+    m_position {sf::Vector2f(x, y)},
+    m_width {width},
+    m_height {height}
+{
+    std::clog << "Constructing DropDownSelect object.." << std::endl;
+
+    std::clog << "DropDownSelect object constructed!" << std::endl;
+}
+
+/* === Deconstructor === */
+gui::DropDownSelect::~DropDownSelect()
+{
+    delete this->mptr_active;
+
+    for (auto &iter : this->m_buttons)
+    {
+        delete iter.second;
+    }
+}
+
+/* === Getters === */
+const std::string &gui::DropDownSelect::getSelected() const
+{
+    return this->m_activeCode;
+}
+
+const bool gui::DropDownSelect::getKeytime()
+{
+    if (this->m_keytime >= this->m_keytimeMax)
+    {
+        this->m_keytime = 0.f;
+        return true;
+    }
+
+    return false;
+}
+
+/* === Setters === */
+void gui::DropDownSelect::addAlternative(std::string key, std::string text)
+{
+    // Add button
+    if (m_buttons.empty())
+    {
+        this->mptr_active = new Button(
+            this->m_position.x,
+            this->m_position.y,
+            this->m_width,
+            this->m_height,
+            this->mref_font,
+            12,
+            text
+        );
+
+        this->m_buttons[key] = new Button(
+            this->m_position.x,
+            this->m_position.y + this->m_height,
+            this->m_width,
+            this->m_height,
+            this->mref_font,
+            12,
+            text
+        );
+
+        this->m_activeCode = key;
+    }
+    else
+    {
+        this->m_buttons[key] = new Button(
+            this->m_position.x,
+            this->m_position.y + this->m_height + this->m_height * this->m_buttons.size(),
+            this->m_width,
+            this->m_height,
+            this->mref_font,
+            12,
+            text
+        );
+    }
+
+    // Add alternative in list
+    this->m_items[key] = text;
+}
+
+/* === Functions === */
+
+void gui::DropDownSelect::render(sf::RenderTarget &target)
+{
+    if (this->mptr_active && !this->m_buttons.empty())
+    {
+        this->mptr_active->render(target);
+
+        if (this->m_isOpen)
+        {
+            for (auto &iter : this->m_buttons)
+            {
+                iter.second->render(target);
+            }
+        }
+    }
+}
+
+void gui::DropDownSelect::updateKeytime(const float &dt)
+{
+    if (this->m_keytime < this->m_keytimeMax)
+    {
+        this->m_keytime += 100.f * dt;
+    }
+}
+
+void gui::DropDownSelect::update(const float &dt, const sf::Vector2f &mouse_position)
+{
+    this->updateKeytime(dt);
+    this->mptr_active->update(mouse_position);
+
+    if (this->mptr_active->isActive() && this->getKeytime())
+        this->m_isOpen = !this->m_isOpen;
+    
+    for (auto &iter : this->m_buttons)
+    {
+        iter.second->update(mouse_position);
+        if (iter.second->isActive())
+            {
+                this->m_activeCode = iter.first;
+                this->mptr_active->setText(
+                    this->m_items[iter.first]
+                );
+            }
+    }
+}
+
+/* ### === End DropDownSelect === ### */
