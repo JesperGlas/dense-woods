@@ -5,9 +5,8 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
- 
 
-# Make data base, printed on Wed Feb  9 09:49:25 2022
+# Make data base, printed on Fri Feb 11 18:43:10 2022
 
 # Variables
 
@@ -56,7 +55,7 @@ QT_AUTO_SCREEN_SCALE_FACTOR = 0
 # environment
 XDG_CONFIG_DIRS = /etc/xdg/xdg-plasma:/etc/xdg:/usr/share/kubuntu-default-settings/kf5-settings
 # makefile (from 'MovementComponent.d', line 1)
-MAKEFILE_LIST :=  Makefile MainMenuState.d Game.d HitboxComponent.d State.d PauseMenu.d Player.d GameState.d Entity.d SettingsState.d Gui.d main.d EditorState.d MovementComponent.d
+MAKEFILE_LIST :=  Makefile MainMenuState.d Game.d HitboxComponent.d State.d PauseMenu.d GuiDropDownSelect.d Player.d GameState.d GuiProgressBar.d Entity.d SettingsState.d EditorState.d main.d GuiButton.d MovementComponent.d
 # 'override' directive
 GNUMAKEFLAGS := 
 # makefile (from 'Makefile', line 7)
@@ -74,9 +73,9 @@ VSCODE_VERBOSE_LOGGING = true
 # makefile (from 'Makefile', line 24)
 DEL = del
 # environment
-TERMINATOR_UUID = urn:uuid:69da172f-155f-4978-b662-9add777d5a52
+TERMINATOR_UUID = urn:uuid:c1c7edea-af78-4958-a334-8ab716f77580
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-d80e3cb1-32ad-4de8-bbdc-3a9b9e52fb24.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-9c142519-31bd-49bd-a5b2-412bab179501.sock
 # environment
 LC_NAME = sv_SE.UTF-8
 # environment
@@ -96,7 +95,7 @@ XCURSOR_THEME = Sweet-cursors
 # environment
 LSCOLORS = Gxfxcxdxbxegedabagacad
 # environment
-SESSION_MANAGER = local/jesper-T460:@/tmp/.ICE-unix/2336,unix/jesper-T460:/tmp/.ICE-unix/2336
+SESSION_MANAGER = local/jesper-T460:@/tmp/.ICE-unix/2639,unix/jesper-T460:/tmp/.ICE-unix/2639
 # environment
 XDG_RUNTIME_DIR = /run/user/1000
 # environment
@@ -114,7 +113,7 @@ LS_COLORS = rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:
 # environment
 XDG_SESSION_DESKTOP = KDE
 # environment
-SSH_AUTH_SOCK = /tmp/ssh-iM2GG1pj8OrZ/agent.2229
+SSH_AUTH_SOCK = /tmp/ssh-4qRJNmvBCAJM/agent.2529
 # makefile (from 'Makefile', line 13)
 SRCDIR = src
 # automatic
@@ -132,7 +131,7 @@ KDE_SESSION_VERSION = 5
 # environment
 XDG_SEAT = seat0
 # environment
-SSH_AGENT_PID = 2270
+SSH_AGENT_PID = 2570
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = KDE
 # environment
@@ -203,7 +202,6 @@ TERMINATOR_DBUS_PATH = /net/tenshu/Terminator2
 XDG_SEAT_PATH = /org/freedesktop/DisplayManager/Seat0
 # environment
 VSCODE_IPC_HOOK = /run/user/1000/vscode-e2df31a7-1.63.2-main.sock
- 
 # makefile (from 'Makefile', line 12)
 EXT = .cpp
 # makefile
@@ -220,6 +218,8 @@ BREAKPAD_DUMP_LOCATION = /home/jesper/.config/Code/exthost Crash Reports
 GDK_BACKEND = x11
 # environment
 LC_PAPER = sv_SE.UTF-8
+# environment
+NO_AT_BRIDGE = 1
 # makefile (from 'Makefile', line 11)
 APPNAME = main
 # environment
@@ -246,6 +246,8 @@ PAGER = less
 LC_ALL = C
 # makefile (from 'Makefile', line 26)
 WDELOBJ = $(SRC:$(SRCDIR)/%$(EXT)=$(OBJDIR)\\%.o)
+# environment
+MODEL_VIEWER_ROOT = /home/jesper/Documents/skola/computer_graphics/gltf_viewer
 # automatic
 ^F = $(notdir $^)
 # default
@@ -269,11 +271,12 @@ TERM = xterm-256color
 # environment
 TERMINATOR_DBUS_NAME = net.tenshu.Terminator21a9d5db22c73a993ff0b42f64b396873
 # environment
-VSCODE_PID = 24713
+VSCODE_PID = 79501
 # environment
 KDE_SESSION_UID = 1000
+ 
 # variable set hash-table stats:
-# Load=130/1024=13%, Rehash=0, Collisions=22/209=11%
+# Load=132/1024=13%, Rehash=0, Collisions=22/215=10%
 
 # Pattern-specific Variable Values
 
@@ -281,12 +284,11 @@ KDE_SESSION_UID = 1000
 
 # Directories
 
-# . (device 2052, inode 7864684): 32 files, no impossibilities.
-# src (device 2052, inode 3714318): 28 files, no impossibilities.
+# . (device 2052, inode 7864684): 35 files, no impossibilities.
+# src (device 2052, inode 3714318): 30 files, no impossibilities.
 
-# 60 files, no impossibilities in 2 directories.
+# 65 files, no impossibilities in 2 directories.
 
- 
 # Implicit Rules
 
 %.d: src/%.cpp
@@ -309,18 +311,22 @@ obj/SettingsState.o: src/SettingsState.cpp src/SettingsState.hpp src/State.hpp s
 # Not a target:
 src/GameState.hpp:
 #  Implicit rule search has been done.
-#  Last modified 2022-02-08 17:00:20.570162546
+#  Last modified 2022-02-09 16:45:54.223203461
 #  File has been updated.
 #  Successfully updated.
+
+obj/GuiProgressBar.o: src/GuiProgressBar.cpp src/Gui.hpp
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 src/State.cpp:
 #  Implicit rule search has been done.
-#  Last modified 2022-02-08 21:26:34.227799441
+#  Last modified 2022-02-09 16:45:54.231203953
 #  File has been updated.
 #  Successfully updated.
 
- 
 # Not a target:
 src/MovementComponent.hpp:
 #  Implicit rule search has been done.
@@ -331,14 +337,14 @@ src/MovementComponent.hpp:
 # Not a target:
 src/MainMenuState.cpp:
 #  Implicit rule search has been done.
-#  Last modified 2022-02-08 21:19:31.780534732
+#  Last modified 2022-02-09 16:45:54.227203707
 #  File has been updated.
 #  Successfully updated.
 
 # Not a target:
 src/Player.hpp:
 #  Implicit rule search has been done.
-#  Last modified 2022-02-08 21:23:41.464106354
+#  Last modified 2022-02-09 16:45:54.231203953
 #  File has been updated.
 #  Successfully updated.
 
@@ -352,7 +358,6 @@ all: main
 # Load=0/32=0%, Rehash=0, Collisions=0/5=0%
 
 obj/PauseMenu.o: src/PauseMenu.cpp src/PauseMenu.hpp src/State.hpp src/Entity.hpp src/MovementComponent.hpp src/HitboxComponent.hpp src/Gui.hpp
- 
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -362,15 +367,10 @@ obj/PauseMenu.o: src/PauseMenu.cpp src/PauseMenu.hpp src/State.hpp src/Entity.hp
 #  Modification time never checked.
 #  File has not been updated.
 
-obj/Gui.o: src/Gui.cpp src/Gui.hpp
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
 Entity.d: src/Entity.cpp
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'Entity'
-#  Last modified 2022-02-09 09:49:25.281580389
+#  Last modified 2022-02-11 18:43:06.365455755
 #  File has been updated.
 #  Successfully updated.
 #  recipe to execute (from 'Makefile', line 40):
@@ -379,23 +379,28 @@ Entity.d: src/Entity.cpp
 # Not a target:
 src/EditorState.cpp:
 #  Implicit rule search has been done.
-#  Last modified 2022-02-08 21:25:57.035866069
+#  Last modified 2022-02-09 16:45:54.223203461
 #  File has been updated.
 #  Successfully updated.
 
 # Not a target:
 src/State.hpp:
 #  Implicit rule search has been done.
-#  Last modified 2022-02-08 21:23:53.652084937
+#  Last modified 2022-02-09 16:45:54.231203953
 #  File has been updated.
 #  Successfully updated.
 
 # Not a target:
 src/MainMenuState.hpp:
 #  Implicit rule search has been done.
-#  Last modified 2022-02-08 21:12:48.841159849
+#  Last modified 2022-02-09 16:45:54.227203707
 #  File has been updated.
 #  Successfully updated.
+
+obj/GuiButton.o: src/GuiButton.cpp src/Gui.hpp
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 obj/main.o: src/main.cpp src/Game.hpp src/MainMenuState.hpp src/GameState.hpp src/State.hpp src/Entity.hpp src/MovementComponent.hpp src/HitboxComponent.hpp src/Gui.hpp src/Player.hpp src/PauseMenu.hpp src/EditorState.hpp src/SettingsState.hpp
 #  Implicit rule search has not been done.
@@ -408,17 +413,29 @@ Makefile:
 #  Last modified 2022-02-05 01:22:14.782042954
 #  File has been updated.
 #  Successfully updated.
- 
 
-obj/HitboxComponent.o: src/HitboxComponent.cpp src/HitboxComponent.hpp
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+obj/HitboxComponent.o: src/HitboxComponent.cpp src/HitboxComponent.cpp src/HitboxComponent.hpp
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'HitboxComponent'
+#  Last modified 2022-02-09 17:27:25.051354353
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 47):
+	$(CC) $(CXXFLAGS) -o $@ -c $<
+
+GuiDropDownSelect.d: src/GuiDropDownSelect.cpp
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'GuiDropDownSelect'
+#  Last modified 2022-02-11 18:43:07.961454382
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 40):
+	@$(CPP) $(CFLAGS) $< -MM -MT $(@:%.d=$(OBJDIR)/%.o) >$@
 
 PauseMenu.d: src/PauseMenu.cpp
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'PauseMenu'
-#  Last modified 2022-02-09 09:49:25.445574393
+#  Last modified 2022-02-11 18:43:08.265454119
 #  File has been updated.
 #  Successfully updated.
 #  recipe to execute (from 'Makefile', line 40):
@@ -427,7 +444,7 @@ PauseMenu.d: src/PauseMenu.cpp
 Game.d: src/Game.cpp
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'Game'
-#  Last modified 2022-02-09 09:49:25.689565471
+#  Last modified 2022-02-11 18:43:09.041453449
 #  File has been updated.
 #  Successfully updated.
 #  recipe to execute (from 'Makefile', line 40):
@@ -438,6 +455,13 @@ obj/Entity.o: src/Entity.cpp src/Entity.hpp src/MovementComponent.hpp src/Hitbox
 #  Modification time never checked.
 #  File has not been updated.
 
+# Not a target:
+src/GuiDropDownSelect.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-02-09 17:28:43.243739523
+#  File has been updated.
+#  Successfully updated.
+
 obj/GameState.o: src/GameState.cpp src/GameState.hpp src/State.hpp src/Entity.hpp src/MovementComponent.hpp src/HitboxComponent.hpp src/Gui.hpp src/Player.hpp src/PauseMenu.hpp
 #  Implicit rule search has not been done.
 #  Modification time never checked.
@@ -446,7 +470,7 @@ obj/GameState.o: src/GameState.cpp src/GameState.hpp src/State.hpp src/Entity.hp
 # Not a target:
 src/Game.cpp:
 #  Implicit rule search has been done.
-#  Last modified 2022-02-08 20:26:13.336006863
+#  Last modified 2022-02-09 16:45:54.223203461
 #  File has been updated.
 #  Successfully updated.
 
@@ -471,7 +495,7 @@ obj/Player.o: src/Player.cpp src/Player.hpp src/Entity.hpp src/MovementComponent
 State.d: src/State.cpp
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'State'
-#  Last modified 2022-02-09 09:49:25.501572345
+#  Last modified 2022-02-11 18:43:08.557453867
 #  File has been updated.
 #  Successfully updated.
 #  recipe to execute (from 'Makefile', line 40):
@@ -480,14 +504,21 @@ State.d: src/State.cpp
 # Not a target:
 src/SettingsState.cpp:
 #  Implicit rule search has been done.
-#  Last modified 2022-02-08 21:25:33.983907224
+#  Last modified 2022-02-09 16:45:54.231203953
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+src/GuiProgressBar.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-02-09 17:28:43.243739523
 #  File has been updated.
 #  Successfully updated.
 
 EditorState.d: src/EditorState.cpp
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'EditorState'
-#  Last modified 2022-02-09 09:49:24.897595051
+#  Last modified 2022-02-11 18:43:05.565456441
 #  File has been updated.
 #  Successfully updated.
 #  recipe to execute (from 'Makefile', line 40):
@@ -496,31 +527,46 @@ EditorState.d: src/EditorState.cpp
 main.d: src/main.cpp
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'main'
-#  Last modified 2022-02-09 09:49:25.001590627
+#  Last modified 2022-02-11 18:43:05.18145677
 #  File has been updated.
 #  Successfully updated.
 #  recipe to execute (from 'Makefile', line 40):
 	@$(CPP) $(CFLAGS) $< -MM -MT $(@:%.d=$(OBJDIR)/%.o) >$@
 
-Gui.d: src/Gui.cpp
+obj/State.o: src/State.cpp src/State.cpp src/State.hpp src/Entity.hpp src/MovementComponent.hpp src/HitboxComponent.hpp src/Gui.hpp
 #  Implicit rule search has been done.
-#  Implicit/static pattern stem: 'Gui'
-#  Last modified 2022-02-09 09:49:25.089587409
+#  Implicit/static pattern stem: 'State'
+#  Last modified 2022-02-09 17:27:25.799358061
 #  File has been updated.
-#  Successfully updated.
-#  recipe to execute (from 'Makefile', line 40):
-	@$(CPP) $(CFLAGS) $< -MM -MT $(@:%.d=$(OBJDIR)/%.o) >$@
-
-obj/State.o: src/State.cpp src/State.hpp src/Entity.hpp src/MovementComponent.hpp src/HitboxComponent.hpp src/Gui.hpp
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Needs to be updated (-q is set).
+# automatic
+# @ := obj/State.o
+# automatic
+# % := 
+# automatic
+# * := State
+# automatic
+# + := src/State.cpp src/State.cpp src/State.hpp src/Entity.hpp src/MovementComponent.hpp src/HitboxComponent.hpp src/Gui.hpp
+# automatic
+# | := 
+# automatic
+# < := src/State.cpp
+# automatic
+# ^ := src/State.cpp src/State.hpp src/Entity.hpp src/MovementComponent.hpp src/HitboxComponent.hpp src/Gui.hpp
+ 
+# automatic
+# ? := src/Gui.hpp
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/15=7%
+#  recipe to execute (from 'Makefile', line 47):
+	$(CC) $(CXXFLAGS) -o $@ -c $<
 
 # Not a target:
 src/Game.hpp:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2022-02-09 16:45:54.223203461
+#  File has been updated.
+#  Successfully updated.
 
 # Not a target:
 .DEFAULT:
@@ -531,48 +577,23 @@ src/Game.hpp:
 # Not a target:
 src/PauseMenu.cpp:
 #  Implicit rule search has been done.
-#  Last modified 2022-02-08 21:05:27.04964932
+#  Last modified 2022-02-09 16:45:54.227203707
 #  File has been updated.
 #  Successfully updated.
 
 # Not a target:
 src/EditorState.hpp:
 #  Implicit rule search has been done.
-#  Last modified 2022-02-08 21:06:52.905579478
-#  File has been updated.
-#  Successfully updated.
-
-# Not a target:
-src/Gui.cpp:
-#  Implicit rule search has been done.
-#  Last modified 2022-02-08 22:57:43.346266525
+#  Last modified 2022-02-09 16:45:54.223203461
 #  File has been updated.
 #  Successfully updated.
 
 obj/MainMenuState.o: src/MainMenuState.cpp src/MainMenuState.cpp src/MainMenuState.hpp src/GameState.hpp src/State.hpp src/Entity.hpp src/MovementComponent.hpp src/HitboxComponent.hpp src/Gui.hpp src/Player.hpp src/PauseMenu.hpp src/EditorState.hpp src/SettingsState.hpp
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'MainMenuState'
-#  Last modified 2022-02-08 21:26:09.563843658
+#  Last modified 2022-02-11 18:43:04.673457205
 #  File has been updated.
-#  Needs to be updated (-q is set).
-# automatic
-# @ := obj/MainMenuState.o
-# automatic
-# % := 
-# automatic
-# * := MainMenuState
-# automatic
-# + := src/MainMenuState.cpp src/MainMenuState.cpp src/MainMenuState.hpp src/GameState.hpp src/State.hpp src/Entity.hpp src/MovementComponent.hpp src/HitboxComponent.hpp src/Gui.hpp src/Player.hpp src/PauseMenu.hpp src/EditorState.hpp src/SettingsState.hpp
-# automatic
-# | := 
-# automatic
-# < := src/MainMenuState.cpp
-# automatic
-# ^ := src/MainMenuState.cpp src/MainMenuState.hpp src/GameState.hpp src/State.hpp src/Entity.hpp src/MovementComponent.hpp src/HitboxComponent.hpp src/Gui.hpp src/Player.hpp src/PauseMenu.hpp src/EditorState.hpp src/SettingsState.hpp
-# automatic
-# ? := src/Gui.hpp
-# variable set hash-table stats:
-# Load=8/32=25%, Rehash=0, Collisions=1/15=7%
+#  Successfully updated.
 #  recipe to execute (from 'Makefile', line 47):
 	$(CC) $(CXXFLAGS) -o $@ -c $<
 
@@ -587,7 +608,7 @@ cleandep:
 # Not a target:
 src/SettingsState.hpp:
 #  Implicit rule search has been done.
-#  Last modified 2022-02-08 21:05:55.781627695
+#  Last modified 2022-02-09 16:45:54.231203953
 #  File has been updated.
 #  Successfully updated.
 
@@ -598,6 +619,15 @@ cleandepw:
 #  File has not been updated.
 #  recipe to execute (from 'Makefile', line 69):
 	$(DEL) $(DEP)
+
+GuiButton.d: src/GuiButton.cpp
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'GuiButton'
+#  Last modified 2022-02-11 18:43:04.897457013
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 40):
+	@$(CPP) $(CFLAGS) $< -MM -MT $(@:%.d=$(OBJDIR)/%.o) >$@
 
 run:
 #  Implicit rule search has not been done.
@@ -617,7 +647,7 @@ clean:
 Player.d: src/Player.cpp
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'Player'
-#  Last modified 2022-02-09 09:49:25.393576294
+#  Last modified 2022-02-11 18:43:07.829454496
 #  File has been updated.
 #  Successfully updated.
 #  recipe to execute (from 'Makefile', line 40):
@@ -629,6 +659,13 @@ obj/EditorState.o: src/EditorState.cpp src/EditorState.hpp src/State.hpp src/Ent
 #  File has not been updated.
 
 # Not a target:
+src/GuiButton.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-02-09 17:28:43.243739523
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
 src/main.cpp:
 #  Implicit rule search has been done.
 #  Last modified 2022-02-03 21:46:59.584529318
@@ -638,7 +675,7 @@ src/main.cpp:
 MovementComponent.d: src/MovementComponent.cpp
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'MovementComponent'
-#  Last modified 2022-02-09 09:49:24.761600829
+#  Last modified 2022-02-11 18:43:04.513457342
 #  File has been updated.
 #  Successfully updated.
 #  recipe to execute (from 'Makefile', line 40):
@@ -647,14 +684,14 @@ MovementComponent.d: src/MovementComponent.cpp
 # Not a target:
 src/PauseMenu.hpp:
 #  Implicit rule search has been done.
-#  Last modified 2022-02-08 21:12:28.48118813
+#  Last modified 2022-02-09 16:45:54.231203953
 #  File has been updated.
 #  Successfully updated.
 
 # Not a target:
 src/Gui.hpp:
 #  Implicit rule search has been done.
-#  Last modified 2022-02-08 22:57:41.4742585
+#  Last modified 2022-02-09 17:32:51.648936286
 #  File has been updated.
 #  Successfully updated.
 
@@ -664,20 +701,19 @@ src/HitboxComponent.cpp:
 #  Last modified 2022-02-07 17:32:35.717749946
 #  File has been updated.
 #  Successfully updated.
- 
 
 GameState.d: src/GameState.cpp
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'GameState'
-#  Last modified 2022-02-09 09:49:25.341578196
+#  Last modified 2022-02-11 18:43:07.513454768
 #  File has been updated.
 #  Successfully updated.
 #  recipe to execute (from 'Makefile', line 40):
 	@$(CPP) $(CFLAGS) $< -MM -MT $(@:%.d=$(OBJDIR)/%.o) >$@
 
-main: obj/MainMenuState.o obj/Game.o obj/HitboxComponent.o obj/State.o obj/PauseMenu.o obj/Player.o obj/GameState.o obj/Entity.o obj/SettingsState.o obj/Gui.o obj/main.o obj/EditorState.o obj/MovementComponent.o
+main: obj/MainMenuState.o obj/Game.o obj/HitboxComponent.o obj/State.o obj/PauseMenu.o obj/GuiDropDownSelect.o obj/Player.o obj/GameState.o obj/GuiProgressBar.o obj/Entity.o obj/SettingsState.o obj/EditorState.o obj/main.o obj/GuiButton.o obj/MovementComponent.o
 #  Implicit rule search has not been done.
-#  Last modified 2022-02-08 21:26:16.391831429
+#  Last modified 2022-02-09 17:28:43.243739523
 #  File has been updated.
 #  Needs to be updated (-q is set).
 # variable set hash-table stats:
@@ -695,7 +731,7 @@ src/Entity.cpp:
 HitboxComponent.d: src/HitboxComponent.cpp
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'HitboxComponent'
-#  Last modified 2022-02-09 09:49:25.577569566
+#  Last modified 2022-02-11 18:43:08.829453632
 #  File has been updated.
 #  Successfully updated.
 #  recipe to execute (from 'Makefile', line 40):
@@ -704,14 +740,14 @@ HitboxComponent.d: src/HitboxComponent.cpp
 # Not a target:
 src/GameState.cpp:
 #  Implicit rule search has been done.
-#  Last modified 2022-02-08 21:24:31.496018193
+#  Last modified 2022-02-09 17:27:14.371301354
 #  File has been updated.
 #  Successfully updated.
 
 MainMenuState.d: src/MainMenuState.cpp
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'MainMenuState'
-#  Last modified 2022-02-09 09:49:25.753563131
+#  Last modified 2022-02-11 18:43:09.361453172
 #  File has been updated.
 #  Successfully updated.
 #  recipe to execute (from 'Makefile', line 40):
@@ -720,7 +756,7 @@ MainMenuState.d: src/MainMenuState.cpp
 SettingsState.d: src/SettingsState.cpp
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'SettingsState'
-#  Last modified 2022-02-09 09:49:25.213582875
+#  Last modified 2022-02-11 18:43:06.037456036
 #  File has been updated.
 #  Successfully updated.
 #  recipe to execute (from 'Makefile', line 40):
@@ -733,10 +769,15 @@ src/MovementComponent.cpp:
 #  File has been updated.
 #  Successfully updated.
 
+obj/GuiDropDownSelect.o: src/GuiDropDownSelect.cpp src/Gui.hpp
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
 # Not a target:
 src/Player.cpp:
 #  Implicit rule search has been done.
-#  Last modified 2022-02-08 21:23:42.100105237
+#  Last modified 2022-02-09 16:45:54.231203953
 #  File has been updated.
 #  Successfully updated.
 
@@ -747,10 +788,23 @@ src/HitboxComponent.hpp:
 #  File has been updated.
 #  Successfully updated.
 
-obj/Game.o: src/Game.cpp src/Game.hpp src/MainMenuState.hpp src/GameState.hpp src/State.hpp src/Entity.hpp src/MovementComponent.hpp src/HitboxComponent.hpp src/Gui.hpp src/Player.hpp src/PauseMenu.hpp src/EditorState.hpp src/SettingsState.hpp
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+obj/Game.o: src/Game.cpp src/Game.cpp src/Game.hpp src/MainMenuState.hpp src/GameState.hpp src/State.hpp src/Entity.hpp src/MovementComponent.hpp src/HitboxComponent.hpp src/Gui.hpp src/Player.hpp src/PauseMenu.hpp src/EditorState.hpp src/SettingsState.hpp
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'Game'
+#  Last modified 2022-02-11 18:43:09.093453404
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 47):
+	$(CC) $(CXXFLAGS) -o $@ -c $<
+
+GuiProgressBar.d: src/GuiProgressBar.cpp
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'GuiProgressBar'
+#  Last modified 2022-02-11 18:43:07.065455154
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 40):
+	@$(CPP) $(CFLAGS) $< -MM -MT $(@:%.d=$(OBJDIR)/%.o) >$@
 
 # Not a target:
 src/Entity.hpp:
@@ -760,19 +814,19 @@ src/Entity.hpp:
 #  Successfully updated.
 
 # files hash-table stats:
-# Load=62/1024=6%, Rehash=0, Collisions=8/255=3%
+# Load=68/1024=7%, Rehash=0, Collisions=12/283=4%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 122 / storage = 1586 B / avg = 13 B
-# current buf: size = 8162 B / used = 1586 B / count = 122 / avg = 13 B
+# strcache buffers: 1 (0) / strings = 133 / storage = 1827 B / avg = 13 B
+# current buf: size = 8162 B / used = 1827 B / count = 133 / avg = 13 B
 
-# strcache performance: lookups = 297 / hit rate = 58%
+# strcache performance: lookups = 331 / hit rate = 59%
 # hash-table stats:
-# Load=122/8192=1%, Rehash=0, Collisions=3/297=1%
-# Finished Make data base on Wed Feb  9 09:49:25 2022
+# Load=133/8192=2%, Rehash=0, Collisions=3/331=1%
+# Finished Make data base on Fri Feb 11 18:43:10 2022
 
  

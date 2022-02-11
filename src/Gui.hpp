@@ -189,6 +189,7 @@ namespace gui {
 
         // Function
     };
+
 }
 
 #endif
