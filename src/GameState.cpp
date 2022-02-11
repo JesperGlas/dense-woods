@@ -39,6 +39,17 @@ void GameState::initUI()
     );
 }
 
+void GameState::initShaders()
+{
+    if (!this->core_shader.loadFromFile("src/core_shader.vert", "src/core_shader.frag"))
+    {
+        std::cerr << "ERROR: [GAMESTATE] Could not load core shaders!" << std::endl;
+    }
+
+    this->core_shader.setUniform("u_texture", sf::Shader::CurrentTexture);
+    this->core_shader.setUniform("u_lightPosition", sf::Vector2f(0.f, 0.f));
+}
+
 void GameState::initPlayer()
 {
     this->mptr_player = new Player(
@@ -69,6 +80,7 @@ GameState::GameState(
     std::clog << "GameState init functions.." << std::endl;
     this->initKeybinds();
     this->initTextures();
+    this->initShaders();
     this->initPlayer();
     this->initPauseMenu();
 
@@ -199,7 +211,7 @@ void GameState::render(sf::RenderTarget &target)
     // Render background
     target.draw(this->m_background);
 
-    this->mptr_player->render(target);
+    this->mptr_player->render(target, &this->core_shader);
 
     // UI
     this->test->render(target); // TEST

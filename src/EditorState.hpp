@@ -3,6 +3,9 @@
 
 #include "State.hpp"
 
+// Forward declarations
+class State;
+
 class EditorState
     : public State
 {

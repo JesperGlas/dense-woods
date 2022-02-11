@@ -3,6 +3,8 @@
 
 #include "MainMenuState.hpp"
 
+class MainMenuState;
+
 class Game
 {
 // Variables

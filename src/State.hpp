@@ -4,6 +4,9 @@
 #include "Entity.hpp"
 #include "Gui.hpp"
 
+// Forward declarations
+class Gui;
+
 class State
 {
 // Variables

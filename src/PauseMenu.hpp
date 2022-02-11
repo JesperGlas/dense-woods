@@ -10,6 +10,9 @@
 
 #include "State.hpp"
 
+// Forward declarations
+class State;
+
 class PauseMenu
 {
 // Variables

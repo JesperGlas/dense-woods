@@ -5,12 +5,19 @@
 #include "Player.hpp" // Might be bad include
 #include "PauseMenu.hpp"
 
+// Forward declarations
+class State;
+class Player;
+class PauseMenu;
+
 class GameState
     : public State
 {
 // Variables
 private:
     PauseMenu m_pauseMenu;
+
+    sf::Shader core_shader;
 
     Player *mptr_player;
     sf::RectangleShape m_background;
@@ -24,6 +31,7 @@ private:
     void initKeybinds();
     void initTextures();
     void initUI();
+    void initShaders();
     void initPlayer();
     void initPauseMenu();
 public:

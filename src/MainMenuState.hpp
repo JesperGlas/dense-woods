@@ -5,6 +5,11 @@
 #include "EditorState.hpp"
 #include "SettingsState.hpp"
 
+// Forward declarations
+class GameState;
+class EditorState;
+class SettingsState;
+
 class MainMenuState
     : public State
 {

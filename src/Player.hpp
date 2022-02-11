@@ -3,6 +3,9 @@
 
 #include "Entity.hpp"
 
+// Forward declarations
+class Entity;
+
 class Player
     : public Entity
 {
